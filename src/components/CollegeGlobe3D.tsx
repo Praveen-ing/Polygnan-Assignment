@@ -1,198 +1,125 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Building2 } from 'lucide-react';
 
 interface CollegeCardData {
   id: number;
   name: string;
   tag: string;
-  logoSvg: React.ReactNode;
+  logoUrl: string;
+  initials: string;
   x: number;
   y: number;
   z: number;
 }
 
-// 100% Working Crisp Custom SVG Brand Logos for Every Single Campus
-const COLLEGES_WITH_LOGOS = [
+const COLLEGES_LIST = [
   {
     name: 'IIT Bombay',
     tag: 'Scout Cohort',
-    logoSvg: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8">
-        <circle cx="20" cy="20" r="18" fill="#003366" stroke="#C4F62E" strokeWidth="1.5" />
-        <path d="M 20 6 L 24 14 L 33 15 L 26 21 L 28 30 L 20 25 L 12 30 L 14 21 L 7 15 L 16 14 Z" fill="#C4F62E" />
-        <circle cx="20" cy="20" r="5" fill="#003366" />
-      </svg>
-    ),
+    initials: 'IITB',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/1/1d/Indian_Institute_of_Technology_Bombay_Logo.svg',
   },
   {
     name: 'IIM Ahd',
     tag: 'Scout Cohort',
-    logoSvg: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8">
-        <rect x="4" y="4" width="32" height="32" rx="8" fill="#8B0000" stroke="#E8B923" strokeWidth="1.5" />
-        <path d="M 12 28 L 20 10 L 28 28 M 16 21 L 24 21" stroke="#E8B923" strokeWidth="3" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    name: 'IIT Delhi',
-    tag: 'Scout Cohort',
-    logoSvg: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8">
-        <polygon points="20,4 36,34 4,34" fill="#005A9C" stroke="#C4F62E" strokeWidth="1.5" />
-        <circle cx="20" cy="22" r="6" fill="#C4F62E" />
-      </svg>
-    ),
-  },
-  {
-    name: 'BITS Pilani',
-    tag: 'Scout Cohort',
-    logoSvg: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8">
-        <path d="M 20 4 L 34 10 V 22 C 34 30, 20 36, 20 36 C 20 36, 6 30, 6 22 V 10 Z" fill="#1E3A8A" stroke="#E8B923" strokeWidth="1.5" />
-        <text x="20" y="24" textAnchor="middle" fill="#E8B923" fontSize="12" fontWeight="900" fontFamily="sans-serif">BITS</text>
-      </svg>
-    ),
-  },
-  {
-    name: 'SRCC',
-    tag: 'Verified Campus',
-    logoSvg: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8">
-        <circle cx="20" cy="20" r="18" fill="#004080" stroke="#C4F62E" strokeWidth="1.5" />
-        <text x="20" y="25" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="900" fontFamily="sans-serif">SRCC</text>
-      </svg>
-    ),
-  },
-  {
-    name: 'KIIT',
-    tag: 'Scout Cohort',
-    logoSvg: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8">
-        <rect x="4" y="4" width="32" height="32" rx="16" fill="#15803D" stroke="#C4F62E" strokeWidth="1.5" />
-        <text x="20" y="25" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="900" fontFamily="sans-serif">KIIT</text>
-      </svg>
-    ),
+    initials: 'IIMA',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/e/e0/Indian_Institute_of_Management_Ahmedabad_logo.svg',
   },
   {
     name: 'Manav Rachna',
     tag: 'Verified Campus',
-    logoSvg: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8">
-        <path d="M 20 4 L 36 12 V 26 L 20 36 L 4 26 V 12 Z" fill="#B91C1C" stroke="#FFFFFF" strokeWidth="1.5" />
-        <text x="20" y="24" textAnchor="middle" fill="#FFFFFF" fontSize="9" fontWeight="900" fontFamily="sans-serif">MRIIRS</text>
-      </svg>
-    ),
+    initials: 'MRIIRS',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Manav_Rachna_Educational_Institutions_logo.png',
+  },
+  {
+    name: 'KIIT',
+    tag: 'Scout Cohort',
+    initials: 'KIIT',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/e/ef/KIIT_logo.png',
   },
   {
     name: 'Presidency',
     tag: 'Verified Campus',
-    logoSvg: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8">
-        <circle cx="20" cy="20" r="18" fill="#1E293B" stroke="#38BDF8" strokeWidth="1.5" />
-        <path d="M 20 8 L 26 18 L 14 18 Z M 14 22 L 26 22 L 20 32 Z" fill="#38BDF8" />
-      </svg>
-    ),
+    initials: 'PRES',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/d/d4/Presidency_University_Kolkata_Logo.svg',
   },
   {
     name: 'Loyola',
     tag: 'Verified Campus',
-    logoSvg: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8">
-        <path d="M 20 4 L 34 10 V 22 C 34 30, 20 36, 20 36 C 20 36, 6 30, 6 22 V 10 Z" fill="#4338CA" stroke="#E8B923" strokeWidth="1.5" />
-        <text x="20" y="24" textAnchor="middle" fill="#E8B923" fontSize="10" fontWeight="900" fontFamily="sans-serif">LOY</text>
-      </svg>
-    ),
+    initials: 'LOY',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/9/9d/Loyola_College_Chennai_logo.png',
   },
   {
     name: 'LSR',
     tag: 'Scout Cohort',
-    logoSvg: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8">
-        <circle cx="20" cy="20" r="18" fill="#831843" stroke="#F472B6" strokeWidth="1.5" />
-        <text x="20" y="25" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="900" fontFamily="sans-serif">LSR</text>
-      </svg>
-    ),
+    initials: 'LSR',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/9/90/Lady_Shri_Ram_College_for_Women_logo.png',
   },
   {
     name: 'MICA',
     tag: 'Scout Cohort',
-    logoSvg: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8">
-        <rect x="4" y="4" width="32" height="32" rx="8" fill="#C2410C" stroke="#F97316" strokeWidth="1.5" />
-        <text x="20" y="25" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontWeight="900" fontFamily="sans-serif">MICA</text>
-      </svg>
-    ),
+    initials: 'MICA',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/9/9c/MICA_logo.png',
+  },
+  {
+    name: 'SRCC',
+    tag: 'Verified Campus',
+    initials: 'SRCC',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/8/87/Shri_Ram_College_of_Commerce_logo.png',
   },
   {
     name: 'Manipal',
     tag: 'Scout Cohort',
-    logoSvg: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8">
-        <circle cx="20" cy="20" r="18" fill="#C2410C" stroke="#FFD700" strokeWidth="1.5" />
-        <text x="20" y="24" textAnchor="middle" fill="#FFFFFF" fontSize="8" fontWeight="900" fontFamily="sans-serif">MANIPAL</text>
-      </svg>
-    ),
+    initials: 'MAHE',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/7/75/Manipal_Academy_of_Higher_Education_logo.png',
   },
   {
     name: 'Symbiosis',
     tag: 'Scout Cohort',
-    logoSvg: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8">
-        <circle cx="20" cy="20" r="18" fill="#0284C7" stroke="#FFFFFF" strokeWidth="1.5" />
-        <circle cx="20" cy="20" r="10" fill="#EA580C" />
-      </svg>
-    ),
+    initials: 'SIU',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/5/53/Symbiosis_International_University_logo.png',
   },
   {
     name: 'Christ Bglr',
     tag: 'Verified Campus',
-    logoSvg: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8">
-        <path d="M 20 4 L 34 10 V 22 C 34 30, 20 36, 20 36 C 20 36, 6 30, 6 22 V 10 Z" fill="#1E3A8A" stroke="#FFFFFF" strokeWidth="1.5" />
-        <text x="20" y="24" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontWeight="900" fontFamily="sans-serif">CU</text>
-      </svg>
-    ),
+    initials: 'CU',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/3/36/Christ_University_logo.png',
+  },
+  {
+    name: 'IIT Delhi',
+    tag: 'Scout Cohort',
+    initials: 'IITD',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/f/fd/Indian_Institute_of_Technology_Delhi_Logo.svg',
+  },
+  {
+    name: 'BITS Pilani',
+    tag: 'Scout Cohort',
+    initials: 'BITS',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/d/d3/BITS_Pilani-Logo.svg',
   },
   {
     name: 'NIT Trichy',
     tag: 'Verified Campus',
-    logoSvg: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8">
-        <circle cx="20" cy="20" r="18" fill="#0F766E" stroke="#C4F62E" strokeWidth="1.5" />
-        <text x="20" y="25" textAnchor="middle" fill="#C4F62E" fontSize="10" fontWeight="900" fontFamily="sans-serif">NITT</text>
-      </svg>
-    ),
+    initials: 'NITT',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/b/b3/National_Institute_of_Technology_Tiruchirappalli_logo.svg',
   },
   {
     name: 'St. Xavier\'s',
     tag: 'Scout Cohort',
-    logoSvg: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8">
-        <path d="M 20 4 L 34 10 V 22 C 34 30, 20 36, 20 36 C 20 36, 6 30, 6 22 V 10 Z" fill="#312E81" stroke="#E8B923" strokeWidth="1.5" />
-        <text x="20" y="24" textAnchor="middle" fill="#E8B923" fontSize="10" fontWeight="900" fontFamily="sans-serif">SXC</text>
-      </svg>
-    ),
+    initials: 'SXC',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/5/54/St._Xavier%27s_College_Autonomous_Mumbai_logo.png',
   },
   {
     name: 'DTU',
     tag: 'Scout Cohort',
-    logoSvg: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8">
-        <circle cx="20" cy="20" r="18" fill="#7C2D12" stroke="#F97316" strokeWidth="1.5" />
-        <text x="20" y="25" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="900" fontFamily="sans-serif">DTU</text>
-      </svg>
-    ),
+    initials: 'DTU',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/b/b5/Delhi_Technological_University_logo.png',
   },
   {
     name: 'VIT Vellore',
     tag: 'Verified Campus',
-    logoSvg: (
-      <svg viewBox="0 0 40 40" className="w-8 h-8">
-        <rect x="4" y="4" width="32" height="32" rx="16" fill="#1E40AF" stroke="#60A5FA" strokeWidth="1.5" />
-        <text x="20" y="25" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="900" fontFamily="sans-serif">VIT</text>
-      </svg>
-    ),
+    initials: 'VIT',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/c/c5/Vellore_Institute_of_Technology_seal.svg',
   },
 ];
 
@@ -201,23 +128,25 @@ export const CollegeGlobe3D: React.FC = () => {
   const [rotX, setRotX] = useState<number>(0.2);
   const [rotY, setRotY] = useState<number>(0);
   const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [failedLogos, setFailedLogos] = useState<Record<number, boolean>>({});
   const lastMousePos = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
   // Generate 3D sphere points using Fibonacci Lattice algorithm
   const points = useRef<CollegeCardData[]>([]);
   if (points.current.length === 0) {
-    const N = COLLEGES_WITH_LOGOS.length;
+    const N = COLLEGES_LIST.length;
     const radius = 240; // 3D sphere radius in px
     const goldenRatio = (1 + Math.sqrt(5)) / 2;
 
-    points.current = COLLEGES_WITH_LOGOS.map((col, i) => {
+    points.current = COLLEGES_LIST.map((col, i) => {
       const theta = 2 * Math.PI * i / goldenRatio;
       const phi = Math.acos(1 - 2 * (i + 0.5) / N);
       return {
         id: i,
         name: col.name,
         tag: col.tag,
-        logoSvg: col.logoSvg,
+        logoUrl: col.logoUrl,
+        initials: col.initials,
         x: radius * Math.sin(phi) * Math.cos(theta),
         y: radius * Math.cos(phi),
         z: radius * Math.sin(phi) * Math.sin(theta),
@@ -256,14 +185,15 @@ export const CollegeGlobe3D: React.FC = () => {
 
   const handleMouseUp = () => setIsDragging(false);
 
+  const handleImageError = (id: number) => {
+    setFailedLogos((prev) => ({ ...prev, [id]: true }));
+  };
+
   return (
     <section className="py-16 px-4 relative overflow-hidden select-none">
       {/* Title Header */}
       <div className="text-center space-y-3 relative z-10 max-w-3xl mx-auto mb-10">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/30 text-xs font-mono-stats text-[#C4F62E] font-bold uppercase tracking-wider">
-          <Sparkles className="w-4 h-4 text-[#C4F62E]" />
-          Pan-India Ambassador Movement
-        </div>
+
         <h2 className="font-display font-black text-3xl sm:text-5xl text-white tracking-tight">
           Real scouts, <span className="text-[#C4F62E] italic font-serif-italic font-normal">real campuses.</span>
         </h2>
@@ -303,6 +233,7 @@ export const CollegeGlobe3D: React.FC = () => {
           const scale = 0.55 + depthPct * 0.55;                 // 0.55x to 1.1x
           const opacity = 0.2 + depthPct * 0.8;               // 0.2 to 1.0
           const zIndex = Math.round(z2 + 500);
+          const isFailed = failedLogos[pt.id];
 
           return (
             <div
@@ -315,11 +246,27 @@ export const CollegeGlobe3D: React.FC = () => {
               className="absolute transition-transform duration-75 ease-out pointer-events-auto"
             >
               {/* Card Container matching exact screenshot design */}
-              <div className="bg-[#121212]/95 border border-[#262626] hover:border-[#C4F62E] rounded-2xl p-3.5 w-32 sm:w-40 flex flex-col items-center justify-center space-y-2 shadow-2xl backdrop-blur-md transition-all group cursor-pointer">
+              <div className="bg-[#121212]/95 border border-[#262626] hover:border-[#C4F62E] rounded-2xl p-4 w-32 sm:w-40 flex flex-col items-center justify-center space-y-2.5 shadow-2xl backdrop-blur-md transition-all group cursor-pointer">
                 
-                {/* 100% Verified Crisp SVG College Brand Logo */}
-                <div className="w-11 h-11 rounded-xl bg-[#0A0A0A] border border-[#262626] flex items-center justify-center overflow-hidden group-hover:border-[#C4F62E]/60 transition-colors shadow-inner">
-                  {pt.logoSvg}
+                {/* College Logo Container */}
+                <div className="w-12 h-12 rounded-xl bg-[#0A0A0A] border border-[#262626] p-2 flex items-center justify-center overflow-hidden group-hover:border-[#C4F62E]/60 transition-colors shadow-inner">
+                  {!isFailed && pt.logoUrl ? (
+                    <img
+                      src={pt.logoUrl}
+                      alt={pt.name}
+                      onError={() => handleImageError(pt.id)}
+                      className="w-full h-full object-contain filter brightness-110 group-hover:scale-110 transition-transform duration-300"
+                      loading="lazy"
+                      crossOrigin="anonymous"
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center text-center">
+                      <Building2 className="w-4 h-4 text-[#C4F62E]" />
+                      <span className="text-[8px] font-mono-stats font-bold text-[#C4F62E] mt-0.5">
+                        {pt.initials}
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 {/* College Name & Tag */}
