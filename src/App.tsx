@@ -91,7 +91,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#F5F3EF] flex flex-col font-sans selection:bg-[#C4F62E] selection:text-black relative">
+    <div className="min-h-screen bg-dots-pattern text-[#F5F3EF] flex flex-col font-sans selection:bg-[#C4F62E] selection:text-black relative">
 
       {/* 1. Announcement Ticker (Orange background) */}
       <MarqueeTicker />
