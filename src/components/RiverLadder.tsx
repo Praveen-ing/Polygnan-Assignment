@@ -89,12 +89,7 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
                   <div className={`relative transition-transform duration-300 ${isBouncing ? 'animate-value-pop scale-125' : ''}`}>
                     <div className="absolute inset-0 rounded-full bg-[#FAD02C]/20 blur-2xl animate-pulse" />
                     
-                    {/* Render Badge Cap SVG for Swag levels or Badge Coin SVG */}
-                    {idx % 2 === 1 ? (
-                      <BadgeCapSVG badgeIndex={idx} size={220} isUnlocked={isUnlocked} />
-                    ) : (
-                      <BadgeCoinSVG badgeIndex={idx} size={110} isUnlocked={isUnlocked} />
-                    )}
+                    <BadgeCoinSVG badgeIndex={idx} size={110} isUnlocked={isUnlocked} />
                   </div>
 
                   <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono-stats font-bold uppercase tracking-wider border"
