@@ -4,6 +4,7 @@ import { CheckCircle2, Lock, Zap, Check, ArrowDown, Sparkles } from 'lucide-reac
 import { RupeeCoinBurst } from './RupeeCoinBurst';
 import { SpotlightCard } from './SpotlightCard';
 import { BadgeCoinSVG } from './BadgeCoinSVG';
+import { BadgeCapSVG } from './BadgeCapSVG';
 
 interface RiverLadderProps {
   currentRegs: number;
@@ -63,16 +64,11 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
   return (
     <div ref={containerRef} className="space-y-12 relative">
 
-
-
-
-
       {/* ── 6 Full-Screen Height Level Reward Sections (One Card Per Viewport Page) ── */}
       <div className="relative space-y-16 sm:space-y-24">
         {LADDER_RUNGS.map((rung, idx) => {
           const isUnlocked = flowPct >= (rung.threshold / 200) * 100;
           const isBouncing = bouncingRungId === rung.id;
-          const regsToGo   = rung.threshold - Math.floor(currentRegs);
 
           return (
             <section
@@ -88,11 +84,17 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
               )}
 
               <div className="w-full max-w-2xl mx-auto space-y-8 relative z-20">
-                {/* 3D Gold Coin Badge Header */}
+                {/* 3D Gold Coin Badge & Outlined Cap Header */}
                 <div className="flex flex-col items-center text-center space-y-3">
                   <div className={`relative transition-transform duration-300 ${isBouncing ? 'animate-value-pop scale-125' : ''}`}>
                     <div className="absolute inset-0 rounded-full bg-[#FAD02C]/20 blur-2xl animate-pulse" />
-                    <BadgeCoinSVG badgeIndex={idx} size={110} isUnlocked={isUnlocked} />
+                    
+                    {/* Render Badge Cap SVG for Swag levels or Badge Coin SVG */}
+                    {idx % 2 === 1 ? (
+                      <BadgeCapSVG badgeIndex={idx} size={220} isUnlocked={isUnlocked} />
+                    ) : (
+                      <BadgeCoinSVG badgeIndex={idx} size={110} isUnlocked={isUnlocked} />
+                    )}
                   </div>
 
                   <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono-stats font-bold uppercase tracking-wider border"
