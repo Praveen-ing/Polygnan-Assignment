@@ -12,7 +12,7 @@ import { CollegeGlobe3D } from './components/CollegeGlobe3D';
 import { FaqAccordion } from './components/FaqAccordion';
 import { ShareCardModal } from './components/ShareCardModal';
 import { PolygnanEthosBanner } from './components/PolygnanEthosBanner';
-import { AIEvaluatorSimulator } from './components/AIEvaluatorSimulator';
+import { FlyingBird } from './components/FlyingBird';
 import { Zap, ArrowRight, ExternalLink } from 'lucide-react';
 
 export function App() {
@@ -115,10 +115,8 @@ export function App() {
           <PolygnanEthosBanner />
         </section>
 
-        {/* 6. AI Agent Auto-Evaluator Simulator */}
-        <section className="max-w-6xl mx-auto px-4 sm:px-6">
-          <AIEvaluatorSimulator />
-        </section>
+        {/* Animated Flying Bird Silhouette */}
+        <FlyingBird />
 
         {/* 7. How It Works Section */}
         <section id="how-it-works" className="max-w-6xl mx-auto px-4 sm:px-6">

@@ -66,6 +66,24 @@
   animation: eyfi-float 4.5s ease-in-out infinite;
 }
 
+/* ——— Flying Bird Animations ——— */
+@keyframes birdFlight {
+  0%   { transform: translate(-10vw, 5vh) scale(0.75); }
+  50%  { transform: translate(55vw, -2vh) scale(1.05); }
+  100% { transform: translate(115vw, 6vh) scale(0.85); }
+}
+.animate-bird-flight {
+  animation: birdFlight 18s linear infinite;
+}
+
+@keyframes birdWingFlap {
+  0%, 100% { transform: scaleY(1) rotate(0deg); }
+  50%       { transform: scaleY(0.35) rotate(12deg); }
+}
+.animate-bird-wing {
+  animation: birdWingFlap 0.4s ease-in-out infinite;
+}
+
 /* ——— Coin Fall Particle ——— */
 @keyframes rupeeCoinFall {
   0% {
