@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { LADDER_RUNGS } from '../data/ladderData';
-import { LadderRung } from '../types';
 import { Lock, ChevronDown, ChevronUp, CheckCircle, Zap, Star } from 'lucide-react';
 import { RupeeCoinBurst } from './RupeeCoinBurst';
 
@@ -64,19 +63,19 @@ export const RewardLadder: React.FC<RewardLadderProps> = ({
           {/* Background line (full height) */}
           <div className="absolute top-3 bottom-3 w-0.5 bg-[#232323] left-1/2 -translate-x-1/2 rounded-full" />
 
-          {/* Orange fill line */}
+          {/* Green fill line */}
           <div
-            className="absolute top-3 w-0.5 bg-gradient-to-b from-[#FF6B2C] to-[#E8B923] left-1/2 -translate-x-1/2 rounded-full transition-all duration-500 ease-out"
+            className="absolute top-3 w-0.5 bg-gradient-to-b from-[#C4F62E] to-[#E8B923] left-1/2 -translate-x-1/2 rounded-full transition-all duration-500 ease-out"
             style={{ height: `calc(${overallPct}% - 24px)` }}
           />
 
           {/* Animated climbing dot */}
           {currentRegs < LADDER_RUNGS[LADDER_RUNGS.length - 1].threshold && (
             <div
-              className="absolute w-4 h-4 rounded-full border-2 border-[#FF6B2C] bg-[#0A0A0A] left-1/2 -translate-x-1/2 transition-all duration-500 ease-out z-10"
+              className="absolute w-4 h-4 rounded-full border-2 border-[#C4F62E] bg-[#0A0A0A] left-1/2 -translate-x-1/2 transition-all duration-500 ease-out z-10"
               style={{ top: `calc(${overallPct}% - 8px)` }}
             >
-              <span className="absolute inset-0.5 rounded-full bg-[#FF6B2C] animate-pulse" />
+              <span className="absolute inset-0.5 rounded-full bg-[#C4F62E] animate-pulse" />
             </div>
           )}
 

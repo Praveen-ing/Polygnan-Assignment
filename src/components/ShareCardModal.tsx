@@ -60,7 +60,7 @@ export const ShareCardModal: React.FC<ShareCardModalProps> = ({
 
         {/* Header */}
         <div className="flex items-center gap-2">
-          <Share2 className="w-5 h-5 text-[#FF6B2C]" />
+          <Share2 className="w-5 h-5 text-[#C4F62E]" />
           <h2 className="font-display font-extrabold text-[#F5F3EF] text-lg">Share Your Rank</h2>
         </div>
 
@@ -80,7 +80,7 @@ export const ShareCardModal: React.FC<ShareCardModalProps> = ({
 
           <div className="relative space-y-2">
             <div className="text-4xl">{currentRung.icon}</div>
-            <div className="font-mono-stats text-3xl font-black text-[#FF6B2C]">
+            <div className="font-mono-stats text-3xl font-black text-[#C4F62E]">
               {Math.round(regs)}{' '}
               <span className="text-sm font-normal text-[#6A6A65]">regs</span>
             </div>

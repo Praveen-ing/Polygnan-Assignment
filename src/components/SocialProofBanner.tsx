@@ -12,10 +12,10 @@ export const SocialProofBanner: React.FC = () => {
         {/* Static label */}
         <div className="flex-shrink-0 px-4 sm:px-6 flex items-center gap-2 border-r border-[#242424] mr-4">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF6B2C] opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF6B2C]" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C4F62E] opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C4F62E]" />
           </span>
-          <span className="text-[11px] font-mono-stats font-bold text-[#FF6B2C] whitespace-nowrap">
+          <span className="text-[11px] font-mono-stats font-bold text-[#C4F62E] whitespace-nowrap">
             {TOTAL_SCOUTS.toLocaleString()} Scouts
           </span>
         </div>
@@ -25,7 +25,7 @@ export const SocialProofBanner: React.FC = () => {
           <div className="animate-social-scroll whitespace-nowrap">
             {repeated.map((campus, idx) => (
               <span key={idx} className="inline-flex items-center gap-1 mx-4 text-[11px] font-sans text-[#8A8A85]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#FF6B2C]/40 inline-block" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C4F62E]/40 inline-block" />
                 {campus}
               </span>
             ))}

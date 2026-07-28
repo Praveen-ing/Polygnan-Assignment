@@ -62,7 +62,7 @@ export const UnlockValueCounter: React.FC<UnlockValueCounterProps> = ({ currentR
         💰 Total Value Unlocked
       </p>
 
-      <div className={`font-mono-stats font-black text-4xl sm:text-5xl text-[#FF6B2C] leading-none tracking-tight transition-all ${isPop ? 'animate-value-pop' : ''}`}>
+      <div className={`font-mono-stats font-black text-4xl sm:text-5xl text-[#C4F62E] leading-none tracking-tight transition-all ${isPop ? 'animate-value-pop' : ''}`}>
         {formatRupees(displayValue)}
       </div>
 

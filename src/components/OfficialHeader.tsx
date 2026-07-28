@@ -25,7 +25,7 @@ export const OfficialHeader: React.FC<OfficialHeaderProps> = ({
         <nav className="flex items-center gap-3 sm:gap-7 font-open-sans text-sm sm:text-base font-semibold">
           <button
             onClick={() => onTabClick?.('ladder')}
-            className="text-[#F5F3EF]/80 hover:text-[#FF6B2C] transition hidden sm:inline cursor-pointer"
+            className="text-[#F5F3EF]/80 hover:text-[#C4F62E] transition hidden sm:inline cursor-pointer"
           >
             Reward Ladder
           </button>
@@ -34,7 +34,7 @@ export const OfficialHeader: React.FC<OfficialHeaderProps> = ({
             href="https://ambassador.eyfichallenge.com/how-it-works"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#F5F3EF]/80 hover:text-[#FF6B2C] transition hidden sm:inline"
+            className="text-[#F5F3EF]/80 hover:text-[#C4F62E] transition hidden sm:inline"
           >
             How it works
           </a>
@@ -43,7 +43,7 @@ export const OfficialHeader: React.FC<OfficialHeaderProps> = ({
             href="https://ambassador.eyfichallenge.com/faq"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#F5F3EF]/80 hover:text-[#FF6B2C] transition hidden sm:inline"
+            className="text-[#F5F3EF]/80 hover:text-[#C4F62E] transition hidden sm:inline"
           >
             FAQs
           </a>
@@ -52,7 +52,7 @@ export const OfficialHeader: React.FC<OfficialHeaderProps> = ({
             href="https://eyfichallenge.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#F5F3EF]/80 hover:text-[#FF6B2C] transition hidden sm:inline"
+            className="text-[#F5F3EF]/80 hover:text-[#C4F62E] transition hidden sm:inline"
           >
             EYFI Challenge
           </a>
@@ -61,7 +61,7 @@ export const OfficialHeader: React.FC<OfficialHeaderProps> = ({
             id="header-apply-btn"
             onClick={onApplyClick}
             type="button"
-            className="rounded-full bg-[#FF6B2C] text-white px-3.5 py-1.5 sm:px-5 sm:py-2.5 text-sm sm:text-base font-bold hover:opacity-90 transition cursor-pointer"
+            className="rounded-full bg-[#C4F62E] text-[#0A0A0A] px-3.5 py-1.5 sm:px-5 sm:py-2.5 text-sm sm:text-base font-bold hover:opacity-90 transition cursor-pointer"
           >
             Apply Now
           </button>

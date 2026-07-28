@@ -87,7 +87,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#F5F3EF] flex flex-col font-sans selection:bg-[#FF6B2C] selection:text-white">
+    <div className="min-h-screen bg-[#0A0A0A] text-[#F5F3EF] flex flex-col font-sans selection:bg-[#C4F62E] selection:text-black">
 
       {/* 1. Marquee */}
       <MarqueeTicker />
@@ -118,13 +118,13 @@ export function App() {
           <div className="max-w-6xl mx-auto">
             {/* Section header */}
             <div className="text-center mb-12 sm:mb-16">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF6B2C]/10 border border-[#FF6B2C]/20 text-xs font-mono-stats text-[#FF6B2C] uppercase tracking-wider mb-4">
-                <Zap className="w-3 h-3 fill-[#FF6B2C]" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/20 text-xs font-mono-stats text-[#C4F62E] uppercase tracking-wider mb-4 font-bold">
+                <Zap className="w-3 h-3 fill-[#C4F62E]" />
                 Reward Ladder · 6 Tiers
               </div>
               <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-white mb-4 tracking-tight">
                 Earned,{' '}
-                <span className="text-[#FF6B2C]">not handed.</span>
+                <span className="text-[#C4F62E]">not handed.</span>
               </h2>
               <p className="text-sm sm:text-base text-[#8A8A85] max-w-lg mx-auto font-sans">
                 Drag the slider to see what you unlock at each milestone.
@@ -153,7 +153,7 @@ export function App() {
                 />
 
                 {/* Share rank card CTA */}
-                <div className="bg-gradient-to-r from-[#FF6B2C]/10 via-[#FF6B2C]/5 to-transparent border border-[#FF6B2C]/20 rounded-2xl p-4 flex items-center justify-between gap-3">
+                <div className="bg-gradient-to-r from-[#C4F62E]/10 via-[#C4F62E]/5 to-transparent border border-[#C4F62E]/20 rounded-2xl p-4 flex items-center justify-between gap-3">
                   <div>
                     <p className="font-display font-bold text-sm text-[#F5F3EF]">
                       Show your campus who's climbing.
@@ -165,7 +165,7 @@ export function App() {
                   <button
                     id="share-rank-btn"
                     onClick={() => setIsShareOpen(true)}
-                    className="flex-shrink-0 bg-[#FF6B2C] hover:bg-[#e85a1a] text-white font-display font-bold text-xs px-4 py-2.5 rounded-full flex items-center gap-1.5 transition-all shadow-[0_2px_12px_rgba(255,107,44,0.35)] cursor-pointer"
+                    className="flex-shrink-0 bg-[#C4F62E] hover:bg-[#b0eb18] text-[#0A0A0A] font-display font-extrabold text-xs px-4 py-2.5 rounded-full flex items-center gap-1.5 transition-all shadow-[0_2px_12px_rgba(196,246,46,0.35)] cursor-pointer"
                   >
                     Share Rank
                     <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
@@ -179,8 +179,8 @@ export function App() {
                 <div className="flex items-center justify-between mb-4 px-1">
                   <div className="inline-flex items-center gap-1.5 text-xs font-mono-stats text-[#6A6A65]">
                     <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF6B2C] opacity-75" />
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF6B2C]" />
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C4F62E] opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C4F62E]" />
                     </span>
                     <span>847 scouts climbing right now</span>
                   </div>
@@ -220,7 +220,7 @@ export function App() {
                 href="https://ambassador.eyfichallenge.com/#apply"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full bg-[#FF6B2C] text-white font-display font-black text-base px-8 py-4 hover:bg-[#e85a1a] transition-all shadow-[0_4px_24px_rgba(255,107,44,0.4)] hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer"
+                className="rounded-full bg-[#C4F62E] text-[#0A0A0A] font-display font-black text-base px-8 py-4 hover:bg-[#b0eb18] transition-all shadow-[0_4px_24px_rgba(196,246,46,0.35)] hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer"
               >
                 Apply as Scout
                 <ExternalLink className="w-4 h-4" />
@@ -229,7 +229,7 @@ export function App() {
                 href="https://eyfichallenge.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#6A6A65] hover:text-[#FF6B2C] text-sm font-sans transition-colors"
+                className="text-[#6A6A65] hover:text-[#C4F62E] text-sm font-sans transition-colors"
               >
                 What is the EYFI Challenge? →
               </a>
@@ -246,17 +246,17 @@ export function App() {
       {/* Footer */}
       <footer className="border-t border-[#1A1A1A] py-8 px-6 text-center">
         <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="font-display font-black text-[#FF6B2C] text-xl">
+          <div className="font-display font-black text-[#C4F62E] text-xl">
             EYFI<span className="text-white">.</span>
           </div>
           <p className="text-xs text-[#4A4640] font-sans">
             Earn Your First Income Challenge · Polygnan © 2026
           </p>
           <div className="flex items-center gap-4 text-xs text-[#4A4640]">
-            <a href="https://eyfichallenge.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF6B2C] transition">
+            <a href="https://eyfichallenge.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#C4F62E] transition">
               EYFI Challenge ↗
             </a>
-            <a href="https://ambassador.eyfichallenge.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF6B2C] transition">
+            <a href="https://ambassador.eyfichallenge.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#C4F62E] transition">
               Official Site ↗
             </a>
           </div>

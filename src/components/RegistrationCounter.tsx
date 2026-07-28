@@ -49,7 +49,7 @@ export const RegistrationCounter: React.FC<RegistrationCounterProps> = ({
   return (
     <div className="bg-[#111111] border border-[#242424] rounded-2xl p-5 sm:p-6 space-y-5 shadow-xl relative overflow-hidden">
       {/* Background glow */}
-      <div className="absolute top-0 right-0 w-48 h-48 bg-[#FF6B2C]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-48 h-48 bg-[#C4F62E]/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Header row */}
       <div className="flex items-center justify-between">
@@ -61,9 +61,9 @@ export const RegistrationCounter: React.FC<RegistrationCounterProps> = ({
           <button
             onClick={onToggleAutoplay}
             id="autoplay-toggle-btn"
-            className={`flex items-center gap-1 text-[11px] font-mono-stats font-semibold px-2.5 py-1 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B2C] cursor-pointer ${
+            className={`flex items-center gap-1 text-[11px] font-mono-stats font-bold px-2.5 py-1 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C4F62E] cursor-pointer ${
               isAutoplay
-                ? 'bg-[#FF6B2C] text-white'
+                ? 'bg-[#C4F62E] text-[#0A0A0A]'
                 : 'text-[#F5F3EF] hover:bg-[#232323]'
             }`}
             title={isAutoplay ? 'Pause auto-climb' : 'Auto-play 0→200'}
@@ -78,7 +78,7 @@ export const RegistrationCounter: React.FC<RegistrationCounterProps> = ({
           <button
             onClick={onReset}
             id="reset-btn"
-            className="p-1 text-[#8A8A85] hover:text-[#F5F3EF] transition-colors rounded hover:bg-[#232323] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B2C] cursor-pointer"
+            className="p-1 text-[#8A8A85] hover:text-[#F5F3EF] transition-colors rounded hover:bg-[#232323] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C4F62E] cursor-pointer"
             title="Reset to 0"
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -88,7 +88,7 @@ export const RegistrationCounter: React.FC<RegistrationCounterProps> = ({
 
       {/* Big count + current tier label */}
       <div className="text-center space-y-1.5">
-        <div className="font-mono-stats text-5xl sm:text-6xl font-extrabold text-[#FF6B2C] tracking-tight drop-shadow-[0_0_24px_rgba(255,107,44,0.4)]">
+        <div className="font-mono-stats text-5xl sm:text-6xl font-extrabold text-[#C4F62E] tracking-tight drop-shadow-[0_0_24px_rgba(196,246,46,0.4)]">
           {Math.round(regs)}
         </div>
 
@@ -121,7 +121,7 @@ export const RegistrationCounter: React.FC<RegistrationCounterProps> = ({
           onChange={handleSliderChange}
           onPointerDown={() => { if (isAutoplay) onToggleAutoplay(); }}
           style={{
-            background: `linear-gradient(to right, #FF6B2C ${sliderPct}%, #242424 ${sliderPct}%)`,
+            background: `linear-gradient(to right, #C4F62E ${sliderPct}%, #242424 ${sliderPct}%)`,
           }}
           aria-label="Registrations count slider"
         />
@@ -146,7 +146,7 @@ export const RegistrationCounter: React.FC<RegistrationCounterProps> = ({
               key={amt}
               id={`quick-add-${amt}`}
               onClick={() => handlePresetClick(amt)}
-              className="inline-flex items-center gap-0.5 text-[10px] font-mono-stats font-semibold bg-[#1A1A1A] hover:bg-[#FF6B2C]/15 hover:text-[#FF6B2C] border border-[#262626] hover:border-[#FF6B2C]/40 px-2.5 py-1 rounded-md transition-all text-[#F5F3EF] cursor-pointer"
+              className="inline-flex items-center gap-0.5 text-[10px] font-mono-stats font-semibold bg-[#1A1A1A] hover:bg-[#C4F62E]/15 hover:text-[#C4F62E] border border-[#262626] hover:border-[#C4F62E]/40 px-2.5 py-1 rounded-md transition-all text-[#F5F3EF] cursor-pointer"
             >
               <Plus className="w-2.5 h-2.5" />
               <span>{amt}</span>
@@ -155,7 +155,7 @@ export const RegistrationCounter: React.FC<RegistrationCounterProps> = ({
           <button
             id="max-regs-btn"
             onClick={() => onRegsChange(200)}
-            className="text-[10px] font-mono-stats font-semibold bg-[#FF6B2C]/10 hover:bg-[#FF6B2C]/20 text-[#FF6B2C] border border-[#FF6B2C]/30 px-2.5 py-1 rounded-md transition-all cursor-pointer"
+            className="text-[10px] font-mono-stats font-bold bg-[#C4F62E]/10 hover:bg-[#C4F62E]/20 text-[#C4F62E] border border-[#C4F62E]/30 px-2.5 py-1 rounded-md transition-all cursor-pointer"
           >
             Max (200)
           </button>

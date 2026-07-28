@@ -9,7 +9,7 @@ export const LADDER_RUNGS: LadderRung[] = [
     description: 'Private community access + starter kit',
     icon: '🚩',
     badgeType: 'scout',
-    color: '#FF6B2C',   // EYFI orange
+    color: '#C4F62E',   // EYFI lime green
     xpValue: 1000,
     timeToEarn: 'Instant on selection',
     perks: ['Discord VIP Role', 'Ambassador Handbook', 'Welcome Asset Pack'],
@@ -28,7 +28,7 @@ export const LADDER_RUNGS: LadderRung[] = [
     description: 'Official title, first swag drop, prize-linked challenge',
     icon: '🎖️',
     badgeType: 'ambassador',
-    color: '#FF6B2C',   // EYFI orange
+    color: '#C4F62E',   // EYFI lime green
     xpValue: 5000,
     timeToEarn: '~1–2 weeks of active posting',
     perks: ['Official Certificate', 'EYFI Oversized Hoodie', 'Weekly Prize Draw'],
@@ -47,7 +47,7 @@ export const LADDER_RUNGS: LadderRung[] = [
     description: 'Campus event grant + exclusive merch',
     icon: '🔥',
     badgeType: 'levelup',
-    color: '#FF6B2C',   // EYFI orange
+    color: '#C4F62E',   // EYFI lime green
     xpValue: 12000,
     timeToEarn: '~3 weeks of consistent outreach',
     perks: ['₹10,000 Campus Grant', 'Customized Name Tag', 'Direct Team Access'],
@@ -66,7 +66,7 @@ export const LADDER_RUNGS: LadderRung[] = [
     description: 'Mentorship access + bigger campus grant',
     icon: '💡',
     badgeType: 'gofurther',
-    color: '#FF6B2C',   // EYFI orange
+    color: '#C4F62E',   // EYFI lime green
     xpValue: 25000,
     timeToEarn: '~4 weeks of hustle',
     perks: ['1-on-1 Founder Mentorship', 'Priority Feature Access', '₹25,000 Budget'],
@@ -85,7 +85,7 @@ export const LADDER_RUNGS: LadderRung[] = [
     description: 'Stipend + Goa retreat + Letter of Recommendation',
     icon: '💼',
     badgeType: 'internship',
-    color: '#FF6B2C',   // EYFI orange
+    color: '#C4F62E',   // EYFI lime green
     xpValue: 45000,
     timeToEarn: '~6 weeks — elite territory',
     perks: ['Stipend: ₹15,000/mo', 'Quarterly Goa Retreat', 'Letter of Recommendation'],

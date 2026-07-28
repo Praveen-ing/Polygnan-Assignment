@@ -44,10 +44,10 @@ export const AmbassadorHero: React.FC<AmbassadorHeroProps> = ({
 
       {/* Wave 01 pill */}
       <div className="flex justify-center mb-6">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF6B2C]/10 border border-[#FF6B2C]/30 text-xs font-mono-stats font-bold text-[#FF6B2C] uppercase tracking-wider">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/30 text-xs font-mono-stats font-bold text-[#C4F62E] uppercase tracking-wider">
           <span className="relative flex h-1.5 w-1.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF6B2C] opacity-75" />
-            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#FF6B2C]" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C4F62E] opacity-75" />
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#C4F62E]" />
           </span>
           Wave 01 · Applications Open
         </div>
@@ -60,13 +60,13 @@ export const AmbassadorHero: React.FC<AmbassadorHeroProps> = ({
         </span>
         <span className="block my-1">
           build{' '}
-          <span className="inline-block text-[#FF6B2C] -rotate-2 font-black tracking-tight hover:rotate-0 transition-transform duration-300">
+          <span className="inline-block text-[#C4F62E] -rotate-2 font-black tracking-tight hover:rotate-0 transition-transform duration-300">
             EYFI
           </span>
         </span>
         <span className="block text-2xl sm:text-4xl text-[#E8E8E4] font-bold mt-2">
           on your{' '}
-          <span className="text-[#FF6B2C] font-extrabold text-3xl sm:text-5xl md:text-6xl">
+          <span className="text-[#C4F62E] font-extrabold text-3xl sm:text-5xl md:text-6xl">
             campus.
           </span>
         </span>
@@ -85,7 +85,7 @@ export const AmbassadorHero: React.FC<AmbassadorHeroProps> = ({
 
       {/* Social proof inline */}
       <p className="text-sm text-[#6A6A65] font-sans mb-8">
-        <span className="text-[#FF6B2C] font-bold font-mono-stats">2,847</span> scouts from{' '}
+        <span className="text-[#C4F62E] font-bold font-mono-stats">2,847</span> scouts from{' '}
         <span className="text-[#F5F3EF]">300+ colleges</span> have already applied
       </p>
 
@@ -94,7 +94,7 @@ export const AmbassadorHero: React.FC<AmbassadorHeroProps> = ({
         <button
           id="hero-apply-btn"
           onClick={onApplyClick}
-          className="rounded-full bg-[#FF6B2C] text-white font-display font-black text-base sm:text-lg px-8 py-4 hover:bg-[#e85a1a] transition-all cursor-pointer shadow-[0_4px_24px_rgba(255,107,44,0.4)] hover:scale-105 active:scale-95 flex items-center gap-2"
+          className="rounded-full bg-[#C4F62E] text-[#0A0A0A] font-display font-extrabold text-base sm:text-lg px-8 py-4 hover:bg-[#b0eb18] transition-all cursor-pointer shadow-[0_4px_24px_rgba(196,246,46,0.35)] hover:scale-105 active:scale-95 flex items-center gap-2"
         >
           <span>Apply as Scout</span>
           <ArrowRight className="w-5 h-5 stroke-[2.5]" />
@@ -103,7 +103,7 @@ export const AmbassadorHero: React.FC<AmbassadorHeroProps> = ({
         <button
           id="hero-explore-btn"
           onClick={onExploreClick}
-          className="rounded-full border border-[#2A2A2A] bg-transparent text-[#C8C8C4] font-display font-semibold text-sm px-6 py-3.5 hover:border-[#FF6B2C]/40 hover:text-[#F5F3EF] transition-all cursor-pointer"
+          className="rounded-full border border-[#2A2A2A] bg-transparent text-[#C8C8C4] font-display font-semibold text-sm px-6 py-3.5 hover:border-[#C4F62E]/40 hover:text-[#F5F3EF] transition-all cursor-pointer"
         >
           See the Reward Ladder ↓
         </button>
@@ -112,21 +112,21 @@ export const AmbassadorHero: React.FC<AmbassadorHeroProps> = ({
       {/* 3-col stats */}
       <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-8 border-t border-[#1E1E1E]">
         <div className="text-center border-r border-[#1E1E1E] pr-2 sm:pr-4">
-          <p className="font-display font-extrabold text-xl sm:text-2xl text-[#FF6B2C] mb-1">
+          <p className="font-display font-extrabold text-xl sm:text-2xl text-[#C4F62E] mb-1">
             WAVE 01
           </p>
           <p className="text-xs text-[#6A6A65]">First-ever cohort</p>
         </div>
 
         <div className="text-center border-r border-[#1E1E1E] px-2 sm:px-4">
-          <p className="font-display font-extrabold text-xl sm:text-2xl text-[#FF6B2C] mb-1">
+          <p className="font-display font-extrabold text-xl sm:text-2xl text-[#C4F62E] mb-1">
             1 or 2
           </p>
           <p className="text-xs text-[#6A6A65]">Spots per college</p>
         </div>
 
         <div className="text-center pl-2 sm:pl-4">
-          <p className="font-display font-extrabold text-xl sm:text-2xl text-[#FF6B2C] mb-1">
+          <p className="font-display font-extrabold text-xl sm:text-2xl text-[#C4F62E] mb-1">
             ₹15L+
           </p>
           <p className="text-xs text-[#6A6A65]">Total rewards up for grabs</p>
@@ -215,4 +215,3 @@ function CoinSVG({ size, rotX = 60, rotY = -20, rotZ = -20, delay = '0s' }: {
     </div>
   );
 }
-
