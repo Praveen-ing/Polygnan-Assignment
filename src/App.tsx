@@ -12,7 +12,6 @@ import { FaqAccordion } from './components/FaqAccordion';
 import { ShareCardModal } from './components/ShareCardModal';
 import { PolygnanEthosBanner } from './components/PolygnanEthosBanner';
 import { AIEvaluatorSimulator } from './components/AIEvaluatorSimulator';
-import { DoraemonCompanion } from './components/DoraemonCompanion';
 import { Zap, ArrowRight, ExternalLink } from 'lucide-react';
 
 export function App() {
@@ -269,21 +268,12 @@ export function App() {
         </div>
       </footer>
 
-      {/* Modals & Doraemon Gadget Assistant */}
+      {/* Modals */}
       <ShareCardModal
         isOpen={isShareOpen}
         onClose={() => setIsShareOpen(false)}
         regs={Math.round(regs)}
         campusName="Your Campus"
-      />
-
-      <DoraemonCompanion
-        onFlyToLevel={() => {
-          document.getElementById('river-ladder-section')?.scrollIntoView({ behavior: 'smooth' });
-        }}
-        onOpenPassStudio={() => {
-          document.getElementById('scout-pass-studio')?.scrollIntoView({ behavior: 'smooth' });
-        }}
       />
     </div>
   );
