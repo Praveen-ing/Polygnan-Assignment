@@ -174,6 +174,7 @@ export function App() {
               currentRegs={regs}
               unlockedSet={unlockedSet}
               onUnlockNewRung={handleUnlockNewRung}
+              onRegsChange={handleManualRegsChange}
             />
           </div>
         </section>

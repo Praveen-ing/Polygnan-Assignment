@@ -1,6 +1,20 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { LADDER_RUNGS } from '../data/ladderData';
-import { CheckCircle2, Lock, Zap, Check, ArrowDown, Sparkles, Trophy, Gift, Award, Briefcase, Crown, Compass } from 'lucide-react';
+import React, { useState } from 'react';
+import {
+  UserCheck,
+  Compass,
+  Award,
+  Gift,
+  Zap,
+  Briefcase,
+  Crown,
+  Lock,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  Sparkles,
+  ArrowRight,
+  ExternalLink,
+} from 'lucide-react';
 import { RupeeCoinBurst } from './RupeeCoinBurst';
 import { SpotlightCard } from './SpotlightCard';
 import { BadgeCoinSVG } from './BadgeCoinSVG';
@@ -9,286 +23,419 @@ interface RiverLadderProps {
   currentRegs: number;
   unlockedSet: Set<number>;
   onUnlockNewRung?: (rungId: number) => void;
+  onRegsChange?: (newVal: number) => void;
 }
 
-// Level themes & icons
-const LEVEL_METADATA = [
+export interface QuestStepData {
+  stepId: number;
+  levelNumber: string;
+  title: string;
+  milestoneText: string;
+  threshold: number; // Regs required
+  themeColor: string;
+  bgGlow: string;
+  icon: React.ReactNode;
+  badgeLabel: string;
+  unlocks: string[];
+}
+
+const QUEST_STEPS: QuestStepData[] = [
   {
-    themeColor: '#C4F62E', // Lime
-    glowClass: 'shadow-[0_0_24px_rgba(196,246,46,0.4)]',
-    icon: <Compass className="w-5 h-5 text-[#C4F62E]" />,
-    badgeLabel: 'SCOUT TITLE',
+    stepId: 0,
+    levelNumber: 'Step 0',
+    title: 'Apply & Get Verified',
+    milestoneText: 'Fill Scout Application & Receive Official Welcome Kit',
+    threshold: 0,
+    themeColor: '#10B981', // Emerald
+    bgGlow: 'shadow-[0_0_30px_rgba(16,185,129,0.35)]',
+    icon: <UserCheck className="w-5 h-5 text-[#10B981]" />,
+    badgeLabel: 'VERIFICATION STEP',
+    unlocks: [
+      'Official EYFI Scout Badge & Verified Ambassador Title',
+      'Direct Access to EYFI Founder Mentorship Group',
+      'Personalized Campus Referral Invite Code & QR Pass Studio',
+    ],
   },
   {
-    themeColor: '#38BDF8', // Cyan
-    glowClass: 'shadow-[0_0_24px_rgba(56,189,248,0.4)]',
+    stepId: 1,
+    levelNumber: 'Level 1',
+    title: 'Scout Leadership',
+    milestoneText: '0 Registrations (Initial Scout Rank)',
+    threshold: 0,
+    themeColor: '#C4F62E', // EYFI Lime
+    bgGlow: 'shadow-[0_0_30px_rgba(196,246,46,0.35)]',
+    icon: <Compass className="w-5 h-5 text-[#C4F62E]" />,
+    badgeLabel: 'SCOUT RANK',
+    unlocks: [
+      'Verified EYFI Scout Title on LinkedIn & Resume',
+      'Access to Level 1 Scout Dashboard & Live Leaderboard Tracking',
+      'Exclusive Wave 01 Ambassador Starter Toolkit',
+    ],
+  },
+  {
+    stepId: 2,
+    levelNumber: 'Level 2',
+    title: 'Campus Ambassador',
+    milestoneText: '25 Campus Registrations',
+    threshold: 25,
+    themeColor: '#38BDF8', // Luminous Cyan
+    bgGlow: 'shadow-[0_0_30px_rgba(56,189,248,0.35)]',
     icon: <Award className="w-5 h-5 text-[#38BDF8]" />,
     badgeLabel: 'AMBASSADOR KIT',
+    unlocks: [
+      'Official EYFI Ambassador Certificate of Excellence',
+      'Exclusive EYFI Swag Drop: Premium Hoodie & Cap',
+      'Feature Spotlight on EYFI Official Campus Wall of Fame',
+    ],
   },
   {
-    themeColor: '#E8B923', // Gold
-    glowClass: 'shadow-[0_0_24px_rgba(232,185,35,0.4)]',
-    icon: <Gift className="w-5 h-5 text-[#E8B923]" />,
+    stepId: 3,
+    levelNumber: 'Level 3',
+    title: 'Level Up & Swag Kit',
+    milestoneText: '50 Campus Registrations',
+    threshold: 50,
+    themeColor: '#F59E0B', // Radiant Gold
+    bgGlow: 'shadow-[0_0_30px_rgba(245,158,11,0.35)]',
+    icon: <Gift className="w-5 h-5 text-[#F59E0B]" />,
     badgeLabel: 'SWAG DROPS',
+    unlocks: [
+      'Customized Tech Swag Box (Powerbank, Stickers, Journal)',
+      'VIP Priority Access to EYFI National Hackathons & Workshops',
+      'Exclusive Invite to Regional Founder Networking Dinners',
+    ],
   },
   {
+    stepId: 4,
+    levelNumber: 'Level 4',
+    title: 'Go Further & Event Grants',
+    milestoneText: '75 Campus Registrations',
+    threshold: 75,
     themeColor: '#FF6B2C', // Flame Orange
-    glowClass: 'shadow-[0_0_24px_rgba(255,107,44,0.4)]',
+    bgGlow: 'shadow-[0_0_30px_rgba(255,107,44,0.35)]',
     icon: <Zap className="w-5 h-5 text-[#FF6B2C]" />,
-    badgeLabel: 'FOUNDER GRANTS',
+    badgeLabel: 'EVENT GRANTS',
+    unlocks: [
+      '₹15,000 Official Sponsorship Grant for your Campus Club/Event',
+      'Direct 1-on-1 Mentorship Sessions with Top Startup Founders',
+      'Fast-track Consideration for High-Growth Paid Internships',
+    ],
   },
   {
+    stepId: 5,
+    levelNumber: 'Level 5',
+    title: 'Paid Internships & Stipends',
+    milestoneText: '100 Campus Registrations',
+    threshold: 100,
     themeColor: '#A855F7', // Neon Violet
-    glowClass: 'shadow-[0_0_24px_rgba(168,85,247,0.4)]',
+    bgGlow: 'shadow-[0_0_30px_rgba(168,85,247,0.35)]',
     icon: <Briefcase className="w-5 h-5 text-[#A855F7]" />,
-    badgeLabel: 'PAID STIPENDS',
+    badgeLabel: 'PAID STIPEND',
+    unlocks: [
+      'Guaranteed Monthly Performance Stipend + Performance Bonuses',
+      'Direct Hiring Referral to Top Partner Tech Companies & VC Startups',
+      'Official EYFI Regional Scout Director Badge',
+    ],
   },
   {
-    themeColor: '#F59E0B', // Imperial Gold
-    glowClass: 'shadow-[0_0_32px_rgba(245,158,11,0.6)]',
-    icon: <Crown className="w-5 h-5 text-[#F59E0B]" />,
+    stepId: 6,
+    levelNumber: 'Level 6',
+    title: 'Founding Team Role',
+    milestoneText: '200 Campus Registrations',
+    threshold: 200,
+    themeColor: '#EAB308', // Diamond Imperial Gold
+    bgGlow: 'shadow-[0_0_40px_rgba(234,179,8,0.6)]',
+    icon: <Crown className="w-5 h-5 text-[#EAB308]" />,
     badgeLabel: 'FOUNDING TEAM',
+    unlocks: [
+      'Full Equity & Core Founding Team Role Consideration at Polygnan EYFI',
+      'All-Expenses-Paid Trip to EYFI National Founders Retreat',
+      'Lifetime Membership in EYFI Executive Council',
+    ],
   },
 ];
 
 export const RiverLadder: React.FC<RiverLadderProps> = ({
   currentRegs,
-  unlockedSet,
-  onUnlockNewRung,
+  onRegsChange,
 }) => {
-  const [bouncingRungId, setBouncingRungId] = useState<number | null>(null);
-  const [burstRungId, setBurstRungId]     = useState<number | null>(null);
-  const [scrollProgress, setScrollProgress] = useState<number>(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeStepIndex, setActiveStepIndex] = useState<number>(0);
+  const [burstKey, setBurstKey] = useState<number | null>(null);
 
-  // Sync scroll progress as user scrolls down the section
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const totalHeight = rect.height;
-      const scrollOffset = windowHeight * 0.5 - rect.top;
-      const progress = Math.max(0, Math.min(1, scrollOffset / totalHeight));
-      setScrollProgress(progress * 100);
-    };
+  const activeStep = QUEST_STEPS[activeStepIndex];
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const handleQuickUnlock = (threshold: number) => {
+    onRegsChange?.(threshold);
+    setBurstKey(threshold);
+    setTimeout(() => setBurstKey(null), 1200);
+  };
 
-  // Combine manual slider registrations with scroll progress
-  const regPct = Math.min(100, (currentRegs / 200) * 100);
-  const flowPct = Math.max(regPct, scrollProgress);
+  const handlePrev = () => {
+    setActiveStepIndex((prev) => Math.max(0, prev - 1));
+  };
 
-  // Auto unlock check
-  useEffect(() => {
-    LADDER_RUNGS.forEach((rung) => {
-      const effectiveRegs = Math.max(currentRegs, (scrollProgress / 100) * 200);
-      if (effectiveRegs >= rung.threshold && !unlockedSet.has(rung.id)) {
-        onUnlockNewRung?.(rung.id);
-        setBouncingRungId(rung.id);
-        setBurstRungId(rung.id);
-        setTimeout(() => setBouncingRungId(null), 800);
-        setTimeout(() => setBurstRungId(null), 1200);
-      }
-    });
-  }, [currentRegs, scrollProgress, unlockedSet, onUnlockNewRung]);
-
-  const scrollToLevel = (levelId: number) => {
-    document.getElementById(`level-station-${levelId}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const handleNext = () => {
+    setActiveStepIndex((prev) => Math.min(QUEST_STEPS.length - 1, prev + 1));
   };
 
   return (
-    <div ref={containerRef} className="space-y-16 relative">
+    <div className="space-y-10 relative select-none">
+      {/* Burst Effect */}
+      {burstKey !== null && (
+        <div className="absolute inset-0 pointer-events-none z-50">
+          <RupeeCoinBurst triggerKey={burstKey} />
+        </div>
+      )}
 
-      {/* ── Interactive Level Quest Hub Bar ── */}
-      <div className="border border-[#262626] rounded-3xl p-6 shadow-2xl relative overflow-hidden backdrop-blur-md">
-        <div className="flex items-center justify-between border-b border-[#222] pb-4 mb-6 flex-wrap gap-2">
+      {/* ── Top Level Progress Track Navigator ── */}
+      <div className="border border-[#262626] rounded-3xl p-5 sm:p-6 shadow-2xl relative overflow-hidden backdrop-blur-md">
+        <div className="flex items-center justify-between border-b border-[#222] pb-4 mb-4 flex-wrap gap-2">
           <div className="flex items-center gap-2">
-            <Trophy className="w-5 h-5 text-[#C4F62E]" />
-            <span className="font-display font-extrabold text-sm text-white uppercase tracking-wider">
-              Scout Milestone Quest Tree
+            <span className="w-2.5 h-2.5 rounded-full bg-[#C4F62E] animate-pulse" />
+            <span className="font-display font-extrabold text-xs sm:text-sm text-white uppercase tracking-wider">
+              Scout Milestone Progression Track
             </span>
           </div>
 
           <div className="text-xs font-mono-stats text-[#8A8A85]">
-            Progress: <strong className="text-[#C4F62E]">{Math.round(flowPct)}%</strong> Unlocked
+            Active Selection: <strong style={{ color: activeStep.themeColor }}>{activeStep.levelNumber} — {activeStep.title}</strong>
           </div>
         </div>
 
-        {/* 6 Level Node Buttons Track */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          {LADDER_RUNGS.map((rung, idx) => {
-            const isUnlocked = flowPct >= (rung.threshold / 200) * 100;
-            const meta = LEVEL_METADATA[idx] || LEVEL_METADATA[0];
+        {/* 7 Horizontal Step Chips */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5">
+          {QUEST_STEPS.map((step, idx) => {
+            const isUnlocked = currentRegs >= step.threshold;
+            const isSelected = activeStepIndex === idx;
 
             return (
               <button
-                key={rung.id}
-                onClick={() => scrollToLevel(rung.id)}
-                className={`p-3.5 rounded-2xl border transition-all flex flex-col items-center text-center space-y-2 cursor-pointer relative group ${
-                  isUnlocked
-                    ? `border-[${meta.themeColor}] ${meta.glowClass} scale-[1.02]`
-                    : 'border-[#222222] text-[#6A6A65] hover:border-[#444] hover:text-white'
+                key={step.stepId}
+                onClick={() => setActiveStepIndex(idx)}
+                className={`p-3 rounded-2xl border transition-all flex flex-col items-center text-center space-y-1.5 cursor-pointer relative ${
+                  isSelected
+                    ? `scale-105 z-10 shadow-lg`
+                    : 'opacity-70 hover:opacity-100 hover:scale-100 border-[#222222]'
                 }`}
                 style={{
-                  borderColor: isUnlocked ? meta.themeColor : '#222222',
+                  borderColor: isSelected ? step.themeColor : isUnlocked ? `${step.themeColor}50` : '#222222',
+                  backgroundColor: isSelected ? `${step.themeColor}12` : '#0D0D0D',
                 }}
               >
+                {/* Lock or Icon badge */}
                 <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center border transition-transform group-hover:scale-110"
+                  className="w-8 h-8 rounded-xl flex items-center justify-center border transition-transform"
                   style={{
-                    backgroundColor: isUnlocked ? `${meta.themeColor}15` : '#0A0A0A',
-                    borderColor: isUnlocked ? `${meta.themeColor}50` : '#262626',
+                    backgroundColor: isUnlocked ? `${step.themeColor}15` : '#141414',
+                    borderColor: isUnlocked ? `${step.themeColor}40` : '#262626',
                   }}
                 >
-                  {meta.icon}
+                  {isUnlocked ? step.icon : <Lock className="w-3.5 h-3.5 text-[#6A6A65]" />}
                 </div>
 
                 <div className="space-y-0.5">
-                  <span className="text-[10px] font-mono-stats uppercase font-bold block" style={{ color: isUnlocked ? meta.themeColor : '#6A6A65' }}>
-                    Level {idx + 1}
+                  <span
+                    className="text-[9px] font-mono-stats uppercase font-bold block"
+                    style={{ color: isUnlocked ? step.themeColor : '#6A6A65' }}
+                  >
+                    {step.levelNumber}
                   </span>
-                  <span className="font-display font-extrabold text-xs text-white truncate max-w-[110px] block">
-                    {rung.title}
+                  <span className="font-display font-extrabold text-[11px] text-white truncate max-w-[95px] block">
+                    {step.title}
                   </span>
                 </div>
-
-                <span className="text-[9px] font-mono-stats text-[#8A8A85]">
-                  {rung.threshold} Regs
-                </span>
               </button>
             );
           })}
         </div>
       </div>
 
-      {/* ── 6 Full-Screen Height Level Reward Sections (One Card Per Viewport Page) ── */}
-      <div className="relative space-y-16 sm:space-y-24">
-        {LADDER_RUNGS.map((rung, idx) => {
-          const isUnlocked = flowPct >= (rung.threshold / 200) * 100;
-          const isBouncing = bouncingRungId === rung.id;
-          const meta = LEVEL_METADATA[idx] || LEVEL_METADATA[0];
+      {/* ── 3D Swiping Horizontal Card Carousel ── */}
+      <div className="relative max-w-3xl mx-auto px-2">
+        {/* Navigation Arrows */}
+        <button
+          onClick={handlePrev}
+          disabled={activeStepIndex === 0}
+          className="absolute -left-4 sm:-left-12 top-1/2 -translate-y-1/2 z-40 w-12 h-12 rounded-full bg-[#111] border-2 border-[#262626] hover:border-[#C4F62E] text-white flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 shadow-2xl cursor-pointer"
+          title="Previous Level"
+        >
+          <ChevronLeft className="w-6 h-6 text-[#C4F62E]" />
+        </button>
 
-          return (
-            <section
-              key={rung.id}
-              id={`level-station-${rung.id}`}
-              className="min-h-screen flex flex-col justify-center items-center py-12 px-4 relative snap-start"
-            >
-              {/* Starburst Effect */}
-              {burstRungId === rung.id && (
-                <div className="absolute inset-0 pointer-events-none z-40">
-                  <RupeeCoinBurst triggerKey={rung.id} />
-                </div>
-              )}
+        <button
+          onClick={handleNext}
+          disabled={activeStepIndex === QUEST_STEPS.length - 1}
+          className="absolute -right-4 sm:-right-12 top-1/2 -translate-y-1/2 z-40 w-12 h-12 rounded-full bg-[#111] border-2 border-[#262626] hover:border-[#C4F62E] text-white flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110 shadow-2xl cursor-pointer"
+          title="Next Level"
+        >
+          <ChevronRight className="w-6 h-6 text-[#C4F62E]" />
+        </button>
 
-              <div className="w-full max-w-2xl mx-auto space-y-8 relative z-20">
-                {/* 3D Gold Coin Badge Header */}
-                <div className="flex flex-col items-center text-center space-y-3">
-                  <div className={`relative transition-transform duration-300 ${isBouncing ? 'animate-value-pop scale-125' : ''}`}>
-                    <div
-                      className="absolute inset-0 rounded-full blur-2xl animate-pulse"
-                      style={{ backgroundColor: `${meta.themeColor}30` }}
-                    />
-                    <BadgeCoinSVG badgeIndex={idx} size={120} isUnlocked={isUnlocked} />
-                  </div>
+        {/* Card Display Deck */}
+        <div className="overflow-hidden py-4">
+          <div
+            className="flex transition-transform duration-500 ease-out"
+            style={{ transform: `translateX(-${activeStepIndex * 100}%)` }}
+          >
+            {QUEST_STEPS.map((step, idx) => {
+              const isUnlocked = currentRegs >= step.threshold;
 
-
-                </div>
-
-                {/* Single Unobstructed Reward Card */}
-                <SpotlightCard
-                  spotlightColor={isUnlocked ? `${meta.themeColor}35` : 'rgba(255, 255, 255, 0.05)'}
-                  className={`p-6 sm:p-10 rounded-3xl border transition-all duration-500 shadow-2xl ${
-                    isUnlocked
-                      ? 'shadow-[0_16px_56px_rgba(0,0,0,0.8)]'
-                      : 'border-[#262626] opacity-85'
-                  }`}
-                  style={{
-                    borderColor: isUnlocked ? `${meta.themeColor}70` : '#262626',
-                  }}
-                >
-                  <div className="space-y-6">
-                    {/* Header */}
-                    <div className="flex items-center justify-between border-b border-[#242424] pb-4 flex-wrap gap-3">
-                      <div>
-                        <span className="text-xs font-mono-stats uppercase tracking-wider font-bold block" style={{ color: isUnlocked ? meta.themeColor : '#8A8A85' }}>
-                          Level {idx + 1} Milestone Title
-                        </span>
-                        <h3 className="font-display font-black text-2xl sm:text-4xl text-white">
-                          {rung.title}
-                        </h3>
-                      </div>
-
-                      {/* Lock Status */}
-                      {isUnlocked ? (
+              return (
+                <div key={step.stepId} className="w-full flex-shrink-0 px-2">
+                  <div className="relative">
+                    {/* Locked Blurred Overlay */}
+                    {!isUnlocked && (
+                      <div className="absolute inset-0 bg-[#0A0A0A]/80 backdrop-blur-md rounded-3xl z-30 flex flex-col items-center justify-center space-y-4 p-6 text-center border border-[#262626]">
                         <div
-                          className="flex items-center gap-1.5 border px-4 py-1.5 rounded-full text-xs font-mono-stats font-bold"
+                          className="w-16 h-16 rounded-2xl border flex items-center justify-center shadow-2xl animate-pulse"
                           style={{
-                            color: meta.themeColor,
-                            backgroundColor: `${meta.themeColor}15`,
-                            borderColor: `${meta.themeColor}40`,
+                            backgroundColor: `${step.themeColor}15`,
+                            borderColor: `${step.themeColor}40`,
                           }}
                         >
-                          <Check className="w-4 h-4 stroke-[3]" />
-                          UNLOCKED
+                          <Lock className="w-8 h-8" style={{ color: step.themeColor }} />
                         </div>
-                      ) : (
-                        <div className="flex items-center gap-1.5 border border-[#262626] px-4 py-1.5 rounded-full text-xs font-mono-stats text-[#6A6A65]">
-                          <Lock className="w-4 h-4" />
-                          Requires {rung.threshold} Regs
+
+                        <div className="space-y-1">
+                          <h4 className="font-display font-extrabold text-xl text-white">
+                            {step.levelNumber}: {step.title} is Locked
+                          </h4>
+                          <p className="text-xs text-[#8A8A85] max-w-sm mx-auto font-sans leading-relaxed">
+                            Set your registration slider to <strong style={{ color: step.themeColor }}>{step.threshold} Regs</strong> to unblur and unlock these level privileges!
+                          </p>
                         </div>
-                      )}
-                    </div>
 
-                    {/* Milestone Requirement */}
-                    <div className="space-y-1">
-                      <span className="text-xs font-mono-stats font-bold uppercase tracking-wider" style={{ color: isUnlocked ? meta.themeColor : '#8A8A85' }}>
-                        Milestone Requirement:
-                      </span>
-                      <p className="text-sm sm:text-base font-display font-extrabold text-white">
-                        {rung.milestoneText}
-                      </p>
-                    </div>
-
-                    {/* Active Privileges */}
-                    <div className="border border-[#222222] rounded-2xl p-5 space-y-3">
-                      <div className="text-xs font-mono-stats uppercase tracking-widest font-bold flex items-center gap-2" style={{ color: isUnlocked ? meta.themeColor : '#8A8A85' }}>
-                        <Zap className="w-4 h-4" />
-                        LEVEL UNLOCKS & REWARDS:
-                      </div>
-
-                      <ul className="space-y-2.5">
-                        {rung.unlocks.map((benefit, bIdx) => (
-                          <li key={bIdx} className="text-xs sm:text-sm text-[#F5F3EF] flex items-start gap-3 font-sans font-medium">
-                            <CheckCircle2 className="w-4.5 h-4.5 flex-shrink-0 mt-0.5" style={{ color: meta.themeColor }} />
-                            <span>{benefit}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Flow Prompt to Next Level */}
-                    {idx < LADDER_RUNGS.length - 1 && (
-                      <div className="pt-2 flex justify-center">
                         <button
-                          onClick={() => scrollToLevel(rung.id + 1)}
-                          className="inline-flex items-center gap-2 text-xs font-mono-stats font-bold text-[#8A8A85] hover:text-[#C4F62E] transition-colors cursor-pointer py-1.5 px-5 rounded-full border border-[#262626] hover:border-[#C4F62E]/40"
+                          onClick={() => handleQuickUnlock(step.threshold)}
+                          className="px-6 py-3 rounded-full text-xs font-mono-stats font-extrabold text-[#0A0A0A] transition-transform hover:scale-105 shadow-xl cursor-pointer"
+                          style={{ backgroundColor: step.themeColor }}
                         >
-                          <span>Scroll to Level {idx + 2}: {LADDER_RUNGS[idx + 1].title}</span>
-                          <ArrowDown className="w-3.5 h-3.5 animate-bounce text-[#C4F62E]" />
+                          Quick Unlock ({step.threshold} Regs)
                         </button>
                       </div>
                     )}
+
+                    {/* Unlocked / Display Card */}
+                    <SpotlightCard
+                      spotlightColor={`${step.themeColor}30`}
+                      className={`p-6 sm:p-10 rounded-3xl border transition-all duration-500 shadow-2xl relative ${
+                        isUnlocked ? step.bgGlow : 'opacity-40 filter blur-[2px]'
+                      }`}
+                      style={{
+                        borderColor: isUnlocked ? `${step.themeColor}60` : '#242424',
+                      }}
+                    >
+                      <div className="space-y-6">
+                        {/* Header */}
+                        <div className="flex items-center justify-between border-b border-[#242424] pb-4 flex-wrap gap-3">
+                          <div className="space-y-1">
+                            <span
+                              className="text-xs font-mono-stats uppercase tracking-wider font-bold block"
+                              style={{ color: step.themeColor }}
+                            >
+                              {step.levelNumber} · {step.badgeLabel}
+                            </span>
+                            <h3 className="font-display font-black text-2xl sm:text-4xl text-white">
+                              {step.title}
+                            </h3>
+                          </div>
+
+                          {/* 3D Badge Coin or Verification Emblem */}
+                          {step.stepId === 0 ? (
+                            <div className="w-14 h-14 rounded-2xl bg-[#10B981]/15 border border-[#10B981]/40 flex items-center justify-center text-[#10B981]">
+                              <UserCheck className="w-8 h-8" />
+                            </div>
+                          ) : (
+                            <div className="flex-shrink-0">
+                              <BadgeCoinSVG badgeIndex={idx - 1} size={84} isUnlocked={isUnlocked} />
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Milestone Requirement */}
+                        <div className="space-y-1">
+                          <span className="text-xs font-mono-stats font-bold uppercase tracking-wider" style={{ color: step.themeColor }}>
+                            Requirement:
+                          </span>
+                          <p className="text-sm sm:text-base font-display font-extrabold text-white">
+                            {step.milestoneText}
+                          </p>
+                        </div>
+
+                        {/* Privileges Unlocked */}
+                        <div className="border border-[#222222] rounded-2xl p-5 space-y-3">
+                          <div
+                            className="text-xs font-mono-stats uppercase tracking-widest font-bold flex items-center gap-2"
+                            style={{ color: step.themeColor }}
+                          >
+                            <Zap className="w-4 h-4" />
+                            LEVEL PRIVILEGES & REWARDS:
+                          </div>
+
+                          <ul className="space-y-2.5">
+                            {step.unlocks.map((benefit, bIdx) => (
+                              <li key={bIdx} className="text-xs sm:text-sm text-[#F5F3EF] flex items-start gap-3 font-sans font-medium">
+                                <CheckCircle2 className="w-4.5 h-4.5 flex-shrink-0 mt-0.5" style={{ color: step.themeColor }} />
+                                <span>{benefit}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* CTA / Action Button */}
+                        <div className="pt-2 flex items-center justify-between flex-wrap gap-3">
+                          {step.stepId === 0 ? (
+                            <a
+                              href="https://ambassador.eyfichallenge.com/#apply"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-full sm:w-auto px-6 py-3 rounded-full text-xs font-display font-black text-[#0A0A0A] bg-[#10B981] hover:bg-[#059669] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+                            >
+                              <span>Apply for Verification Now</span>
+                              <ExternalLink className="w-4 h-4" />
+                            </a>
+                          ) : (
+                            <div className="flex items-center gap-2 text-xs font-mono-stats text-[#8A8A85]">
+                              <span>Status:</span>
+                              <strong style={{ color: isUnlocked ? step.themeColor : '#6A6A65' }}>
+                                {isUnlocked ? 'Unlocked & Active' : 'Requires Slider Boost'}
+                              </strong>
+                            </div>
+                          )}
+
+                          {idx < QUEST_STEPS.length - 1 && (
+                            <button
+                              onClick={handleNext}
+                              className="text-xs font-mono-stats font-bold text-[#8A8A85] hover:text-white transition-colors cursor-pointer flex items-center gap-1 ml-auto"
+                            >
+                              <span>Next Card →</span>
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </SpotlightCard>
                   </div>
-                </SpotlightCard>
-              </div>
-            </section>
-          );
-        })}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Slide Indicators */}
+        <div className="flex justify-center items-center gap-2 pt-4">
+          {QUEST_STEPS.map((step, idx) => (
+            <button
+              key={idx}
+              onClick={() => setActiveStepIndex(idx)}
+              className={`w-3 h-3 rounded-full transition-all cursor-pointer ${
+                activeStepIndex === idx ? 'scale-125' : 'opacity-40 hover:opacity-80'
+              }`}
+              style={{
+                backgroundColor: activeStepIndex === idx ? step.themeColor : '#444',
+              }}
+              title={step.levelNumber}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
