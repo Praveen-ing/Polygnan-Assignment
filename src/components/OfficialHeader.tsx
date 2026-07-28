@@ -18,7 +18,7 @@ export const OfficialHeader: React.FC<OfficialHeaderProps> = ({ onNavClick }) =>
         </a>
 
         {/* Navigation Links */}
-        <nav className="flex items-center gap-4 sm:gap-8 font-sans text-xs sm:text-sm font-semibold">
+        <nav className="flex items-center gap-3 sm:gap-7 font-sans text-xs sm:text-sm font-semibold">
           <button
             onClick={() => onNavClick?.('how-it-works')}
             className="text-[#8A8A85] hover:text-[#C4F62E] transition-colors cursor-pointer hidden sm:inline"
@@ -34,10 +34,17 @@ export const OfficialHeader: React.FC<OfficialHeaderProps> = ({ onNavClick }) =>
           </button>
 
           <button
+            onClick={() => onNavClick?.('analytics')}
+            className="text-[#8A8A85] hover:text-[#C4F62E] transition-colors cursor-pointer hidden sm:inline"
+          >
+            CF Visual Analytics
+          </button>
+
+          <button
             onClick={() => onNavClick?.('leaderboard')}
             className="text-[#8A8A85] hover:text-[#C4F62E] transition-colors cursor-pointer hidden sm:inline"
           >
-            College Leaderboard
+            Leaderboard
           </button>
 
           <button
