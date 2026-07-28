@@ -8,16 +8,13 @@ import { RewardLadder } from './components/RewardLadder';
 import { TierProgressBar } from './components/TierProgressBar';
 import { UnlockValueCounter } from './components/UnlockValueCounter';
 import { ShareCardModal } from './components/ShareCardModal';
-import { MajorMilestoneSpotlightModal } from './components/MajorMilestoneSpotlightModal';
-import { LadderRung } from './types';
 import { Zap, ArrowRight, ExternalLink } from 'lucide-react';
 
 export function App() {
-  const [regs, setRegs]                   = useState<number>(0);
-  const [isAutoplay, setIsAutoplay]       = useState<boolean>(true);
-  const [unlockedSet, setUnlockedSet]     = useState<Set<number>>(new Set([0]));
-  const [isShareOpen, setIsShareOpen]     = useState<boolean>(false);
-  const [spotlightRung, setSpotlightRung] = useState<LadderRung | null>(null);
+  const [regs, setRegs]               = useState<number>(0);
+  const [isAutoplay, setIsAutoplay]   = useState<boolean>(true);
+  const [unlockedSet, setUnlockedSet] = useState<Set<number>>(new Set([0]));
+  const [isShareOpen, setIsShareOpen] = useState<boolean>(false);
 
   const animFrameRef = useRef<number | null>(null);
   const startTimeRef = useRef<number | null>(null);
@@ -75,7 +72,6 @@ export function App() {
     if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
     setRegs(0);
     setUnlockedSet(new Set([0]));
-    setSpotlightRung(null);
   };
 
   const handleUnlockNewRung = (rungId: number) => {
@@ -197,7 +193,6 @@ export function App() {
                   currentRegs={regs}
                   unlockedSet={unlockedSet}
                   onUnlockNewRung={handleUnlockNewRung}
-                  onMajorMilestoneTrigger={setSpotlightRung}
                 />
               </div>
             </div>
@@ -269,12 +264,6 @@ export function App() {
       </footer>
 
       {/* Modals */}
-      <MajorMilestoneSpotlightModal
-        rung={spotlightRung}
-        onClose={() => setSpotlightRung(null)}
-        campusName="Your Campus"
-      />
-
       <ShareCardModal
         isOpen={isShareOpen}
         onClose={() => setIsShareOpen(false)}

@@ -8,14 +8,12 @@ interface RewardLadderProps {
   currentRegs: number;
   unlockedSet: Set<number>;
   onUnlockNewRung?: (rungId: number) => void;
-  onMajorMilestoneTrigger?: (rung: LadderRung) => void;
 }
 
 export const RewardLadder: React.FC<RewardLadderProps> = ({
   currentRegs,
   unlockedSet,
   onUnlockNewRung,
-  onMajorMilestoneTrigger,
 }) => {
   const [expandedRung, setExpandedRung]   = useState<number>(0);
   const [bouncingRungId, setBouncingRungId] = useState<number | null>(null);
@@ -40,16 +38,11 @@ export const RewardLadder: React.FC<RewardLadderProps> = ({
         setBurstRungId(rung.id);
         setTimeout(() => setBurstRungId(null), 1200);
 
-        // Spotlight for 100+ tiers
-        if (rung.threshold >= 100 && onMajorMilestoneTrigger) {
-          onMajorMilestoneTrigger(rung);
-        }
-
         // Auto-expand newly unlocked tier
         setExpandedRung(rung.id);
       }
     });
-  }, [currentRegs, unlockedSet, onUnlockNewRung, onMajorMilestoneTrigger]);
+  }, [currentRegs, unlockedSet, onUnlockNewRung]);
 
   const handleToggleExpand = (rungId: number) => {
     setExpandedRung(prev => prev === rungId ? -1 : rungId);

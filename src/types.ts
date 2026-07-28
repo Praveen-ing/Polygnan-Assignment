@@ -1,5 +1,3 @@
-import { MilestoneBadgeType } from './components/BadgeIcon';
-
 export interface PerkDetail {
   emoji: string;
   text: string;
@@ -12,7 +10,7 @@ export interface LadderRung {
   reqText: string;
   description: string;
   icon: string;
-  badgeType: MilestoneBadgeType;
+  badgeType: string;
   perks: string[];
   perksDetailed: PerkDetail[];
   estimatedValue: string;
