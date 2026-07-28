@@ -63,13 +63,7 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
   return (
     <div ref={containerRef} className="space-y-12 relative">
 
-      {/* ── Sleek Left Vertical Liquid River Progress Bar (Unobstructed Margin) ── */}
-      <div className="fixed left-4 lg:left-12 top-1/4 bottom-1/4 w-1.5 rounded-full bg-[#1C1C1C] z-40 hidden sm:block pointer-events-none">
-        <div
-          className="w-full bg-[#C4F62E] rounded-full transition-all duration-300 shadow-[0_0_16px_rgba(196,246,46,0.8)]"
-          style={{ height: `${flowPct}%` }}
-        />
-      </div>
+
 
 
 
