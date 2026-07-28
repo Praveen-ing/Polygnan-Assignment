@@ -14,9 +14,10 @@ import { ShareCardModal } from './components/ShareCardModal';
 import { PolygnanEthosBanner } from './components/PolygnanEthosBanner';
 import { FlyingBird } from './components/FlyingBird';
 import { PolyAgent } from './components/PolyAgent';
-import { Zap, ArrowRight, ExternalLink } from 'lucide-react';
+import { Sun, Moon, Zap, ArrowRight, ExternalLink } from 'lucide-react';
 
 export function App() {
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [regs, setRegs] = useState<number>(0);
   const [isAutoplay, setIsAutoplay] = useState<boolean>(true);
   const [unlockedSet, setUnlockedSet] = useState<Set<number>>(new Set([0]));
@@ -93,7 +94,20 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-dots-pattern text-[#F5F3EF] flex flex-col font-sans selection:bg-[#C4F62E] selection:text-black relative">
+    <div className={`min-h-screen bg-dots-pattern text-[#F5F3EF] flex flex-col font-sans selection:bg-[#C4F62E] selection:text-black relative ${theme === 'light' ? 'theme-light' : ''}`}>
+
+      {/* Floating Dark/Light Mode Theme Switcher */}
+      <button
+        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        className="fixed top-4 right-4 z-50 p-3 rounded-full bg-[#111111] border-2 border-[#C4F62E] shadow-[0_0_20px_rgba(196,246,46,0.5)] text-[#C4F62E] hover:scale-110 active:scale-95 transition-all cursor-pointer flex items-center justify-center"
+        title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      >
+        {theme === 'dark' ? (
+          <Sun className="w-5 h-5 text-[#C4F62E]" />
+        ) : (
+          <Moon className="w-5 h-5 text-[#C4F62E]" />
+        )}
+      </button>
 
       {/* 1. Announcement Ticker (Orange background) */}
       <MarqueeTicker />
