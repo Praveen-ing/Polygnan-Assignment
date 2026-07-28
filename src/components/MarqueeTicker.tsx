@@ -13,7 +13,7 @@ export const MarqueeTicker: React.FC = () => {
   const repeated = [...items, ...items, ...items, ...items];
 
   return (
-    <div className="bg-[#C4F62E] border-b-[3px] border-[#0A0A0A] overflow-hidden whitespace-nowrap">
+    <div className="bg-[#FF6B2C] border-b-[3px] border-[#0A0A0A] overflow-hidden whitespace-nowrap">
       <div className="inline-block animate-marquee py-2.5 font-display font-bold text-[13px] tracking-[0.08em] uppercase">
         {repeated.map((item, idx) => (
           <span key={idx} className={`mx-6 ${item.color}`}>
