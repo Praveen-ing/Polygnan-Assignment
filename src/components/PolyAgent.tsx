@@ -76,16 +76,7 @@ export const PolyAgent: React.FC = () => {
     <>
       {/* Floating Poly AI Agent Button (Bottom Right) */}
       <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
-        {/* Unopened Speech Bubble */}
-        {!isOpen && (
-          <div
-            onClick={() => setIsOpen(true)}
-            className="bg-[#0D0D0D]/95 border border-[#C4F62E]/50 text-white text-xs font-mono-stats px-3.5 py-2 rounded-2xl shadow-[0_4px_20px_rgba(196,246,46,0.3)] flex items-center gap-2 cursor-pointer animate-bounce hover:scale-105 transition-transform"
-          >
-            <span className="w-2 h-2 rounded-full bg-[#C4F62E] animate-ping" />
-            <span>Chat with <strong>Poly</strong> AI 🤖</span>
-          </div>
-        )}
+
 
         {/* Trigger Button */}
         <button
