@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MarqueeTicker } from './components/MarqueeTicker';
-import { OfficialHeader } from './components/OfficialHeader';
 import { AmbassadorHero } from './components/AmbassadorHero';
 import { SocialProofBanner } from './components/SocialProofBanner';
 import { RegistrationCounter } from './components/RegistrationCounter';
@@ -90,14 +89,6 @@ export function App() {
 
       {/* 1. Marquee */}
       <MarqueeTicker />
-
-      {/* 2. Sticky Header */}
-      <OfficialHeader
-        onApplyClick={() => scrollToSection('apply-section')}
-        onTabClick={(tab) => {
-          if (tab === 'ladder') scrollToSection('ladder');
-        }}
-      />
 
       <main className="flex-1">
         {/* 3. Hero */}
