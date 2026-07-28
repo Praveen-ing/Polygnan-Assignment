@@ -49,16 +49,6 @@ export const AmbassadorHero: React.FC<AmbassadorHeroProps> = ({
         </div>
       </div>
 
-      {/* Wave 01 pill */}
-      <div className="flex justify-center mb-8">
-        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/30 text-xs font-mono-stats font-bold text-[#C4F62E] uppercase tracking-wider animate-glow-pulse">
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C4F62E] opacity-75" />
-            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#C4F62E]" />
-          </span>
-          Wave 01 · Applications Open Now
-        </div>
-      </div>
 
       {/* Main Headline — bold massive typography */}
       <h1 className="font-display font-extrabold text-white leading-[1.05] tracking-tight mb-6">
