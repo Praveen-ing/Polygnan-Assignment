@@ -26,9 +26,7 @@ export const HowItWorksSteps: React.FC = () => {
   return (
     <div className="py-8 space-y-8">
       <div className="text-center space-y-3">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/30 text-xs font-mono-stats text-[#C4F62E] font-bold uppercase tracking-wider">
-          Simple 3-Step Journey
-        </div>
+
         <h3 className="font-display font-extrabold text-2xl sm:text-4xl text-white tracking-tight">
           How the <span className="text-[#C4F62E]">Program Works</span>
         </h3>
