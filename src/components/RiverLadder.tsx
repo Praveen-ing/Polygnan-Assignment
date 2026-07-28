@@ -71,35 +71,7 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
         />
       </div>
 
-      {/* ── Fixed Vertical Right Dock Milestone Navigation Bar ── */}
-      <aside className="fixed right-3 sm:right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2 p-2 sm:p-3 border border-[#262626] rounded-2xl shadow-2xl max-h-[85vh] overflow-y-auto">
-        <div className="text-[10px] font-mono-stats text-[#8A8A85] uppercase tracking-wider px-2 py-1 flex items-center gap-1 font-bold">
-          <Zap className="w-3 h-3 text-[#C4F62E]" />
-          <span className="hidden md:inline">Level Jump</span>
-        </div>
 
-        {LADDER_RUNGS.map((rung, idx) => {
-          const isUnlocked = flowPct >= (rung.threshold / 200) * 100;
-          return (
-            <button
-              key={rung.id}
-              onClick={() => scrollToLevel(rung.id)}
-              className={`px-2.5 py-1.5 rounded-xl text-xs font-mono-stats font-bold transition-all flex items-center gap-2 cursor-pointer border text-left ${
-                isUnlocked
-                  ? 'bg-[#C4F62E] text-[#0A0A0A] border-[#C4F62E] shadow-[0_2px_12px_rgba(196,246,46,0.4)] scale-[1.02]'
-                  : 'border-[#222] text-[#8A8A85] hover:border-[#444] hover:text-white'
-              }`}
-            >
-              <span className="w-5 h-5 rounded-full border border-[#333] flex items-center justify-center text-[10px] font-black flex-shrink-0">
-                L{idx + 1}
-              </span>
-              <span className="hidden md:inline truncate max-w-[140px]">
-                {rung.title}
-              </span>
-            </button>
-          );
-        })}
-      </aside>
 
       {/* ── 6 Full-Screen Height Level Reward Sections (One Card Per Viewport Page) ── */}
       <div className="relative space-y-16 sm:space-y-24">
