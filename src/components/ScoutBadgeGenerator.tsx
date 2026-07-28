@@ -23,15 +23,11 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
   };
 
   return (
-    <div className="bg-[#0D0D0D] border border-[#1F1F1F] rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden noise-overlay">
-      {/* Background ambient glow */}
-      <div className="pointer-events-none absolute -top-24 -right-24 w-96 h-96 bg-[#C4F62E]/10 rounded-full blur-[120px]" />
-      <div className="pointer-events-none absolute -bottom-24 -left-24 w-96 h-96 bg-[#E8B923]/10 rounded-full blur-[120px]" />
-
+    <div className="py-8 relative overflow-hidden">
       <div className="max-w-5xl mx-auto space-y-8 relative z-10">
         {/* Section Header */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/20 text-xs font-mono-stats text-[#C4F62E] uppercase tracking-wider font-bold">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/30 text-xs font-mono-stats text-[#C4F62E] uppercase tracking-wider font-bold">
             <Sparkles className="w-4 h-4 text-[#C4F62E]" />
             Interactive Scout Pass Studio
           </div>
@@ -44,8 +40,8 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Controls Form */}
-          <div className="lg:col-span-6 space-y-5 bg-[#121212] border border-[#222222] rounded-3xl p-6 sm:p-8 shadow-xl">
+          {/* Controls Form (Transparent floating box) */}
+          <div className="lg:col-span-6 space-y-5 border border-[#262626] rounded-3xl p-6 sm:p-8">
             <div className="space-y-2">
               <label className="block text-xs font-mono-stats uppercase tracking-widest text-[#8A8A85] font-bold">
                 Your Full Name
@@ -57,7 +53,7 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Enter your name"
-                  className="w-full bg-[#0A0A0A] border border-[#2A2A2A] rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder-[#4A4640] focus:border-[#C4F62E] focus:outline-none transition-all font-sans"
+                  className="w-full bg-[#0A0A0A]/40 border border-[#2A2A2A] rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder-[#4A4640] focus:border-[#C4F62E] focus:outline-none transition-all font-sans"
                 />
               </div>
             </div>
@@ -73,7 +69,7 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
                   value={college}
                   onChange={(e) => setCollege(e.target.value)}
                   placeholder="Enter college name"
-                  className="w-full bg-[#0A0A0A] border border-[#2A2A2A] rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder-[#4A4640] focus:border-[#C4F62E] focus:outline-none transition-all font-sans"
+                  className="w-full bg-[#0A0A0A]/40 border border-[#2A2A2A] rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder-[#4A4640] focus:border-[#C4F62E] focus:outline-none transition-all font-sans"
                 />
               </div>
             </div>
@@ -89,10 +85,11 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
                     <button
                       key={rung.id}
                       onClick={() => setSelectedRole(idx)}
-                      className={`py-2.5 px-3 rounded-xl text-xs font-mono-stats font-bold transition-all text-left border cursor-pointer flex flex-col justify-between ${isSelected
+                      className={`py-2.5 px-3 rounded-xl text-xs font-mono-stats font-bold transition-all text-left border cursor-pointer flex flex-col justify-between ${
+                        isSelected
                           ? 'bg-[#C4F62E] text-[#0A0A0A] border-[#C4F62E] shadow-[0_4px_16px_rgba(196,246,46,0.35)] scale-[1.02]'
-                          : 'bg-[#0A0A0A] text-[#8A8A85] border-[#222222] hover:border-[#444444] hover:text-white'
-                        }`}
+                          : 'border-[#262626] text-[#8A8A85] hover:border-[#444444] hover:text-white'
+                      }`}
                     >
                       <span className="text-[10px] opacity-75">L{idx + 1}</span>
                       <span className="truncate font-extrabold">{rung.title}</span>
@@ -117,14 +114,14 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
             </div>
           </div>
 
-          {/* Ultra-Premium Glassmorphic 3D Holographic Pass Card Preview */}
+          {/* Holographic Pass Card Preview */}
           <div className="lg:col-span-6 flex justify-center">
             <SpotlightCard
               spotlightColor="rgba(196, 246, 46, 0.25)"
-              className="w-full max-w-sm bg-gradient-to-b from-[#1C1C1C] via-[#121212] to-[#080808] border-2 border-[#C4F62E]/50 rounded-3xl p-6 space-y-6 shadow-[0_20px_60px_rgba(0,0,0,0.9)] relative group"
+              className="w-full max-w-sm border-2 border-[#C4F62E]/50 rounded-3xl p-6 space-y-6 shadow-[0_20px_60px_rgba(0,0,0,0.9)] relative group"
             >
               {/* Simulated Lanyard Slot */}
-              <div className="w-12 h-1.5 rounded-full bg-[#050505] border border-[#2A2A2A] mx-auto -mt-2 opacity-80" />
+              <div className="w-12 h-1.5 rounded-full border border-[#2A2A2A] mx-auto -mt-2 opacity-80" />
 
               {/* Header Bar */}
               <div className="flex items-center justify-between border-b border-[#262626] pb-4">
@@ -147,7 +144,7 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
               {/* Card Body */}
               <div className="space-y-5">
                 <div className="flex items-center gap-4">
-                  {/* 3D Gold Badge Coin with Glowing Halo */}
+                  {/* 3D Gold Badge Coin */}
                   <div className="relative flex-shrink-0">
                     <div className="absolute inset-0 rounded-full bg-[#FAD02C]/20 blur-xl animate-pulse" />
                     <BadgeCoinSVG badgeIndex={selectedRole} size={72} isUnlocked={true} />
@@ -161,14 +158,14 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
                       <Building className="w-3.5 h-3.5 text-[#C4F62E]" />
                       {college || 'IIT Delhi'}
                     </p>
-                    <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-[#1E1E1E] border border-[#2E2E2E] text-[10px] font-mono-stats text-[#C4F62E] font-bold">
+                    <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md border border-[#2E2E2E] text-[10px] font-mono-stats text-[#C4F62E] font-bold">
                       {activeRung.title}
                     </div>
                   </div>
                 </div>
 
                 {/* Level Perks Unlocked */}
-                <div className="bg-[#070707] border border-[#1E1E1E] rounded-2xl p-4 space-y-2.5">
+                <div className="border border-[#1E1E1E] rounded-2xl p-4 space-y-2.5">
                   <p className="text-[10px] font-mono-stats uppercase tracking-widest text-[#C4F62E] font-bold">
                     ACTIVE LEVEL PRIVILEGES:
                   </p>
@@ -183,13 +180,13 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
                 </div>
               </div>
 
-              {/* Bottom Code & QR Verification Aesthetic */}
+              {/* Bottom Code & QR */}
               <div className="pt-3 border-t border-[#202020] flex items-center justify-between text-[10px] font-mono-stats">
                 <div>
                   <p className="text-[#6A6A65]">ID: EYFI-SCOUT-2026</p>
                   <p className="text-[#C4F62E] font-bold mt-0.5">LEVEL {selectedRole + 1} OF 6</p>
                 </div>
-                <div className="w-9 h-9 rounded-lg bg-[#141414] border border-[#262626] flex items-center justify-center text-[#8A8A85]">
+                <div className="w-9 h-9 rounded-lg border border-[#262626] flex items-center justify-center text-[#8A8A85]">
                   <QrCode className="w-5 h-5 text-[#C4F62E]" />
                 </div>
               </div>

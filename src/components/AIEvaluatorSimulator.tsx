@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Bot, Sparkles, Zap, ArrowRight, CheckCircle2, TrendingUp } from 'lucide-react';
+import { Bot, CheckCircle2 } from 'lucide-react';
 
 interface AIResult {
   feasibilityScore: number;
@@ -41,10 +41,10 @@ export const AIEvaluatorSimulator: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#0D0D0D] border border-[#1F1F1F] rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8 noise-overlay">
+    <div className="py-8 space-y-8">
       {/* Header */}
       <div className="text-center space-y-3">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/20 text-xs font-mono-stats text-[#C4F62E] font-bold uppercase tracking-wider">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/30 text-xs font-mono-stats text-[#C4F62E] font-bold uppercase tracking-wider">
           <Bot className="w-4 h-4 text-[#C4F62E]" />
           EYFI AI Agent Auto-Evaluator (Preview)
         </div>
@@ -65,7 +65,7 @@ export const AIEvaluatorSimulator: React.FC = () => {
               value={ideaInput}
               onChange={(e) => setIdeaInput(e.target.value)}
               placeholder="Describe your student earning idea..."
-              className="w-full bg-[#121212] border border-[#262626] rounded-2xl p-4 text-xs sm:text-sm text-white placeholder-[#4A4640] focus:border-[#C4F62E] focus:outline-none transition-all font-sans"
+              className="w-full bg-[#0A0A0A]/40 border border-[#2A2A2A] rounded-2xl p-4 text-xs sm:text-sm text-white placeholder-[#4A4640] focus:border-[#C4F62E] focus:outline-none transition-all font-sans"
             />
           </div>
 
@@ -76,7 +76,7 @@ export const AIEvaluatorSimulator: React.FC = () => {
               <button
                 key={i}
                 onClick={() => setIdeaInput(preset)}
-                className="text-[11px] font-mono-stats px-2.5 py-1 rounded-lg bg-[#141414] border border-[#222] hover:border-[#C4F62E]/40 hover:text-[#C4F62E] text-[#8A8A85] transition-all cursor-pointer"
+                className="text-[11px] font-mono-stats px-2.5 py-1 rounded-lg border border-[#262626] hover:border-[#C4F62E]/40 hover:text-[#C4F62E] text-[#8A8A85] transition-all cursor-pointer"
               >
                 {preset.slice(0, 24)}…
               </button>
@@ -98,7 +98,7 @@ export const AIEvaluatorSimulator: React.FC = () => {
 
         {/* AI Output Card */}
         {result && (
-          <div className="bg-[#121212] border border-[#C4F62E]/40 rounded-2xl p-6 space-y-5 animate-slide-in shadow-2xl">
+          <div className="border border-[#C4F62E]/40 rounded-2xl p-6 space-y-5 animate-slide-in shadow-2xl">
             <div className="flex items-center justify-between border-b border-[#202020] pb-4">
               <div className="flex items-center gap-2">
                 <Bot className="w-5 h-5 text-[#C4F62E]" />
@@ -110,14 +110,14 @@ export const AIEvaluatorSimulator: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-[#0A0A0A] border border-[#1E1E1E] p-4 rounded-xl text-center">
+              <div className="border border-[#1E1E1E] p-4 rounded-xl text-center">
                 <p className="text-[10px] font-mono-stats text-[#8A8A85] uppercase">Feasibility Score</p>
                 <p className="font-display font-extrabold text-3xl text-[#C4F62E] mt-1">
                   {result.feasibilityScore}%
                 </p>
               </div>
 
-              <div className="bg-[#0A0A0A] border border-[#1E1E1E] p-4 rounded-xl text-center">
+              <div className="border border-[#1E1E1E] p-4 rounded-xl text-center">
                 <p className="text-[10px] font-mono-stats text-[#8A8A85] uppercase">30-Day Earnings Estimate</p>
                 <p className="font-display font-extrabold text-lg sm:text-xl text-[#E8B923] mt-2">
                   {result.potentialEstimate}
@@ -125,7 +125,7 @@ export const AIEvaluatorSimulator: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-[#0A0A0A] border border-[#1E1E1E] p-4 rounded-xl space-y-2.5">
+            <div className="border border-[#1E1E1E] p-4 rounded-xl space-y-2.5">
               <p className="text-[10px] font-mono-stats uppercase tracking-widest text-[#C4F62E] font-bold">
                 AI EXECUTION RECOMMENDATIONS:
               </p>

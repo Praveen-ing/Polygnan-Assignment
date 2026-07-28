@@ -47,7 +47,7 @@ export const RegistrationCounter: React.FC<RegistrationCounterProps> = ({
   const sliderPct = (regs / 200) * 100;
 
   return (
-    <div className="bg-[#111111] border border-[#242424] rounded-2xl p-5 sm:p-6 space-y-5 shadow-xl relative overflow-hidden">
+    <div className="border border-[#242424] rounded-2xl p-5 sm:p-6 space-y-5 shadow-xl relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-0 right-0 w-48 h-48 bg-[#C4F62E]/5 rounded-full blur-3xl pointer-events-none" />
 
@@ -57,7 +57,7 @@ export const RegistrationCounter: React.FC<RegistrationCounterProps> = ({
           Your Registrations
         </div>
 
-        <div className="flex items-center gap-1.5 bg-[#1A1A1A] border border-[#262626] rounded-lg p-1">
+        <div className="flex items-center gap-1.5 border border-[#262626] rounded-lg p-1">
           <button
             onClick={onToggleAutoplay}
             id="autoplay-toggle-btn"
@@ -145,7 +145,7 @@ export const RegistrationCounter: React.FC<RegistrationCounterProps> = ({
               key={amt}
               id={`quick-add-${amt}`}
               onClick={() => handlePresetClick(amt)}
-              className="inline-flex items-center gap-0.5 text-[10px] font-mono-stats font-semibold bg-[#1A1A1A] hover:bg-[#C4F62E]/15 hover:text-[#C4F62E] border border-[#262626] hover:border-[#C4F62E]/40 px-2.5 py-1 rounded-md transition-all text-[#F5F3EF] cursor-pointer"
+              className="inline-flex items-center gap-0.5 text-[10px] font-mono-stats font-semibold hover:bg-[#C4F62E]/15 hover:text-[#C4F62E] border border-[#262626] hover:border-[#C4F62E]/40 px-2.5 py-1 rounded-md transition-all text-[#F5F3EF] cursor-pointer"
             >
               <Plus className="w-2.5 h-2.5" />
               <span>{amt}</span>
