@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
+import QRCode from 'react-qr-code';
 import {
   UserCheck,
   Compass,
@@ -160,6 +161,10 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
 }) => {
   const [activeStepIndex, setActiveStepIndex] = useState<number>(0);
   const [burstKey, setBurstKey] = useState<number | null>(null);
+
+  const randomCampusQR = useMemo(() => {
+    return `EYFI-CAMPUS-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
+  }, []);
 
   const activeStep = QUEST_STEPS[activeStepIndex];
 
@@ -341,8 +346,8 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
 
                           {/* 3D Badge Coin or Verification Emblem */}
                           {step.stepId === 0 ? (
-                            <div className="w-14 h-14 rounded-2xl bg-[#10B981]/15 border border-[#10B981]/40 flex items-center justify-center text-[#10B981]">
-                              <UserCheck className="w-8 h-8" />
+                            <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center p-1 shadow-lg shadow-[#10B981]/20 border border-[#10B981]/50">
+                              <QRCode value={randomCampusQR} size={44} bgColor="#ffffff" fgColor="#0A0A0A" />
                             </div>
                           ) : (
                             <div className="flex-shrink-0">
