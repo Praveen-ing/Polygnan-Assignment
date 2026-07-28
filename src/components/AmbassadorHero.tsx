@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Users, MapPin, Clock } from 'lucide-react';
 
 interface AmbassadorHeroProps {
   onApplyClick?: () => void;
@@ -11,91 +11,110 @@ export const AmbassadorHero: React.FC<AmbassadorHeroProps> = ({
   onExploreClick,
 }) => {
   return (
-    <section id="top" className="relative pt-12 pb-16 px-4 sm:px-6 max-w-4xl mx-auto text-center overflow-hidden">
+    <section
+      id="top"
+      className="relative pt-16 pb-20 px-4 sm:px-6 max-w-5xl mx-auto text-center overflow-hidden hero-gradient noise-overlay"
+    >
+      {/* Ambient glow orbs */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#C4F62E]/5 rounded-full blur-[80px]" />
+        <div className="absolute bottom-0 right-0 w-[300px] h-[200px] bg-[#E8B923]/5 rounded-full blur-[60px]" />
+      </div>
+
       {/* Floating ambient coins */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        {/* Desktop coins — exact sizes & rotations from official EYFI HTML */}
-        <div className="hidden sm:block absolute top-8 left-[2vw] opacity-50">
+        <div className="hidden sm:block absolute top-8 left-[2vw] opacity-40">
           <CoinSVG size={100} rotX={72} rotY={-32} rotZ={-24} delay="0s" />
         </div>
-        <div className="hidden sm:block absolute top-2 right-[3vw] opacity-50">
+        <div className="hidden sm:block absolute top-2 right-[3vw] opacity-40">
           <CoinSVG size={140} rotX={-62} rotY={38} rotZ={18} delay="1s" />
         </div>
-        <div className="hidden sm:block absolute top-[38%] right-[1vw] opacity-50">
+        <div className="hidden sm:block absolute top-[38%] right-[1vw] opacity-30">
           <CoinSVG size={82} rotX={78} rotY={22} rotZ={36} delay="2s" />
         </div>
-        <div className="hidden sm:block absolute top-[42%] left-[1vw] opacity-50">
+        <div className="hidden sm:block absolute top-[42%] left-[1vw] opacity-30">
           <CoinSVG size={78} rotX={18} rotY={30} rotZ={-16} delay="0.7s" />
         </div>
-        <div className="hidden sm:block absolute bottom-24 left-[4vw] opacity-50">
+        <div className="hidden sm:block absolute bottom-24 left-[4vw] opacity-35">
           <CoinSVG size={86} rotX={-68} rotY={-34} rotZ={-14} delay="1.5s" />
         </div>
-        <div className="hidden sm:block absolute bottom-8 right-[4vw] opacity-50">
+        <div className="hidden sm:block absolute bottom-8 right-[4vw] opacity-40">
           <CoinSVG size={120} rotX={64} rotY={42} rotZ={-28} delay="0.5s" />
         </div>
-        {/* Mobile coins */}
-        <div className="sm:hidden absolute top-[90px] left-[2vw] opacity-50">
+        <div className="sm:hidden absolute top-[90px] left-[2vw] opacity-40">
           <CoinSVG size={72} rotX={62} rotY={-14} rotZ={-18} delay="0s" />
         </div>
-        <div className="sm:hidden absolute top-[200px] right-[1vw] opacity-50">
+        <div className="sm:hidden absolute top-[200px] right-[1vw] opacity-35">
           <CoinSVG size={66} rotX={20} rotY={72} rotZ={-6} delay="0.8s" />
         </div>
       </div>
 
       {/* Wave 01 pill */}
-      <div className="flex justify-center mb-6">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/30 text-xs font-mono-stats font-bold text-[#C4F62E] uppercase tracking-wider">
+      <div className="flex justify-center mb-8">
+        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/30 text-xs font-mono-stats font-bold text-[#C4F62E] uppercase tracking-wider animate-glow-pulse">
           <span className="relative flex h-1.5 w-1.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C4F62E] opacity-75" />
             <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#C4F62E]" />
           </span>
-          Wave 01 · Applications Open
+          Wave 01 · Applications Open Now
         </div>
       </div>
 
-      {/* Main Headline */}
-      <h1 className="font-display font-extrabold text-white leading-[1.1] tracking-tight mb-4 text-3xl sm:text-5xl md:text-6xl">
-        <span className="block text-2xl sm:text-3xl text-[#E8E8E4] font-bold mb-2">
+      {/* Main Headline — bold massive typography */}
+      <h1 className="font-display font-extrabold text-white leading-[1.05] tracking-tight mb-6">
+        <span className="block text-xl sm:text-2xl text-[#8A8A85] font-semibold mb-3 uppercase tracking-[0.2em]">
           Someone is going to
         </span>
-        <span className="block my-1">
+        <span className="block text-5xl sm:text-7xl md:text-8xl leading-none">
           build{' '}
-          <span className="inline-block text-[#C4F62E] -rotate-2 font-black tracking-tight hover:rotate-0 transition-transform duration-300">
+          <span className="animate-text-shimmer inline-block -rotate-1 hover:rotate-0 transition-transform duration-500 cursor-default">
             EYFI
           </span>
         </span>
-        <span className="block text-2xl sm:text-4xl text-[#E8E8E4] font-bold mt-2">
-          on your{' '}
-          <span className="text-[#C4F62E] font-extrabold text-3xl sm:text-5xl md:text-6xl">
-            campus.
-          </span>
+        <span className="block text-3xl sm:text-5xl md:text-6xl text-[#C8C8C4] font-bold mt-3">
+          on your campus.
         </span>
       </h1>
 
-      {/* Gold italic tagline */}
-      <p className="font-serif-italic text-2xl sm:text-4xl text-[#E8B923] my-6 sm:my-8 leading-tight">
+      {/* Gold italic tagline — larger, more impact */}
+      <p className="font-serif-italic text-2xl sm:text-4xl md:text-5xl text-[#E8B923] my-8 sm:my-10 leading-tight">
         Why shouldn't it be you?
       </p>
 
       {/* Sub description */}
-      <p className="text-base sm:text-lg text-[#C8C8C4] max-w-xl mx-auto mb-8 leading-relaxed font-sans">
-        Join the first wave of scouts helping launch India's first student income challenge.
-        Earn real rewards as you bring in more registrations.
+      <p className="text-base sm:text-lg text-[#8A8A85] max-w-xl mx-auto mb-6 leading-relaxed font-sans">
+        Join India's first student income movement as a founding campus scout.
+        Unlock exclusive perks, grants, and career opportunities as you grow.
       </p>
 
       {/* Social proof inline */}
-      <p className="text-sm text-[#6A6A65] font-sans mb-8">
-        <span className="text-[#C4F62E] font-bold font-mono-stats">2,847</span> scouts from{' '}
-        <span className="text-[#F5F3EF]">300+ colleges</span> have already applied
-      </p>
+      <div className="flex items-center justify-center gap-6 mb-8 flex-wrap">
+        <div className="flex items-center gap-2 text-sm font-mono-stats">
+          <Users className="w-4 h-4 text-[#C4F62E]" />
+          <span className="text-[#C4F62E] font-bold">2,847</span>
+          <span className="text-[#6A6A65]">scouts applied</span>
+        </div>
+        <div className="w-px h-4 bg-[#2A2A2A]" />
+        <div className="flex items-center gap-2 text-sm font-mono-stats">
+          <MapPin className="w-4 h-4 text-[#C4F62E]" />
+          <span className="text-[#F5F3EF]">300+ colleges</span>
+        </div>
+        <div className="w-px h-4 bg-[#2A2A2A]" />
+        <div className="flex items-center gap-2 text-sm font-mono-stats">
+          <Clock className="w-4 h-4 text-[#C4F62E]" />
+          <span className="text-[#F5F3EF]">1–2 spots/college</span>
+        </div>
+      </div>
 
       {/* CTAs */}
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
         <button
           id="hero-apply-btn"
           onClick={onApplyClick}
-          className="rounded-full bg-[#C4F62E] text-[#0A0A0A] font-display font-extrabold text-base sm:text-lg px-8 py-4 hover:bg-[#b0eb18] transition-all cursor-pointer shadow-[0_4px_24px_rgba(196,246,46,0.35)] hover:scale-105 active:scale-95 flex items-center gap-2"
+          className="relative rounded-full bg-[#C4F62E] text-[#0A0A0A] font-display font-extrabold text-base sm:text-lg px-10 py-4 transition-all cursor-pointer shadow-[0_4px_32px_rgba(196,246,46,0.4)] hover:shadow-[0_6px_48px_rgba(196,246,46,0.6)] hover:scale-105 active:scale-95 flex items-center gap-2 overflow-hidden group"
         >
+          {/* Button shimmer */}
+          <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
           <span>Apply as Scout</span>
           <ArrowRight className="w-5 h-5 stroke-[2.5]" />
         </button>
@@ -103,40 +122,40 @@ export const AmbassadorHero: React.FC<AmbassadorHeroProps> = ({
         <button
           id="hero-explore-btn"
           onClick={onExploreClick}
-          className="rounded-full border border-[#2A2A2A] bg-transparent text-[#C8C8C4] font-display font-semibold text-sm px-6 py-3.5 hover:border-[#C4F62E]/40 hover:text-[#F5F3EF] transition-all cursor-pointer"
+          className="rounded-full border border-[#2A2A2A] bg-transparent text-[#C8C8C4] font-display font-semibold text-sm px-8 py-4 hover:border-[#C4F62E]/40 hover:text-[#C4F62E] transition-all cursor-pointer"
         >
-          See the Reward Ladder ↓
+          Explore the 6 Levels ↓
         </button>
       </div>
 
-      {/* 3-col stats */}
-      <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-8 border-t border-[#1E1E1E]">
-        <div className="text-center border-r border-[#1E1E1E] pr-2 sm:pr-4">
-          <p className="font-display font-extrabold text-xl sm:text-2xl text-[#C4F62E] mb-1">
-            WAVE 01
+      {/* 3-col stats — bigger and bolder */}
+      <div className="grid grid-cols-3 gap-4 pt-8 border-t border-[#1E1E1E]">
+        <div className="text-center border-r border-[#1E1E1E] pr-4">
+          <p className="font-display font-extrabold text-2xl sm:text-3xl text-[#C4F62E] mb-1 tabular-nums">
+            01
           </p>
-          <p className="text-xs text-[#6A6A65]">First-ever cohort</p>
+          <p className="text-[11px] uppercase tracking-widest text-[#6A6A65] font-mono-stats">First-ever wave</p>
         </div>
 
-        <div className="text-center border-r border-[#1E1E1E] px-2 sm:px-4">
-          <p className="font-display font-extrabold text-xl sm:text-2xl text-[#C4F62E] mb-1">
-            1 or 2
+        <div className="text-center border-r border-[#1E1E1E] px-4">
+          <p className="font-display font-extrabold text-2xl sm:text-3xl text-[#C4F62E] mb-1 tabular-nums">
+            6
           </p>
-          <p className="text-xs text-[#6A6A65]">Spots per college</p>
+          <p className="text-[11px] uppercase tracking-widest text-[#6A6A65] font-mono-stats">Reward levels</p>
         </div>
 
-        <div className="text-center pl-2 sm:pl-4">
-          <p className="font-display font-extrabold text-xl sm:text-2xl text-[#C4F62E] mb-1">
-            ₹15L+
+        <div className="text-center pl-4">
+          <p className="font-display font-extrabold text-2xl sm:text-3xl text-[#E8B923] mb-1">
+            Real
           </p>
-          <p className="text-xs text-[#6A6A65]">Total rewards up for grabs</p>
+          <p className="text-[11px] uppercase tracking-widest text-[#6A6A65] font-mono-stats">Perks & career opp.</p>
         </div>
       </div>
     </section>
   );
 };
 
-/* 3D Rupee Coin — exact match to official EYFI site: lime-green stack + DFF864 face */
+/* 3D Rupee Coin */
 function CoinSVG({ size, rotX = 60, rotY = -20, rotZ = -20, delay = '0s' }: {
   size: number;
   rotX?: number;
@@ -160,7 +179,6 @@ function CoinSVG({ size, rotX = 60, rotY = -20, rotZ = -20, delay = '0s' }: {
           position: 'relative',
         }}
       >
-        {/* Side layers — green hue 130 oklch stack */}
         {Array.from({ length: layers }).map((_, i) => {
           const l = 0.42 + (i / layers) * 0.18;
           return (
@@ -175,7 +193,6 @@ function CoinSVG({ size, rotX = 60, rotY = -20, rotZ = -20, delay = '0s' }: {
             />
           );
         })}
-        {/* Back face (hidden) */}
         <div
           className="absolute inset-0 rounded-full flex items-center justify-center"
           style={{
@@ -187,7 +204,6 @@ function CoinSVG({ size, rotX = 60, rotY = -20, rotZ = -20, delay = '0s' }: {
         >
           <div className="absolute rounded-full" style={{ inset: size * 0.08, border: '1px dashed rgba(30,45,5,0.55)' }} />
         </div>
-        {/* Front face */}
         <div
           className="absolute inset-0 rounded-full flex items-center justify-center"
           style={{

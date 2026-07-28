@@ -1,0 +1,75 @@
+import React from 'react';
+import { ShieldCheck, Award, Gift, Zap, Users, Briefcase, Crown, Sparkles } from 'lucide-react';
+
+export const PerksShowcase: React.FC = () => {
+  const perks = [
+    {
+      icon: <ShieldCheck className="w-6 h-6 text-[#C4F62E]" />,
+      title: 'Official Ambassador Title',
+      description: 'Gain verified campus ambassador credentials to highlight on LinkedIn & resume.',
+    },
+    {
+      icon: <Gift className="w-6 h-6 text-[#C4F62E]" />,
+      title: 'Exclusive Swag Drops',
+      description: 'Receive custom EYFI hoodies, tees, caps, stickers, and tech accessories.',
+    },
+    {
+      icon: <Award className="w-6 h-6 text-[#C4F62E]" />,
+      title: 'Campus Event Grants',
+      description: 'Unlock official sponsorship funding & merchandise grants for campus events.',
+    },
+    {
+      icon: <Users className="w-6 h-6 text-[#C4F62E]" />,
+      title: 'Private Founder Network',
+      description: 'Connect directly with top startup founders, mentors, and student leaders across India.',
+    },
+    {
+      icon: <Briefcase className="w-6 h-6 text-[#C4F62E]" />,
+      title: 'Paid Internships & Stipends',
+      description: 'Fast-track access to high-growth paid internships and performance stipends.',
+    },
+    {
+      icon: <Crown className="w-6 h-6 text-[#E8B923]" />,
+      title: 'Founding Team Role',
+      description: 'Top-performing level 6 scouts are considered for equity & core team roles at EYFI.',
+    },
+  ];
+
+  return (
+    <div className="bg-[#0D0D0D] border border-[#1F1F1F] rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8">
+      <div className="text-center space-y-3">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/20 text-xs font-mono-stats text-[#C4F62E] font-bold uppercase tracking-wider">
+          <Sparkles className="w-4 h-4 text-[#C4F62E]" />
+          Exclusive Ambassador Privileges
+        </div>
+        <h3 className="font-display font-extrabold text-2xl sm:text-4xl text-white tracking-tight">
+          Why Become an <span className="text-[#C4F62E]">EYFI Scout</span>?
+        </h3>
+        <p className="text-xs sm:text-sm text-[#8A8A85] max-w-xl mx-auto">
+          Every level you achieve unlocks real-world benefits designed to propel your campus reputation and career forward.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {perks.map((perk, idx) => (
+          <div
+            key={idx}
+            className="bg-[#121212] border border-[#1E1E1E] hover:border-[#C4F62E]/40 rounded-2xl p-6 space-y-4 transition-all duration-300 hover:-translate-y-1 shadow-lg group relative overflow-hidden"
+          >
+            <div className="w-12 h-12 rounded-xl bg-[#0A0A0A] border border-[#242424] flex items-center justify-center group-hover:border-[#C4F62E] transition-colors">
+              {perk.icon}
+            </div>
+            <div>
+              <h4 className="font-display font-extrabold text-lg text-white group-hover:text-[#C4F62E] transition-colors">
+                {perk.title}
+              </h4>
+              <p className="text-xs sm:text-sm text-[#8A8A85] leading-relaxed mt-2 font-sans">
+                {perk.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
