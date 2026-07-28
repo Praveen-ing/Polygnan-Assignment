@@ -1,0 +1,8 @@
+{
+  "name": "EYFI Reward Ladder",
+  "description": "Interactive campus ambassador reward ladder tracking registrations, badges, and unlock tiers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

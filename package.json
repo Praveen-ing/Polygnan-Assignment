@@ -1,0 +1,27 @@
+{
+  "name": "eyfi-reward-ladder",
+  "version": "1.0.0",
+  "description": "EYFI Reward Ladder app imported from GitHub",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "vite build",
+    "lint": "vite build"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/canvas-confetti": "^1.9.0",
+    "@vitejs/plugin-react": "^6.0.4",
+    "canvas-confetti": "^1.9.4",
+    "clsx": "^2.1.1",
+    "express": "^4.19.2",
+    "lucide-react": "^1.27.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.1.5"
+  }
+}
