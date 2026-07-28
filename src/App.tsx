@@ -14,6 +14,8 @@ import { ShareCardModal } from './components/ShareCardModal';
 import { ScoutFunnelChart } from './components/ScoutFunnelChart';
 import { CampusRankBumpChart } from './components/CampusRankBumpChart';
 import { RadialRankChart } from './components/RadialRankChart';
+import { PolygnanEthosBanner } from './components/PolygnanEthosBanner';
+import { AIEvaluatorSimulator } from './components/AIEvaluatorSimulator';
 import { Zap, ArrowRight, ExternalLink, BarChart3 } from 'lucide-react';
 
 export function App() {
@@ -108,12 +110,22 @@ export function App() {
         {/* 4. Social Proof Banner (300+ colleges ticker) */}
         <SocialProofBanner />
 
-        {/* 5. How It Works Section */}
+        {/* 5. Polygnan Ethos & Rancho Mindset Banner */}
+        <section className="max-w-6xl mx-auto px-4 sm:px-6">
+          <PolygnanEthosBanner />
+        </section>
+
+        {/* 6. AI Agent Auto-Evaluator Simulator */}
+        <section className="max-w-6xl mx-auto px-4 sm:px-6">
+          <AIEvaluatorSimulator />
+        </section>
+
+        {/* 7. How It Works Section */}
         <section id="how-it-works" className="max-w-6xl mx-auto px-4 sm:px-6">
           <HowItWorksSteps />
         </section>
 
-        {/* 6. Flowing River Level Journey Section (Long Scrollable) */}
+        {/* 8. Flowing River Level Journey Section (Long Scrollable) */}
         <section
           id="ladder"
           className="py-16 sm:py-24 px-4 sm:px-6 bg-[#0C0C0C] border-y border-[#1A1A1A] relative"
@@ -170,7 +182,7 @@ export function App() {
           </div>
         </section>
 
-        {/* 7. CF-Lens Visual Analytics Section */}
+        {/* 9. CF-Lens Visual Analytics Section */}
         <section id="analytics" className="max-w-6xl mx-auto px-4 sm:px-6 space-y-12">
           {/* Section Banner */}
           <div className="text-center space-y-3">
@@ -186,37 +198,37 @@ export function App() {
             </p>
           </div>
 
-          {/* 7a. Radial Gauge */}
+          {/* 9a. Radial Gauge */}
           <RadialRankChart currentRegs={regs} />
 
-          {/* 7b. Scout Level Funnel */}
+          {/* 9b. Scout Level Funnel */}
           <ScoutFunnelChart />
 
-          {/* 7c. Campus Rank Trajectory Bump Chart */}
+          {/* 9c. Campus Rank Trajectory Bump Chart */}
           <CampusRankBumpChart />
         </section>
 
-        {/* 8. Pass Studio Generator */}
+        {/* 10. Pass Studio Generator */}
         <section id="pass-studio" className="max-w-6xl mx-auto px-4 sm:px-6">
           <ScoutBadgeGenerator currentRegs={regs} />
         </section>
 
-        {/* 9. Campus Leaderboard */}
+        {/* 11. Campus Leaderboard */}
         <section id="leaderboard" className="max-w-6xl mx-auto px-4 sm:px-6">
           <CampusLeaderboard />
         </section>
 
-        {/* 10. Perks & Privileges Showcase Grid */}
+        {/* 12. Perks & Privileges Showcase Grid */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6">
           <PerksShowcase />
         </section>
 
-        {/* 11. FAQ Accordion */}
+        {/* 13. FAQ Accordion */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6">
           <FaqAccordion />
         </section>
 
-        {/* 12. Final Apply CTA Section */}
+        {/* 14. Final Apply CTA Section */}
         <section
           id="apply-section"
           className="py-20 px-4 sm:px-6 bg-gradient-to-b from-[#0C0C0C] to-[#050505] border-t border-[#1A1A1A] relative overflow-hidden"
@@ -264,7 +276,7 @@ export function App() {
         </section>
       </main>
 
-      {/* 13. Footer */}
+      {/* 15. Footer */}
       <footer className="border-t border-[#1A1A1A] py-10 px-6 text-center bg-[#070707]">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
