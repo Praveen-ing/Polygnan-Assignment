@@ -109,29 +109,29 @@ export function App() {
         {/* 4. Social Proof Banner */}
         <SocialProofBanner />
 
-        {/* 5. 6-Level River Journey Section */}
+        {/* 5. Flowing River Journey Section (Long Scrollable) */}
         <section
           id="ladder"
           className="py-16 sm:py-24 px-4 sm:px-6 bg-[#0C0C0C] border-t border-[#1A1A1A]"
         >
-          <div className="max-w-6xl mx-auto space-y-8">
+          <div className="max-w-6xl mx-auto space-y-10">
             {/* Section header */}
             <div className="text-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/20 text-xs font-mono-stats text-[#C4F62E] uppercase tracking-wider mb-4 font-bold">
-                <Zap className="w-3.5 h-3.5 fill-[#C4F62E]" />
-                Level River Journey · 6 Levels
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/20 text-xs font-mono-stats text-[#C4F62E] uppercase tracking-wider mb-4 font-bold">
+                <Zap className="w-4 h-4 fill-[#C4F62E]" />
+                Flowing River Level Journey · 6 Levels
               </div>
-              <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-white mb-3 tracking-tight">
+              <h2 className="font-display font-extrabold text-3xl sm:text-6xl text-white mb-4 tracking-tight">
                 Flow Through The <span className="text-[#C4F62E]">6 Levels</span>
               </h2>
-              <p className="text-sm sm:text-base text-[#8A8A85] max-w-xl mx-auto font-sans">
-                Follow the curved river pathway as your campus registrations grow.
-                Each level unlocks exclusive perks, grants, titles, and team opportunities.
+              <p className="text-sm sm:text-lg text-[#8A8A85] max-w-2xl mx-auto font-sans leading-relaxed">
+                Scroll down the long winding level river as your campus registrations grow.
+                Each level station along the river unlocks exclusive perks, grants, titles, and co-founder opportunities.
               </p>
             </div>
 
             {/* Registration Controls + Level Progress Bar */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-[#111111] border border-[#242424] rounded-3xl p-5 shadow-xl">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-[#111111] border border-[#242424] rounded-3xl p-5 sm:p-6 shadow-2xl">
               <div className="md:col-span-7">
                 <RegistrationCounter
                   regs={regs}
@@ -157,7 +157,7 @@ export function App() {
               </div>
             </div>
 
-            {/* The 6-Level River & Step Page Showcase Component */}
+            {/* The 6-Level Flowing River Component */}
             <RiverLadder
               currentRegs={regs}
               unlockedSet={unlockedSet}
