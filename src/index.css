@@ -40,37 +40,11 @@
   }
 }
 
-/* ——— Dedicated Visible Dot Grid Background & Theme Modes ——— */
+/* ——— Dedicated Visible Dot Grid Background ——— */
 .bg-dots-pattern {
   background-color: #0A0A0A;
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.22) 1.5px, transparent 1.5px);
   background-size: 28px 28px;
-  color: #F5F3EF;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.theme-light.bg-dots-pattern,
-.theme-light .bg-dots-pattern {
-  background-color: #FAFAFA;
-  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.16) 1.5px, transparent 1.5px);
-  background-size: 28px 28px;
-  color: #0A0A0A;
-}
-
-.theme-light body {
-  background-color: #FAFAFA;
-  color: #0A0A0A;
-}
-
-.theme-light h1,
-.theme-light h2,
-.theme-light h3,
-.theme-light h4 {
-  color: #0A0A0A !important;
-}
-
-.theme-light p {
-  color: #4A4A45 !important;
 }
 
 /* ——— Marquee ——— */
