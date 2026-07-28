@@ -1,9 +1,9 @@
 import React from 'react';
-import { Lightbulb, Rocket, Sparkles, Award } from 'lucide-react';
+import { Lightbulb, Rocket, Zap, Sparkles, Code2, Award } from 'lucide-react';
 
 export const PolygnanEthosBanner: React.FC = () => {
   return (
-    <div className="py-6 space-y-8 relative overflow-hidden">
+    <div className="bg-[#0D0D0D] border border-[#1F1F1F] rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden noise-overlay">
       {/* Glow Orbs */}
       <div className="pointer-events-none absolute -top-20 -left-20 w-80 h-80 bg-[#C4F62E]/5 rounded-full blur-[100px]" />
       <div className="pointer-events-none absolute -bottom-20 -right-20 w-80 h-80 bg-[#E8B923]/5 rounded-full blur-[100px]" />
@@ -28,7 +28,7 @@ export const PolygnanEthosBanner: React.FC = () => {
 
         {/* 3 Pillars Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-[#121212]/80 border border-[#202020] rounded-2xl p-6 space-y-3 hover:border-[#C4F62E]/40 transition-all backdrop-blur-sm">
+          <div className="bg-[#121212] border border-[#202020] rounded-2xl p-6 space-y-3 hover:border-[#C4F62E]/40 transition-all">
             <div className="w-10 h-10 rounded-xl bg-[#0A0A0A] border border-[#262626] flex items-center justify-center text-[#C4F62E]">
               <Lightbulb className="w-5 h-5" />
             </div>
@@ -38,7 +38,7 @@ export const PolygnanEthosBanner: React.FC = () => {
             </p>
           </div>
 
-          <div className="bg-[#121212]/80 border border-[#202020] rounded-2xl p-6 space-y-3 hover:border-[#C4F62E]/40 transition-all backdrop-blur-sm">
+          <div className="bg-[#121212] border border-[#202020] rounded-2xl p-6 space-y-3 hover:border-[#C4F62E]/40 transition-all">
             <div className="w-10 h-10 rounded-xl bg-[#0A0A0A] border border-[#262626] flex items-center justify-center text-[#C4F62E]">
               <Rocket className="w-5 h-5" />
             </div>
@@ -48,7 +48,7 @@ export const PolygnanEthosBanner: React.FC = () => {
             </p>
           </div>
 
-          <div className="bg-[#121212]/80 border border-[#202020] rounded-2xl p-6 space-y-3 hover:border-[#C4F62E]/40 transition-all backdrop-blur-sm">
+          <div className="bg-[#121212] border border-[#202020] rounded-2xl p-6 space-y-3 hover:border-[#C4F62E]/40 transition-all">
             <div className="w-10 h-10 rounded-xl bg-[#0A0A0A] border border-[#262626] flex items-center justify-center text-[#E8B923]">
               <Award className="w-5 h-5" />
             </div>

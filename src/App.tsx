@@ -15,8 +15,8 @@ import { AIEvaluatorSimulator } from './components/AIEvaluatorSimulator';
 import { Zap, ArrowRight, ExternalLink } from 'lucide-react';
 
 export function App() {
-  const [regs, setRegs]               = useState<number>(0);
-  const [isAutoplay, setIsAutoplay]   = useState<boolean>(true);
+  const [regs, setRegs] = useState<number>(0);
+  const [isAutoplay, setIsAutoplay] = useState<boolean>(true);
   const [unlockedSet, setUnlockedSet] = useState<Set<number>>(new Set([0]));
   const [isShareOpen, setIsShareOpen] = useState<boolean>(false);
 
@@ -35,10 +35,10 @@ export function App() {
 
     const animate = (timestamp: number) => {
       if (!startTimeRef.current) startTimeRef.current = timestamp;
-      const elapsed  = timestamp - startTimeRef.current;
+      const elapsed = timestamp - startTimeRef.current;
       const progress = Math.min(1, elapsed / duration);
-      const ease     = 1 - Math.pow(1 - progress, 3);
-      const current  = startVal + (targetVal - startVal) * ease;
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const current = startVal + (targetVal - startVal) * ease;
       setRegs(current);
       if (progress < 1) {
         animFrameRef.current = requestAnimationFrame(animate);
@@ -91,7 +91,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen text-[#F5F3EF] flex flex-col font-sans selection:bg-[#C4F62E] selection:text-black relative">
+    <div className="min-h-screen bg-[#0A0A0A] text-[#F5F3EF] flex flex-col font-sans selection:bg-[#C4F62E] selection:text-black relative">
 
       {/* 1. Announcement Ticker (Orange background) */}
       <MarqueeTicker />
@@ -124,7 +124,7 @@ export function App() {
         {/* 8. Flowing River Level Journey Section (Long Scrollable) */}
         <section
           id="ladder"
-          className="py-16 sm:py-24 px-4 sm:px-6 relative"
+          className="py-16 sm:py-24 px-4 sm:px-6 bg-[#0C0C0C] border-y border-[#1A1A1A] relative"
         >
           <div className="max-w-6xl mx-auto space-y-12">
             {/* Section Header */}
@@ -143,7 +143,7 @@ export function App() {
             </div>
 
             {/* Live Registration Controls + Tier Progress Bar */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-[#111111]/80 border border-[#242424] rounded-3xl p-5 sm:p-6 shadow-2xl backdrop-blur-md">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-[#111111] border border-[#242424] rounded-3xl p-5 sm:p-6 shadow-2xl">
               <div className="md:col-span-7">
                 <RegistrationCounter
                   regs={regs}
@@ -196,7 +196,7 @@ export function App() {
         {/* 12. Final Apply CTA Section */}
         <section
           id="apply-section"
-          className="py-20 px-4 sm:px-6 border-t border-[#1A1A1A] relative overflow-hidden"
+          className="py-20 px-4 sm:px-6 bg-gradient-to-b from-[#0C0C0C] to-[#050505] border-t border-[#1A1A1A] relative overflow-hidden"
         >
           <div className="max-w-3xl mx-auto text-center space-y-8 relative z-10">
             <div className="w-16 h-16 rounded-2xl bg-[#C4F62E]/10 border border-[#C4F62E]/30 flex items-center justify-center mx-auto text-[#C4F62E]">
@@ -242,14 +242,14 @@ export function App() {
       </main>
 
       {/* 13. Footer */}
-      <footer className="border-t border-[#1A1A1A] py-10 px-6 text-center">
+      <footer className="border-t border-[#1A1A1A] py-10 px-6 text-center bg-[#070707]">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-lg bg-[#C4F62E] text-[#0A0A0A] flex items-center justify-center font-extrabold text-xs">
               EY
             </div>
-            <span className="font-display font-black text-white text-lg">
-              EYFI<span className="text-[#C4F62E]">.</span>
+            <span className="font-display font-black text-[#C4F62E] text-lg">
+              EYFI<span className="text-white">.</span>
             </span>
           </div>
 

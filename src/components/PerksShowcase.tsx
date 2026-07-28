@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Award, Gift, Users, Briefcase, Crown, Sparkles } from 'lucide-react';
+import { ShieldCheck, Award, Gift, Zap, Users, Briefcase, Crown, Sparkles } from 'lucide-react';
 
 export const PerksShowcase: React.FC = () => {
   const perks = [
@@ -36,7 +36,7 @@ export const PerksShowcase: React.FC = () => {
   ];
 
   return (
-    <div className="py-6 space-y-8">
+    <div className="bg-[#0D0D0D] border border-[#1F1F1F] rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8">
       <div className="text-center space-y-3">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/20 text-xs font-mono-stats text-[#C4F62E] font-bold uppercase tracking-wider">
           <Sparkles className="w-4 h-4 text-[#C4F62E]" />
@@ -54,7 +54,7 @@ export const PerksShowcase: React.FC = () => {
         {perks.map((perk, idx) => (
           <div
             key={idx}
-            className="bg-[#121212]/80 border border-[#1E1E1E] hover:border-[#C4F62E]/40 rounded-2xl p-6 space-y-4 transition-all duration-300 hover:-translate-y-1 shadow-lg group relative overflow-hidden backdrop-blur-sm"
+            className="bg-[#121212] border border-[#1E1E1E] hover:border-[#C4F62E]/40 rounded-2xl p-6 space-y-4 transition-all duration-300 hover:-translate-y-1 shadow-lg group relative overflow-hidden"
           >
             <div className="w-12 h-12 rounded-xl bg-[#0A0A0A] border border-[#242424] flex items-center justify-center group-hover:border-[#C4F62E] transition-colors">
               {perk.icon}
