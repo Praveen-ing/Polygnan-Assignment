@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
+import QRCode from 'react-qr-code';
 import { Sparkles, Share2, CheckCircle, Zap, Building, User, QrCode, Cpu } from 'lucide-react';
 import { LADDER_RUNGS } from '../data/ladderData';
 import { BadgeCoinSVG } from './BadgeCoinSVG';
@@ -15,6 +16,10 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
   const [copied, setCopied] = useState<boolean>(false);
 
   const activeRung = LADDER_RUNGS[selectedRole] || LADDER_RUNGS[0];
+
+  const randomCampusQR = useMemo(() => {
+    return `EYFI-PASS-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
+  }, []);
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -183,8 +188,8 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
                   <p className="text-[#6A6A65]">ID: EYFI-SCOUT-2026</p>
                   <p className="text-[#C4F62E] font-bold mt-0.5">LEVEL {selectedRole + 1} OF 6</p>
                 </div>
-                <div className="w-9 h-9 rounded-lg border border-[#262626] flex items-center justify-center text-[#8A8A85]">
-                  <QrCode className="w-5 h-5 text-[#C4F62E]" />
+                <div className="w-10 h-10 bg-white rounded-lg border border-[#C4F62E]/50 flex items-center justify-center p-1 shadow-lg shadow-[#C4F62E]/20">
+                  <QRCode value={randomCampusQR} size={32} bgColor="#ffffff" fgColor="#0A0A0A" />
                 </div>
               </div>
             </SpotlightCard>
