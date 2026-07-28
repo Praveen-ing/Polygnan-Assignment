@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Sparkles, Share2, CheckCircle, Zap, Building, User } from 'lucide-react';
+import { Sparkles, Share2, CheckCircle, Zap, Building, User, QrCode, Cpu } from 'lucide-react';
 import { LADDER_RUNGS } from '../data/ladderData';
 import { BadgeCoinSVG } from './BadgeCoinSVG';
+import { SpotlightCard } from './SpotlightCard';
 
 interface ScoutBadgeGeneratorProps {
   currentRegs: number;
@@ -24,27 +25,27 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
   return (
     <div className="bg-[#0D0D0D] border border-[#1F1F1F] rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden noise-overlay">
       {/* Background ambient glow */}
-      <div className="pointer-events-none absolute -top-24 -right-24 w-96 h-96 bg-[#C4F62E]/5 rounded-full blur-[100px]" />
-      <div className="pointer-events-none absolute -bottom-24 -left-24 w-96 h-96 bg-[#E8B923]/5 rounded-full blur-[100px]" />
+      <div className="pointer-events-none absolute -top-24 -right-24 w-96 h-96 bg-[#C4F62E]/10 rounded-full blur-[120px]" />
+      <div className="pointer-events-none absolute -bottom-24 -left-24 w-96 h-96 bg-[#E8B923]/10 rounded-full blur-[120px]" />
 
-      <div className="max-w-4xl mx-auto space-y-8 relative z-10">
+      <div className="max-w-5xl mx-auto space-y-8 relative z-10">
         {/* Section Header */}
         <div className="text-center space-y-3">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/20 text-xs font-mono-stats text-[#C4F62E] uppercase tracking-wider font-bold">
             <Sparkles className="w-4 h-4 text-[#C4F62E]" />
             Interactive Scout Pass Studio
           </div>
-          <h3 className="font-display font-extrabold text-2xl sm:text-4xl text-white tracking-tight">
+          <h3 className="font-display font-extrabold text-2xl sm:text-5xl text-white tracking-tight">
             Preview Your Official <span className="text-[#C4F62E]">EYFI Campus Pass</span>
           </h3>
-          <p className="text-xs sm:text-sm text-[#8A8A85] max-w-xl mx-auto">
-            Customize your personalized ambassador badge. See how your badge evolves as you unlock higher levels down the river.
+          <p className="text-xs sm:text-sm text-[#8A8A85] max-w-xl mx-auto font-sans">
+            Customize your personalized ambassador badge. See how your pass evolves as you unlock higher levels down the river.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Controls Form */}
-          <div className="lg:col-span-6 space-y-5 bg-[#121212] border border-[#222222] rounded-2xl p-6">
+          <div className="lg:col-span-6 space-y-5 bg-[#121212] border border-[#222222] rounded-3xl p-6 sm:p-8 shadow-xl">
             <div className="space-y-2">
               <label className="block text-xs font-mono-stats uppercase tracking-widest text-[#8A8A85] font-bold">
                 Your Full Name
@@ -79,47 +80,57 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
 
             <div className="space-y-2">
               <label className="block text-xs font-mono-stats uppercase tracking-widest text-[#8A8A85] font-bold">
-                Preview Level Rank
+                Select Level Rank Preview
               </label>
-              <div className="grid grid-cols-3 gap-2">
-                {LADDER_RUNGS.map((rung, idx) => (
-                  <button
-                    key={rung.id}
-                    onClick={() => setSelectedRole(idx)}
-                    className={`py-2 px-2 rounded-xl text-xs font-mono-stats font-bold transition-all text-center border cursor-pointer ${
-                      selectedRole === idx
-                        ? 'bg-[#C4F62E] text-[#0A0A0A] border-[#C4F62E] shadow-[0_2px_10px_rgba(196,246,46,0.3)]'
-                        : 'bg-[#0A0A0A] text-[#8A8A85] border-[#222222] hover:border-[#333333]'
-                    }`}
-                  >
-                    L{idx + 1}: {rung.title}
-                  </button>
-                ))}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {LADDER_RUNGS.map((rung, idx) => {
+                  const isSelected = selectedRole === idx;
+                  return (
+                    <button
+                      key={rung.id}
+                      onClick={() => setSelectedRole(idx)}
+                      className={`py-2.5 px-3 rounded-xl text-xs font-mono-stats font-bold transition-all text-left border cursor-pointer flex flex-col justify-between ${
+                        isSelected
+                          ? 'bg-[#C4F62E] text-[#0A0A0A] border-[#C4F62E] shadow-[0_4px_16px_rgba(196,246,46,0.35)] scale-[1.02]'
+                          : 'bg-[#0A0A0A] text-[#8A8A85] border-[#222222] hover:border-[#444444] hover:text-white'
+                      }`}
+                    >
+                      <span className="text-[10px] opacity-75">L{idx + 1}</span>
+                      <span className="truncate font-extrabold">{rung.title}</span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
-            <div className="pt-2 flex items-center justify-between text-xs text-[#6A6A65] border-t border-[#1E1E1E]">
+            <div className="pt-3 flex items-center justify-between text-xs text-[#6A6A65] border-t border-[#1E1E1E]">
               <span className="flex items-center gap-1.5 font-mono-stats">
                 <Zap className="w-3.5 h-3.5 text-[#C4F62E]" />
-                Requirement: {activeRung.milestoneText}
+                Requirement: <strong className="text-white">{activeRung.milestoneText}</strong>
               </span>
               <button
                 onClick={handleCopyLink}
-                className="text-[#C4F62E] hover:underline font-mono-stats flex items-center gap-1 cursor-pointer"
+                className="text-[#C4F62E] hover:underline font-mono-stats flex items-center gap-1 cursor-pointer font-bold"
               >
                 {copied ? <CheckCircle className="w-3.5 h-3.5 text-[#C4F62E]" /> : <Share2 className="w-3.5 h-3.5" />}
-                {copied ? 'Link Copied!' : 'Share Pass'}
+                {copied ? 'Pass Link Copied!' : 'Share Pass'}
               </button>
             </div>
           </div>
 
-          {/* 3D Holographic Pass Card Preview */}
+          {/* Ultra-Premium Glassmorphic 3D Holographic Pass Card Preview */}
           <div className="lg:col-span-6 flex justify-center">
-            <div className="w-full max-w-sm bg-gradient-to-b from-[#181818] via-[#111111] to-[#0A0A0A] border-2 border-[#C4F62E]/40 rounded-3xl p-6 space-y-6 shadow-[0_12px_48px_rgba(0,0,0,0.8)] relative group transition-transform duration-300 hover:scale-[1.02]">
-              {/* Top Bar / Chip */}
-              <div className="flex items-center justify-between border-b border-[#242424] pb-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-[#C4F62E] flex items-center justify-center font-display font-black text-[#0A0A0A] text-sm">
+            <SpotlightCard
+              spotlightColor="rgba(196, 246, 46, 0.25)"
+              className="w-full max-w-sm bg-gradient-to-b from-[#1C1C1C] via-[#121212] to-[#080808] border-2 border-[#C4F62E]/50 rounded-3xl p-6 space-y-6 shadow-[0_20px_60px_rgba(0,0,0,0.9)] relative group"
+            >
+              {/* Simulated Lanyard Slot */}
+              <div className="w-12 h-1.5 rounded-full bg-[#050505] border border-[#2A2A2A] mx-auto -mt-2 opacity-80" />
+
+              {/* Header Bar */}
+              <div className="flex items-center justify-between border-b border-[#262626] pb-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-[#C4F62E] text-[#0A0A0A] flex items-center justify-center font-display font-black text-sm shadow-[0_0_12px_rgba(196,246,46,0.5)]">
                     EY
                   </div>
                   <div>
@@ -127,53 +138,63 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
                     <p className="text-[9px] font-mono-stats text-[#8A8A85]">WAVE 01 · OFFICIAL COHORT</p>
                   </div>
                 </div>
-                <div className="px-2.5 py-1 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/30 text-[10px] font-mono-stats font-bold text-[#C4F62E] uppercase">
+
+                <div className="flex items-center gap-1.5 bg-[#C4F62E]/10 border border-[#C4F62E]/40 px-3 py-1 rounded-full text-[10px] font-mono-stats font-bold text-[#C4F62E]">
+                  <Cpu className="w-3 h-3 text-[#C4F62E]" />
                   VERIFIED
                 </div>
               </div>
 
               {/* Card Body */}
-              <div className="space-y-4">
+              <div className="space-y-5">
                 <div className="flex items-center gap-4">
-                  {/* Exact 3D Gold Badge Coin */}
-                  <BadgeCoinSVG badgeIndex={selectedRole} size={64} isUnlocked={true} />
+                  {/* 3D Gold Badge Coin with Glowing Halo */}
+                  <div className="relative flex-shrink-0">
+                    <div className="absolute inset-0 rounded-full bg-[#FAD02C]/20 blur-xl animate-pulse" />
+                    <BadgeCoinSVG badgeIndex={selectedRole} size={72} isUnlocked={true} />
+                  </div>
 
-                  <div>
-                    <h4 className="font-display font-extrabold text-lg text-white leading-tight">
+                  <div className="space-y-1">
+                    <h4 className="font-display font-black text-xl text-white leading-tight">
                       {name || 'Alex Sharma'}
                     </h4>
-                    <p className="text-xs text-[#8A8A85] font-sans flex items-center gap-1 mt-0.5">
-                      <Building className="w-3 h-3 text-[#C4F62E]" />
+                    <p className="text-xs text-[#8A8A85] font-sans flex items-center gap-1">
+                      <Building className="w-3.5 h-3.5 text-[#C4F62E]" />
                       {college || 'IIT Delhi'}
                     </p>
-                    <div className="mt-1.5 inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-[#1E1E1E] text-[10px] font-mono-stats text-[#C4F62E] font-bold">
+                    <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-[#1E1E1E] border border-[#2E2E2E] text-[10px] font-mono-stats text-[#C4F62E] font-bold">
                       {activeRung.title}
                     </div>
                   </div>
                 </div>
 
                 {/* Level Perks Unlocked */}
-                <div className="bg-[#080808] border border-[#1C1C1C] rounded-xl p-3.5 space-y-2">
-                  <p className="text-[10px] font-mono-stats uppercase tracking-widest text-[#8A8A85] font-bold">
+                <div className="bg-[#070707] border border-[#1E1E1E] rounded-2xl p-4 space-y-2.5">
+                  <p className="text-[10px] font-mono-stats uppercase tracking-widest text-[#C4F62E] font-bold">
                     ACTIVE LEVEL PRIVILEGES:
                   </p>
-                  <ul className="space-y-1">
+                  <ul className="space-y-1.5">
                     {activeRung.unlocks.map((u, i) => (
-                      <li key={i} className="text-xs text-[#F5F3EF] flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#C4F62E]" />
-                        {u}
+                      <li key={i} className="text-xs text-[#F5F3EF] flex items-center gap-2 font-sans font-medium">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#C4F62E] flex-shrink-0" />
+                        <span>{u}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
 
-              {/* Bottom Code / Pass Details */}
-              <div className="pt-2 border-t border-[#1C1C1C] flex items-center justify-between text-[10px] font-mono-stats text-[#6A6A65]">
-                <span>ID: EYFI-SCOUT-2026</span>
-                <span className="text-[#C4F62E] font-bold">LEVEL {selectedRole + 1} OF 6</span>
+              {/* Bottom Code & QR Verification Aesthetic */}
+              <div className="pt-3 border-t border-[#202020] flex items-center justify-between text-[10px] font-mono-stats">
+                <div>
+                  <p className="text-[#6A6A65]">ID: EYFI-SCOUT-2026</p>
+                  <p className="text-[#C4F62E] font-bold mt-0.5">LEVEL {selectedRole + 1} OF 6</p>
+                </div>
+                <div className="w-9 h-9 rounded-lg bg-[#141414] border border-[#262626] flex items-center justify-center text-[#8A8A85]">
+                  <QrCode className="w-5 h-5 text-[#C4F62E]" />
+                </div>
               </div>
-            </div>
+            </SpotlightCard>
           </div>
         </div>
       </div>
