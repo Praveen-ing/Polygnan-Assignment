@@ -1,31 +1,29 @@
-# Logs
-logs
+# ── Dependencies ──────────────────────────────────────────────
+node_modules/
+.pnpm-store/
+
+# ── Production / Build outputs ────────────────────────────────
+dist/
+dist-ssr/
+
+# ── Logs ──────────────────────────────────────────────────────
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
-# Diagnostic data
 .pnpm-debug.log*
 
-# Dependencies
-node_modules/
-.pnpm-store/
-
-# Production / Build outputs
-dist/
-dist-ssr/
-
-# Local env files
+# ── Local env files ───────────────────────────────────────────
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-# Editor directories and files
+# ── Editor & IDE ──────────────────────────────────────────────
 .vscode/*
 !.vscode/extensions.json
 .idea/
@@ -35,6 +33,22 @@ dist-ssr/
 *.sln
 *.sw?
 
-# OS generated files
+# ── OS generated ──────────────────────────────────────────────
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# ── Saved HTML page snapshots (browser "Save As") ─────────────
+EYFI Campus Ambassador Program Wave 01 Applications Open.html
+EYFI Campus Ambassador Program Wave 01 Applications Open_files/
+
+# ── Old standalone prototypes (superseded by Vite app) ────────
+eyfi-reward-ladder.html
+server.js
+
+# ── Public folder clutter (copied from browser save) ──────────
+public/WhatsApp.svg
+public/_flock.js.download
+public/css2
+public/index-D3zern99.js.download
+public/styles-D3xyE9_D.css
