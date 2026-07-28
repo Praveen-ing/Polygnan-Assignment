@@ -1,35 +1,126 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Camera, Building2, Sparkles } from 'lucide-react';
+import { Sparkles, Building2 } from 'lucide-react';
 
 interface CollegeCardData {
   id: number;
   name: string;
   tag: string;
-  photoPlaceholder: string;
+  logoUrl: string;
+  initials: string;
   x: number;
   y: number;
   z: number;
 }
 
 const COLLEGES_LIST = [
-  { name: 'IIT Bombay', tag: 'Scout Cohort' },
-  { name: 'IIM Ahd', tag: 'Scout Cohort' },
-  { name: 'Manav Rachna', tag: 'Verified Campus' },
-  { name: 'KIIT', tag: 'Scout Cohort' },
-  { name: 'Presidency', tag: 'Verified Campus' },
-  { name: 'Loyola', tag: 'Verified Campus' },
-  { name: 'LSR', tag: 'Scout Cohort' },
-  { name: 'MICA', tag: 'Scout Cohort' },
-  { name: 'SRCC', tag: 'Verified Campus' },
-  { name: 'Manipal', tag: 'Scout Cohort' },
-  { name: 'Symbiosis', tag: 'Scout Cohort' },
-  { name: 'Christ Bglr', tag: 'Verified Campus' },
-  { name: 'IIT Delhi', tag: 'Scout Cohort' },
-  { name: 'BITS Pilani', tag: 'Scout Cohort' },
-  { name: 'NIT Trichy', tag: 'Verified Campus' },
-  { name: 'St. Xavier\'s', tag: 'Scout Cohort' },
-  { name: 'DTU', tag: 'Scout Cohort' },
-  { name: 'VIT Vellore', tag: 'Verified Campus' },
+  {
+    name: 'IIT Bombay',
+    tag: 'Scout Cohort',
+    initials: 'IITB',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/1/1d/Indian_Institute_of_Technology_Bombay_Logo.svg',
+  },
+  {
+    name: 'IIM Ahd',
+    tag: 'Scout Cohort',
+    initials: 'IIMA',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/e/e0/Indian_Institute_of_Management_Ahmedabad_logo.svg',
+  },
+  {
+    name: 'Manav Rachna',
+    tag: 'Verified Campus',
+    initials: 'MRIIRS',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Manav_Rachna_Educational_Institutions_logo.png',
+  },
+  {
+    name: 'KIIT',
+    tag: 'Scout Cohort',
+    initials: 'KIIT',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/e/ef/KIIT_logo.png',
+  },
+  {
+    name: 'Presidency',
+    tag: 'Verified Campus',
+    initials: 'PRES',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/d/d4/Presidency_University_Kolkata_Logo.svg',
+  },
+  {
+    name: 'Loyola',
+    tag: 'Verified Campus',
+    initials: 'LOY',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/9/9d/Loyola_College_Chennai_logo.png',
+  },
+  {
+    name: 'LSR',
+    tag: 'Scout Cohort',
+    initials: 'LSR',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/9/90/Lady_Shri_Ram_College_for_Women_logo.png',
+  },
+  {
+    name: 'MICA',
+    tag: 'Scout Cohort',
+    initials: 'MICA',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/9/9c/MICA_logo.png',
+  },
+  {
+    name: 'SRCC',
+    tag: 'Verified Campus',
+    initials: 'SRCC',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/8/87/Shri_Ram_College_of_Commerce_logo.png',
+  },
+  {
+    name: 'Manipal',
+    tag: 'Scout Cohort',
+    initials: 'MAHE',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/7/75/Manipal_Academy_of_Higher_Education_logo.png',
+  },
+  {
+    name: 'Symbiosis',
+    tag: 'Scout Cohort',
+    initials: 'SIU',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/5/53/Symbiosis_International_University_logo.png',
+  },
+  {
+    name: 'Christ Bglr',
+    tag: 'Verified Campus',
+    initials: 'CU',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/3/36/Christ_University_logo.png',
+  },
+  {
+    name: 'IIT Delhi',
+    tag: 'Scout Cohort',
+    initials: 'IITD',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/f/fd/Indian_Institute_of_Technology_Delhi_Logo.svg',
+  },
+  {
+    name: 'BITS Pilani',
+    tag: 'Scout Cohort',
+    initials: 'BITS',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/d/d3/BITS_Pilani-Logo.svg',
+  },
+  {
+    name: 'NIT Trichy',
+    tag: 'Verified Campus',
+    initials: 'NITT',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/b/b3/National_Institute_of_Technology_Tiruchirappalli_logo.svg',
+  },
+  {
+    name: 'St. Xavier\'s',
+    tag: 'Scout Cohort',
+    initials: 'SXC',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/5/54/St._Xavier%27s_College_Autonomous_Mumbai_logo.png',
+  },
+  {
+    name: 'DTU',
+    tag: 'Scout Cohort',
+    initials: 'DTU',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/b/b5/Delhi_Technological_University_logo.png',
+  },
+  {
+    name: 'VIT Vellore',
+    tag: 'Verified Campus',
+    initials: 'VIT',
+    logoUrl: 'https://upload.wikimedia.org/wikipedia/en/c/c5/Vellore_Institute_of_Technology_seal.svg',
+  },
 ];
 
 export const CollegeGlobe3D: React.FC = () => {
@@ -37,6 +128,7 @@ export const CollegeGlobe3D: React.FC = () => {
   const [rotX, setRotX] = useState<number>(0.2);
   const [rotY, setRotY] = useState<number>(0);
   const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [failedLogos, setFailedLogos] = useState<Record<number, boolean>>({});
   const lastMousePos = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
   // Generate 3D sphere points using Fibonacci Lattice algorithm
@@ -53,7 +145,8 @@ export const CollegeGlobe3D: React.FC = () => {
         id: i,
         name: col.name,
         tag: col.tag,
-        photoPlaceholder: '[photo]',
+        logoUrl: col.logoUrl,
+        initials: col.initials,
         x: radius * Math.sin(phi) * Math.cos(theta),
         y: radius * Math.cos(phi),
         z: radius * Math.sin(phi) * Math.sin(theta),
@@ -91,6 +184,10 @@ export const CollegeGlobe3D: React.FC = () => {
   };
 
   const handleMouseUp = () => setIsDragging(false);
+
+  const handleImageError = (id: number) => {
+    setFailedLogos((prev) => ({ ...prev, [id]: true }));
+  };
 
   return (
     <section className="py-16 px-4 relative overflow-hidden select-none">
@@ -139,6 +236,7 @@ export const CollegeGlobe3D: React.FC = () => {
           const scale = 0.55 + depthPct * 0.55;                 // 0.55x to 1.1x
           const opacity = 0.2 + depthPct * 0.8;               // 0.2 to 1.0
           const zIndex = Math.round(z2 + 500);
+          const isFailed = failedLogos[pt.id];
 
           return (
             <div
@@ -151,21 +249,35 @@ export const CollegeGlobe3D: React.FC = () => {
               className="absolute transition-transform duration-75 ease-out pointer-events-auto"
             >
               {/* Card Container matching exact screenshot design */}
-              <div className="bg-[#121212]/90 border border-[#262626] hover:border-[#C4F62E] rounded-2xl p-4 w-32 sm:w-40 flex flex-col items-center justify-center space-y-2 shadow-2xl backdrop-blur-md transition-colors group cursor-pointer">
-                {/* Photo Placeholder Box */}
-                <div className="w-10 h-10 rounded-xl bg-[#0A0A0A] border border-[#222] flex flex-col items-center justify-center text-[#6A6A65] group-hover:text-[#C4F62E] group-hover:border-[#C4F62E]/40 transition-colors">
-                  <Camera className="w-4 h-4" />
-                  <span className="text-[8px] font-mono-stats text-[#6A6A65] uppercase mt-0.5">
-                    {pt.photoPlaceholder}
-                  </span>
+              <div className="bg-[#121212]/95 border border-[#262626] hover:border-[#C4F62E] rounded-2xl p-4 w-32 sm:w-40 flex flex-col items-center justify-center space-y-2.5 shadow-2xl backdrop-blur-md transition-all group cursor-pointer">
+                
+                {/* College Logo Container */}
+                <div className="w-12 h-12 rounded-xl bg-[#0A0A0A] border border-[#262626] p-2 flex items-center justify-center overflow-hidden group-hover:border-[#C4F62E]/60 transition-colors shadow-inner">
+                  {!isFailed && pt.logoUrl ? (
+                    <img
+                      src={pt.logoUrl}
+                      alt={pt.name}
+                      onError={() => handleImageError(pt.id)}
+                      className="w-full h-full object-contain filter brightness-110 group-hover:scale-110 transition-transform duration-300"
+                      loading="lazy"
+                      crossOrigin="anonymous"
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center text-center">
+                      <Building2 className="w-4 h-4 text-[#C4F62E]" />
+                      <span className="text-[8px] font-mono-stats font-bold text-[#C4F62E] mt-0.5">
+                        {pt.initials}
+                      </span>
+                    </div>
+                  )}
                 </div>
 
-                {/* College Name */}
+                {/* College Name & Tag */}
                 <div className="text-center">
                   <h4 className="font-display font-black text-xs sm:text-sm text-white tracking-tight group-hover:text-[#C4F62E] transition-colors truncate max-w-[120px]">
                     {pt.name}
                   </h4>
-                  <span className="text-[9px] font-mono-stats text-[#8A8A85] block mt-0.5">
+                  <span className="text-[9px] font-mono-stats text-[#8A8A85] block mt-0.5 font-bold">
                     {pt.tag}
                   </span>
                 </div>
