@@ -209,7 +209,7 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
       )}
 
       {/* ── Top Level Progress Track Navigator ── */}
-      <div className="border border-[#262626] rounded-3xl p-5 sm:p-6 shadow-2xl relative overflow-hidden backdrop-blur-md">
+      <div className="relative w-full">
 
         {/* Alternating Horizontal Stepper Timeline */}
         <div className="relative w-full py-12 overflow-x-auto no-scrollbar">
