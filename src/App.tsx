@@ -12,7 +12,6 @@ import { CampusLeaderboard } from './components/CampusLeaderboard';
 import { PerksShowcase } from './components/PerksShowcase';
 import { FaqAccordion } from './components/FaqAccordion';
 import { ShareCardModal } from './components/ShareCardModal';
-import { LiveActivityToast } from './components/LiveActivityToast';
 import { Zap, ArrowRight, ExternalLink } from 'lucide-react';
 
 export function App() {
@@ -239,9 +238,6 @@ export function App() {
           </div>
         </section>
       </main>
-
-      {/* Live Scout Activity Popup Toast */}
-      <LiveActivityToast />
 
       {/* 12. Footer */}
       <footer className="border-t border-[#1A1A1A] py-10 px-6 text-center bg-[#070707]">
