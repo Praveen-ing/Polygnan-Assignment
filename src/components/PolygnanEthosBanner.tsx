@@ -7,10 +7,7 @@ export const PolygnanEthosBanner: React.FC = () => {
       <div className="max-w-4xl mx-auto space-y-8 relative z-10">
         {/* Header */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/30 text-xs font-mono-stats text-[#C4F62E] font-bold uppercase tracking-wider">
-            <Sparkles className="w-4 h-4 text-[#C4F62E]" />
-            Driven by Polygnan · The Rancho Builder Mindset
-          </div>
+
 
           <h3 className="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight leading-tight">
             "You Learn By <span className="text-[#C4F62E]">Doing</span>"
