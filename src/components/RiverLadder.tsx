@@ -1,23 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { LADDER_RUNGS } from '../data/ladderData';
-import { CheckCircle2, Lock, Zap, ArrowDown, Flag, Award, Flame, Lightbulb, Briefcase, Crown, Check } from 'lucide-react';
+import { CheckCircle2, Lock, Zap, ArrowDown, Check } from 'lucide-react';
 import { RupeeCoinBurst } from './RupeeCoinBurst';
 import { SpotlightCard } from './SpotlightCard';
+import { BadgeCoinSVG } from './BadgeCoinSVG';
 
 interface RiverLadderProps {
   currentRegs: number;
   unlockedSet: Set<number>;
   onUnlockNewRung?: (rungId: number) => void;
 }
-
-const LEVEL_ICONS = [
-  <Flag className="w-6 h-6 sm:w-7 sm:h-7" />,
-  <Award className="w-6 h-6 sm:w-7 sm:h-7" />,
-  <Flame className="w-6 h-6 sm:w-7 sm:h-7" />,
-  <Lightbulb className="w-6 h-6 sm:w-7 sm:h-7" />,
-  <Briefcase className="w-6 h-6 sm:w-7 sm:h-7" />,
-  <Crown className="w-6 h-6 sm:w-7 sm:h-7" />,
-];
 
 export const RiverLadder: React.FC<RiverLadderProps> = ({
   currentRegs,
@@ -69,7 +61,7 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
                       : 'bg-[#141414] border-[#222] text-[#4A4640] hover:text-[#8A8A85]'
                   }`}
                 >
-                  L{idx + 1}: {rung.milestoneText}
+                  L{idx + 1}: {rung.title}
                 </button>
               );
             })}
@@ -144,18 +136,10 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
                   </div>
                 )}
 
-                {/* Level Station Node Badge on the River Center */}
+                {/* Exact 3D Gold Coin Badge Node from official screenshot */}
                 <div className="flex-shrink-0 relative z-20 flex flex-col items-center">
-                  <div
-                    className={`w-16 h-16 sm:w-20 sm:h-20 rounded-3xl flex items-center justify-center border-2 transition-all duration-500 shadow-2xl ${
-                      isBouncing ? 'animate-bounce' : ''
-                    } ${
-                      isUnlocked
-                        ? 'bg-[#0A0A0A] border-[#C4F62E] text-[#C4F62E] shadow-[0_0_32px_rgba(196,246,46,0.7)] scale-105'
-                        : 'bg-[#111111] border-[#2A2A2A] text-[#4A4640] opacity-70'
-                    }`}
-                  >
-                    {LEVEL_ICONS[idx]}
+                  <div className={`transition-all duration-500 ${isBouncing ? 'animate-bounce' : ''}`}>
+                    <BadgeCoinSVG badgeIndex={idx} size={76} isUnlocked={isUnlocked} />
                   </div>
 
                   {/* Level Tag under node */}
@@ -164,7 +148,7 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
                   </div>
                 </div>
 
-                {/* Level Station Card Details wrapped in 3D Spotlight Card */}
+                {/* Level Station Card Details */}
                 <div className="flex-1 max-w-xl w-full">
                   <SpotlightCard
                     spotlightColor={isUnlocked ? 'rgba(196, 246, 46, 0.2)' : 'rgba(255, 255, 255, 0.05)'}
@@ -230,7 +214,7 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
                           onClick={() => scrollToLevel(rung.id + 1)}
                           className="inline-flex items-center gap-1.5 hover:text-[#C4F62E] transition-colors cursor-pointer"
                         >
-                          <span>Flow to {LADDER_RUNGS[idx + 1].milestoneText}</span>
+                          <span>Flow to {LADDER_RUNGS[idx + 1].title}</span>
                           <ArrowDown className="w-3.5 h-3.5 animate-bounce text-[#C4F62E]" />
                         </button>
                       </div>

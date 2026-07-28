@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Shield, Sparkles, Download, Share2, CheckCircle, Zap, Award, Building, User } from 'lucide-react';
+import { Sparkles, Share2, CheckCircle, Zap, Building, User } from 'lucide-react';
 import { LADDER_RUNGS } from '../data/ladderData';
+import { BadgeCoinSVG } from './BadgeCoinSVG';
 
 interface ScoutBadgeGeneratorProps {
   currentRegs: number;
@@ -12,7 +13,6 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
   const [selectedRole, setSelectedRole] = useState<number>(0);
   const [copied, setCopied] = useState<boolean>(false);
 
-  // Calculate tier based on currentRegs or manual selector
   const activeRung = LADDER_RUNGS[selectedRole] || LADDER_RUNGS[0];
 
   const handleCopyLink = () => {
@@ -101,7 +101,7 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
             <div className="pt-2 flex items-center justify-between text-xs text-[#6A6A65] border-t border-[#1E1E1E]">
               <span className="flex items-center gap-1.5 font-mono-stats">
                 <Zap className="w-3.5 h-3.5 text-[#C4F62E]" />
-                Live Requirement: {activeRung.milestoneText}
+                Requirement: {activeRung.milestoneText}
               </span>
               <button
                 onClick={handleCopyLink}
@@ -135,11 +135,8 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
               {/* Card Body */}
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
-                  {/* Hologram Avatar Box */}
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#C4F62E]/20 to-[#E8B923]/20 border border-[#C4F62E]/40 flex items-center justify-center relative overflow-hidden">
-                    <User className="w-8 h-8 text-[#C4F62E]" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  </div>
+                  {/* Exact 3D Gold Badge Coin */}
+                  <BadgeCoinSVG badgeIndex={selectedRole} size={64} isUnlocked={true} />
 
                   <div>
                     <h4 className="font-display font-extrabold text-lg text-white leading-tight">
@@ -150,7 +147,6 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
                       {college || 'IIT Delhi'}
                     </p>
                     <div className="mt-1.5 inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-[#1E1E1E] text-[10px] font-mono-stats text-[#C4F62E] font-bold">
-                      <Award className="w-3 h-3" />
                       {activeRung.title}
                     </div>
                   </div>

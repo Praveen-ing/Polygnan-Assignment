@@ -4,68 +4,69 @@ export const LADDER_RUNGS: LadderRung[] = [
   {
     id: 0,
     threshold: 0,
-    milestoneText: 'Selected as Scout',
+    milestoneText: 'Scout',
     title: 'Scout',
     unlocks: [
-      'Private community access',
-      'Starter kit'
+      'Private community',
+      'Starter kit',
+      'Part of the movement from day one'
     ],
-    color: '#C4F62E',
+    color: '#FAD02C',
   },
   {
     id: 1,
     threshold: 25,
-    milestoneText: '25 registrations',
+    milestoneText: 'Campus Ambassador · 25 regs',
     title: 'Campus Ambassador',
     unlocks: [
-      'Official Campus Ambassador title',
+      'Official title and badge',
       'First swag drop',
-      'Prize-linked challenge'
+      'Cash-prize challenge'
     ],
-    color: '#C4F62E',
+    color: '#FAD02C',
   },
   {
     id: 2,
     threshold: 50,
-    milestoneText: '50+ registrations',
-    title: 'Level Up',
+    milestoneText: 'Level up · 50 regs',
+    title: 'Level up',
     unlocks: [
       'Event grants for your campus',
       'Exclusive merch'
     ],
-    color: '#C4F62E',
+    color: '#FAD02C',
   },
   {
     id: 3,
     threshold: 75,
-    milestoneText: '75+ registrations',
-    title: 'Go Further',
+    milestoneText: 'Go further · 75 regs',
+    title: 'Go further',
     unlocks: [
       'Mentorship access',
       'Campus event grants'
     ],
-    color: '#C4F62E',
+    color: '#FAD02C',
   },
   {
     id: 4,
     threshold: 100,
-    milestoneText: '100+ registrations',
-    title: 'Paid Internship',
+    milestoneText: 'Paid internship Opportunity · 100 regs',
+    title: 'Paid internship Opportunity',
     unlocks: [
-      'Paid internship opportunities',
+      'Internship opportunities',
       'Invite to ambassador events'
     ],
-    color: '#C4F62E',
+    color: '#FAD02C',
   },
   {
     id: 5,
     threshold: 200,
-    milestoneText: '200+ registrations',
+    milestoneText: 'Founding Team · 200 regs',
     title: 'Founding Team',
     unlocks: [
-      'Founding Team consideration'
+      'Consideration for the Founding Team, next wave'
     ],
-    color: '#E8B923',
+    color: '#FAD02C',
   },
 ];
 
