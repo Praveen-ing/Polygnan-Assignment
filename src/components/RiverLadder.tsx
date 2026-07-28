@@ -19,7 +19,7 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
   const [bouncingRungId, setBouncingRungId] = useState<number | null>(null);
   const [burstRungId, setBurstRungId]     = useState<number | null>(null);
   const [scrollProgress, setScrollProgress] = useState<number>(0);
-  const [riverTheme, setRiverTheme]       = useState<'gradient' | 'cyan' | 'lime' | 'orange'>('gradient');
+  const [riverTheme, setRiverTheme]       = useState<'ice' | 'pastelLime' | 'pastelCyan' | 'gradient'>('ice');
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Sync river fill with vertical window scrolling
@@ -61,11 +61,20 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
     document.getElementById(`level-station-${levelId}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
-  // Determine stroke color
-  let strokeColor = 'url(#riverMultiGradient)';
-  if (riverTheme === 'cyan') strokeColor = '#00F0FF';
-  if (riverTheme === 'lime') strokeColor = '#C4F62E';
-  if (riverTheme === 'orange') strokeColor = '#FF6B2C';
+  // Determine stroke color (Default: Very Light Luminous Ice White)
+  let strokeColor = '#FFFFFF';
+  let filterGlow = 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.8))';
+
+  if (riverTheme === 'pastelLime') {
+    strokeColor = '#E2FF80';
+    filterGlow = 'drop-shadow(0 0 10px rgba(196, 246, 46, 0.6))';
+  } else if (riverTheme === 'pastelCyan') {
+    strokeColor = '#E0F2FE';
+    filterGlow = 'drop-shadow(0 0 10px rgba(56, 189, 248, 0.6))';
+  } else if (riverTheme === 'gradient') {
+    strokeColor = 'url(#riverMultiGradient)';
+    filterGlow = 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.5))';
+  }
 
   return (
     <div ref={containerRef} className="space-y-12 relative">
@@ -99,29 +108,24 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
           );
         })}
 
-        {/* River Color Selector */}
+        {/* Light River Color Options */}
         <div className="pt-2 mt-1 border-t border-[#222] space-y-1 text-center">
-          <span className="text-[9px] font-mono-stats text-[#6A6A65] uppercase block">River Color</span>
-          <div className="flex items-center justify-center gap-1">
+          <span className="text-[9px] font-mono-stats text-[#6A6A65] uppercase block">Light Water</span>
+          <div className="flex items-center justify-center gap-1.5">
             <button
-              onClick={() => setRiverTheme('gradient')}
-              title="Liquid Gradient Flow"
-              className={`w-4 h-4 rounded-full bg-gradient-to-b from-[#FF6B2C] via-[#C4F62E] to-[#00F0FF] border cursor-pointer ${riverTheme === 'gradient' ? 'border-white scale-110' : 'border-transparent opacity-70'}`}
+              onClick={() => setRiverTheme('ice')}
+              title="Luminous Ice White"
+              className={`w-4 h-4 rounded-full bg-[#FFFFFF] border cursor-pointer ${riverTheme === 'ice' ? 'border-[#C4F62E] scale-125' : 'border-transparent opacity-60'}`}
             />
             <button
-              onClick={() => setRiverTheme('cyan')}
-              title="Electric Luminous Cyan"
-              className={`w-4 h-4 rounded-full bg-[#00F0FF] border cursor-pointer ${riverTheme === 'cyan' ? 'border-white scale-110' : 'border-transparent opacity-70'}`}
+              onClick={() => setRiverTheme('pastelCyan')}
+              title="Pastel Ice Cyan"
+              className={`w-4 h-4 rounded-full bg-[#E0F2FE] border cursor-pointer ${riverTheme === 'pastelCyan' ? 'border-[#C4F62E] scale-125' : 'border-transparent opacity-60'}`}
             />
             <button
-              onClick={() => setRiverTheme('lime')}
-              title="EYFI Lime Green"
-              className={`w-4 h-4 rounded-full bg-[#C4F62E] border cursor-pointer ${riverTheme === 'lime' ? 'border-white scale-110' : 'border-transparent opacity-70'}`}
-            />
-            <button
-              onClick={() => setRiverTheme('orange')}
-              title="Flame Orange"
-              className={`w-4 h-4 rounded-full bg-[#FF6B2C] border cursor-pointer ${riverTheme === 'orange' ? 'border-white scale-110' : 'border-transparent opacity-70'}`}
+              onClick={() => setRiverTheme('pastelLime')}
+              title="Soft Glow Lime"
+              className={`w-4 h-4 rounded-full bg-[#E2FF80] border cursor-pointer ${riverTheme === 'pastelLime' ? 'border-[#C4F62E] scale-125' : 'border-transparent opacity-60'}`}
             />
           </div>
         </div>
@@ -140,43 +144,44 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
             {/* SVG Gradient Definition */}
             <defs>
               <linearGradient id="riverMultiGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#FF6B2C" />
-                <stop offset="25%" stopColor="#E8B923" />
-                <stop offset="60%" stopColor="#C4F62E" />
-                <stop offset="100%" stopColor="#00F0FF" />
+                <stop offset="0%" stopColor="#FFFFFF" />
+                <stop offset="35%" stopColor="#E0F2FE" />
+                <stop offset="70%" stopColor="#E2FF80" />
+                <stop offset="100%" stopColor="#C4F62E" />
               </linearGradient>
             </defs>
 
-            {/* Base river bed */}
+            {/* Base river bed path */}
             <path
               d="M 50 2 C 85 8, 85 16, 50 20 C 15 24, 15 32, 50 36 C 85 40, 85 48, 50 52 C 15 56, 15 64, 50 68 C 85 72, 85 80, 50 84 C 15 88, 15 96, 50 99"
               fill="none"
-              stroke="#181818"
+              stroke="#1C1C1C"
               strokeWidth="4"
               strokeLinecap="round"
             />
 
-            {/* Unlocked river stroke with custom gradient/color */}
+            {/* Unlocked light river stroke synced with scrolling */}
             <path
               d="M 50 2 C 85 8, 85 16, 50 20 C 15 24, 15 32, 50 36 C 85 40, 85 48, 50 52 C 15 56, 15 64, 50 68 C 85 72, 85 80, 50 84 C 15 88, 15 96, 50 99"
               fill="none"
               stroke={strokeColor}
-              strokeWidth="4"
+              strokeWidth="3.5"
               strokeLinecap="round"
               strokeDasharray="600"
               strokeDashoffset={600 - (flowPct / 100) * 600}
-              className="transition-all duration-300 ease-out river-line-glow"
+              style={{ filter: filterGlow }}
+              className="transition-all duration-300 ease-out"
             />
 
             {/* Flowing animated light water pulses along path */}
             <path
               d="M 50 2 C 85 8, 85 16, 50 20 C 15 24, 15 32, 50 36 C 85 40, 85 48, 50 52 C 15 56, 15 64, 50 68 C 85 72, 85 80, 50 84 C 15 88, 15 96, 50 99"
               fill="none"
-              stroke="#FFFFFF"
-              strokeWidth="1.5"
+              stroke="#0A0A0A"
+              strokeWidth="1.2"
               strokeLinecap="round"
-              strokeDasharray="8 24"
-              className="opacity-50 animate-marquee"
+              strokeDasharray="6 20"
+              className="opacity-40 animate-marquee"
             />
           </svg>
         </div>
