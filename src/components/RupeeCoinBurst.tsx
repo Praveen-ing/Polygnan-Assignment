@@ -44,7 +44,7 @@ export const RupeeCoinBurst: React.FC<RupeeCoinBurstProps> = ({ triggerKey }) =>
       {particles.map((p) => (
         <span
           key={`${triggerKey}-${p.id}`}
-          className="rupee-coin-particle font-mono-stats font-extrabold text-[#FFC857] text-sm sm:text-base select-none"
+          className="rupee-coin-particle font-mono-stats font-extrabold text-[#DFF864] text-sm sm:text-base select-none"
           style={
             {
               '--dx': p.dx,

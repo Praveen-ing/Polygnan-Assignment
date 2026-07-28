@@ -1,53 +1,44 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Header } from './components/Header';
-import { BadgeShelf } from './components/BadgeShelf';
+import { MarqueeTicker } from './components/MarqueeTicker';
+import { OfficialHeader } from './components/OfficialHeader';
+import { AmbassadorHero } from './components/AmbassadorHero';
+import { SocialProofBanner } from './components/SocialProofBanner';
 import { RegistrationCounter } from './components/RegistrationCounter';
 import { RewardLadder } from './components/RewardLadder';
-import { HustleStats } from './components/HustleStats';
+import { TierProgressBar } from './components/TierProgressBar';
+import { UnlockValueCounter } from './components/UnlockValueCounter';
 import { ShareCardModal } from './components/ShareCardModal';
 import { MajorMilestoneSpotlightModal } from './components/MajorMilestoneSpotlightModal';
-import { CAMPUSES } from './data/ladderData';
 import { LadderRung } from './types';
-import { Zap, ArrowRight } from 'lucide-react';
+import { Zap, ArrowRight, ExternalLink } from 'lucide-react';
 
 export function App() {
-  const [regs, setRegs] = useState<number>(0);
-  const [isAutoplay, setIsAutoplay] = useState<boolean>(true);
-  const [selectedCampus, setSelectedCampus] = useState<string>(CAMPUSES[0].id);
-  const [unlockedSet, setUnlockedSet] = useState<Set<number>>(new Set([0]));
-  const [isShareOpen, setIsShareOpen] = useState<boolean>(false);
+  const [regs, setRegs]                   = useState<number>(0);
+  const [isAutoplay, setIsAutoplay]       = useState<boolean>(true);
+  const [unlockedSet, setUnlockedSet]     = useState<Set<number>>(new Set([0]));
+  const [isShareOpen, setIsShareOpen]     = useState<boolean>(false);
   const [spotlightRung, setSpotlightRung] = useState<LadderRung | null>(null);
 
   const animFrameRef = useRef<number | null>(null);
   const startTimeRef = useRef<number | null>(null);
 
-  // Auto-play climb effect on initial load (~4 seconds duration)
+  // Auto-play climb (0 → 200 in ~5s)
   useEffect(() => {
-    // Respect prefers-reduced-motion: skip animation and set max state immediately
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) {
-      setRegs(200);
-      setIsAutoplay(false);
-      return;
-    }
-
+    if (prefersReduced) { setRegs(200); setIsAutoplay(false); return; }
     if (!isAutoplay) return;
 
-    const duration = 4000; // 4 seconds
+    const duration = 5000;
     const startVal = regs;
     const targetVal = 200;
 
     const animate = (timestamp: number) => {
       if (!startTimeRef.current) startTimeRef.current = timestamp;
-      const elapsed = timestamp - startTimeRef.current;
+      const elapsed  = timestamp - startTimeRef.current;
       const progress = Math.min(1, elapsed / duration);
-
-      // Ease-out cubic formula
-      const easeProgress = 1 - Math.pow(1 - progress, 3);
-      const currentVal = startVal + (targetVal - startVal) * easeProgress;
-
-      setRegs(currentVal);
-
+      const ease     = 1 - Math.pow(1 - progress, 3);
+      const current  = startVal + (targetVal - startVal) * ease;
+      setRegs(current);
       if (progress < 1) {
         animFrameRef.current = requestAnimationFrame(animate);
       } else {
@@ -57,14 +48,10 @@ export function App() {
     };
 
     animFrameRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
-    };
+    return () => { if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current); };
   }, [isAutoplay]);
 
   const handleManualRegsChange = (newVal: number) => {
-    // Halt autoplay immediately on manual input
     if (isAutoplay) {
       setIsAutoplay(false);
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
@@ -99,114 +86,200 @@ export function App() {
     });
   };
 
-  const handleMajorMilestoneTrigger = (rung: LadderRung) => {
-    setSpotlightRung(rung);
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
-
-  const handleRungClick = (threshold: number) => {
-    handleManualRegsChange(threshold);
-  };
-
-  const currentCampusObj = CAMPUSES.find((c) => c.id === selectedCampus) || CAMPUSES[0];
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#F5F3EF] py-6 sm:py-8 px-3 sm:px-6">
-      {/* Container: 1 column on mobile/small tablet, 2 columns on desktop/large tablet (lg) */}
-      <div className="w-full max-w-xl lg:max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-        {/* Left Column (Desktop/Tablet Controls) - Sticky on Desktop */}
-        <div className="lg:col-span-5 space-y-5 lg:sticky lg:top-6 lg:self-start">
-          {/* Header Section */}
-          <Header selectedCampus={selectedCampus} onSelectCampus={setSelectedCampus} />
+    <div className="min-h-screen bg-[#0A0A0A] text-[#F5F3EF] flex flex-col font-sans selection:bg-[#FF6B2C] selection:text-white">
 
-          {/* Counter and Slider Control Box */}
-          <RegistrationCounter
-            regs={regs}
-            onRegsChange={handleManualRegsChange}
-            isAutoplay={isAutoplay}
-            onToggleAutoplay={handleToggleAutoplay}
-            onReset={handleReset}
-          />
+      {/* 1. Marquee */}
+      <MarqueeTicker />
 
-          {/* Badge / Trophy Shelf */}
-          <BadgeShelf currentRegs={regs} onRungClick={handleRungClick} />
+      {/* 2. Sticky Header */}
+      <OfficialHeader
+        onApplyClick={() => scrollToSection('apply-section')}
+        onTabClick={(tab) => {
+          if (tab === 'ladder') scrollToSection('ladder');
+        }}
+      />
 
-          {/* Hustle Stats Summary */}
-          <HustleStats regs={regs} />
-        </div>
+      <main className="flex-1">
+        {/* 3. Hero */}
+        <AmbassadorHero
+          onApplyClick={() => scrollToSection('apply-section')}
+          onExploreClick={() => scrollToSection('ladder')}
+        />
 
-        {/* Right Column (The Ambassador Ladder & Action Area) */}
-        <div className="lg:col-span-7 space-y-6">
-          {/* Top-left aligned product UI chips */}
-          <div className="flex flex-wrap items-center justify-between gap-2 px-1">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF6B2C]/10 border border-[#FF6B2C]/30 text-xs font-medium text-[#FFE8A3] shadow-sm">
-              <span>🔥 Only 2 Ambassador spots left at {currentCampusObj.name}</span>
-            </div>
+        {/* 4. Social Proof Banner */}
+        <SocialProofBanner />
 
-            <div className="inline-flex items-center gap-2 text-xs font-mono-stats text-[#A39E93]">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF6B2C] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF6B2C]"></span>
-              </span>
-              <span>847 scouts climbing right now</span>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between text-xs font-mono-stats text-[#A39E93] uppercase tracking-wider px-1 pt-1">
-            <span className="flex items-center gap-1.5">
-              <Zap className="w-3.5 h-3.5 text-[#FF6B2C]" />
-              <span>Ambassador Ladder</span>
-            </span>
-            <span>6 Reward Tiers</span>
-          </div>
-
-          <RewardLadder
-            currentRegs={regs}
-            unlockedSet={unlockedSet}
-            onUnlockNewRung={handleUnlockNewRung}
-            onMajorMilestoneTrigger={handleMajorMilestoneTrigger}
-          />
-
-          {/* Share Banner Prompt */}
-          <div className="bg-gradient-to-r from-[#FF6B2C]/15 via-[#FFC857]/10 to-[#141414] border border-[#FF6B2C]/30 rounded-2xl p-4 sm:p-5 flex items-center justify-between gap-4 shadow-lg">
-            <div className="space-y-0.5">
-              <div className="font-heading font-bold text-sm sm:text-base text-[#F5F3EF]">
-                Show your campus you're climbing.
+        {/* 5. Reward Ladder — the star of the show */}
+        <section
+          id="ladder"
+          className="py-16 sm:py-24 px-4 sm:px-6 bg-[#0C0C0C] border-t border-[#1A1A1A]"
+        >
+          <div className="max-w-6xl mx-auto">
+            {/* Section header */}
+            <div className="text-center mb-12 sm:mb-16">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF6B2C]/10 border border-[#FF6B2C]/20 text-xs font-mono-stats text-[#FF6B2C] uppercase tracking-wider mb-4">
+                <Zap className="w-3 h-3 fill-[#FF6B2C]" />
+                Reward Ladder · 6 Tiers
               </div>
-              <div className="text-xs text-[#A39E93]">
-                Share your custom ambassador rank card with peers
-              </div>
+              <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-white mb-4 tracking-tight">
+                Earned,{' '}
+                <span className="text-[#FF6B2C]">not handed.</span>
+              </h2>
+              <p className="text-sm sm:text-base text-[#8A8A85] max-w-lg mx-auto font-sans">
+                Drag the slider to see what you unlock at each milestone.
+                Every tier earned = real rewards, real value.
+              </p>
             </div>
 
-            <button
-              onClick={() => setIsShareOpen(true)}
-              className="flex-shrink-0 bg-[#FF6B2C] hover:bg-[#FF8542] text-[#0A0A0A] font-heading font-bold text-xs sm:text-sm px-4 py-2.5 rounded-full flex items-center gap-1.5 transition-all shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]"
-            >
-              <span>Share</span>
-              <ArrowRight className="w-4 h-4 stroke-[2.5]" />
-            </button>
+            {/* Main 2-col layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
+
+              {/* Left: Controls (sticky on desktop) */}
+              <div className="lg:col-span-5 space-y-4 lg:sticky lg:top-24 lg:self-start">
+                {/* Value counter */}
+                <UnlockValueCounter currentRegs={regs} />
+
+                {/* Tier XP progress bar */}
+                <TierProgressBar currentRegs={regs} />
+
+                {/* Registration slider */}
+                <RegistrationCounter
+                  regs={regs}
+                  onRegsChange={handleManualRegsChange}
+                  isAutoplay={isAutoplay}
+                  onToggleAutoplay={handleToggleAutoplay}
+                  onReset={handleReset}
+                />
+
+                {/* Share rank card CTA */}
+                <div className="bg-gradient-to-r from-[#FF6B2C]/10 via-[#FF6B2C]/5 to-transparent border border-[#FF6B2C]/20 rounded-2xl p-4 flex items-center justify-between gap-3">
+                  <div>
+                    <p className="font-display font-bold text-sm text-[#F5F3EF]">
+                      Show your campus who's climbing.
+                    </p>
+                    <p className="text-xs text-[#6A6A65] mt-0.5">
+                      Share your custom ambassador rank card
+                    </p>
+                  </div>
+                  <button
+                    id="share-rank-btn"
+                    onClick={() => setIsShareOpen(true)}
+                    className="flex-shrink-0 bg-[#FF6B2C] hover:bg-[#e85a1a] text-white font-display font-bold text-xs px-4 py-2.5 rounded-full flex items-center gap-1.5 transition-all shadow-[0_2px_12px_rgba(255,107,44,0.35)] cursor-pointer"
+                  >
+                    Share Rank
+                    <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Right: Vertical Ladder */}
+              <div className="lg:col-span-7">
+                {/* Live scouts indicator */}
+                <div className="flex items-center justify-between mb-4 px-1">
+                  <div className="inline-flex items-center gap-1.5 text-xs font-mono-stats text-[#6A6A65]">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF6B2C] opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF6B2C]" />
+                    </span>
+                    <span>847 scouts climbing right now</span>
+                  </div>
+                  <div className="text-xs font-mono-stats text-[#3A3A3A] uppercase tracking-wider">
+                    6 reward tiers
+                  </div>
+                </div>
+
+                <RewardLadder
+                  currentRegs={regs}
+                  unlockedSet={unlockedSet}
+                  onUnlockNewRung={handleUnlockNewRung}
+                  onMajorMilestoneTrigger={setSpotlightRung}
+                />
+              </div>
+            </div>
           </div>
+        </section>
 
-          {/* Footer Note */}
-          <footer className="text-center text-xs font-mono-stats text-[#4A4640] pt-4 pb-8 space-y-1">
-            <div>EYFI.AMBASSADORS — EARNED, NOT HANDED</div>
-            <div className="text-[10px] text-[#333]">Built for student hustlers across India</div>
-          </footer>
+        {/* 6. Apply CTA Section */}
+        <section
+          id="apply-section"
+          className="py-16 sm:py-20 px-4 sm:px-6 bg-[#0A0A0A] border-t border-[#1A1A1A]"
+        >
+          <div className="max-w-2xl mx-auto text-center space-y-6">
+            <div className="inline-block text-4xl">🚀</div>
+            <h2 className="font-display font-extrabold text-2xl sm:text-4xl text-white tracking-tight">
+              Ready to start climbing?
+            </h2>
+            <p className="text-[#8A8A85] font-sans text-sm sm:text-base leading-relaxed">
+              Applications are open for Wave 01 scouts. Only 1–2 spots per college.
+              Apply before they're gone.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <a
+                id="final-apply-btn"
+                href="https://ambassador.eyfichallenge.com/#apply"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-[#FF6B2C] text-white font-display font-black text-base px-8 py-4 hover:bg-[#e85a1a] transition-all shadow-[0_4px_24px_rgba(255,107,44,0.4)] hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer"
+              >
+                Apply as Scout
+                <ExternalLink className="w-4 h-4" />
+              </a>
+              <a
+                href="https://eyfichallenge.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#6A6A65] hover:text-[#FF6B2C] text-sm font-sans transition-colors"
+              >
+                What is the EYFI Challenge? →
+              </a>
+            </div>
+
+            {/* Urgency */}
+            <p className="text-xs font-mono-stats text-[#4A4640]">
+              ⚡ Wave 01 closing soon · Limited spots per college
+            </p>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="border-t border-[#1A1A1A] py-8 px-6 text-center">
+        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="font-display font-black text-[#FF6B2C] text-xl">
+            EYFI<span className="text-white">.</span>
+          </div>
+          <p className="text-xs text-[#4A4640] font-sans">
+            Earn Your First Income Challenge · Polygnan © 2026
+          </p>
+          <div className="flex items-center gap-4 text-xs text-[#4A4640]">
+            <a href="https://eyfichallenge.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF6B2C] transition">
+              EYFI Challenge ↗
+            </a>
+            <a href="https://ambassador.eyfichallenge.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF6B2C] transition">
+              Official Site ↗
+            </a>
+          </div>
         </div>
-      </div>
+      </footer>
 
-      {/* Major Milestone Spotlight Modal */}
+      {/* Modals */}
       <MajorMilestoneSpotlightModal
         rung={spotlightRung}
         onClose={() => setSpotlightRung(null)}
-        campusName={currentCampusObj.name}
+        campusName="Your Campus"
       />
 
-      {/* Share Card Modal */}
       <ShareCardModal
         isOpen={isShareOpen}
         onClose={() => setIsShareOpen(false)}
         regs={Math.round(regs)}
-        campusName={currentCampusObj.name}
+        campusName="Your Campus"
       />
     </div>
   );

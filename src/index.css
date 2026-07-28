@@ -3,22 +3,28 @@
 @layer base {
   :root {
     --bg: #0A0A0A;
-    --surface: #141414;
-    --surface-2: #1B1B1B;
+    --surface: #111111;
+    --surface-2: #1A1A1A;
     --orange: #FF6B2C;
-    --gold: #FFC857;
+    --orange-light: #FF8C55;
+    --orange-glow: rgba(255, 107, 44, 0.3);
+    --gold: #FFD700;
+    --gold-soft: #FFC857;
     --text: #F5F3EF;
-    --muted: #726C64;
+    --muted: #8A8A85;
     --muted-2: #4A4640;
+    --border: #242424;
   }
 
   body {
-    background-color: var(--bg);
+    background-color: #0A0A0A;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    background-size: 24px 24px;
     color: var(--text);
     font-family: 'Inter', sans-serif;
   }
 
-  h1, h2, h3, h4, .font-heading {
+  h1, h2, h3, h4, .font-heading, .font-display {
     font-family: 'Space Grotesk', sans-serif;
   }
 
@@ -27,133 +33,133 @@
   }
 }
 
-/* Custom Range Slider with Rupee / Gold Coin Handle */
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 8px;
-  border-radius: 9999px;
-  background: #232323;
-  outline: none;
-  cursor: grab;
+/* ——— Marquee ——— */
+@keyframes marquee {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 28s linear infinite;
+}
+.animate-marquee:hover { animation-play-state: paused; }
+
+/* ——— Float (coins) ——— */
+@keyframes floatAnimation {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-12px) rotate(4deg); }
+}
+.animate-float {
+  animation: floatAnimation 5s ease-in-out infinite;
 }
 
-input[type="range"]:focus-visible {
-  outline: 2px solid #FFC857;
-  outline-offset: 4px;
+/* ——— XP Bar fill ——— */
+@keyframes xpFill {
+  from { width: 0%; }
+  to   { width: var(--target-width, 100%); }
+}
+.animate-xp-fill {
+  animation: xpFill 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-  .animate-pulse,
-  .animate-pulse-glow,
-  .animate-ping,
-  .spotlight-glow {
-    animation: none !important;
-  }
+/* ——— Unlock burst glow ——— */
+@keyframes unlockGlow {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 107, 44, 0); }
+  30%  { box-shadow: 0 0 0 12px rgba(255, 107, 44, 0.5), 0 0 40px rgba(255, 107, 44, 0.4); }
+  70%  { box-shadow: 0 0 0 6px rgba(255, 215, 0, 0.3), 0 0 24px rgba(255, 215, 0, 0.25); }
+  100% { box-shadow: 0 0 0 3px rgba(255, 107, 44, 0.15), 0 0 12px rgba(255, 107, 44, 0.1); }
+}
+.animate-unlock-glow {
+  animation: unlockGlow 1s ease-out forwards;
 }
 
-input[type="range"]:active {
-  cursor: grabbing;
+/* ——— Tier card slide-in ——— */
+@keyframes tierSlideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-tier-slide-in {
+  animation: tierSlideIn 0.35s ease-out forwards;
 }
 
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #FFE08A, #FFC857 60%, #B8863A);
-  border: 3px solid #0A0A0A;
-  box-shadow: 0 0 0 5px rgba(255, 200, 87, 0.25), 0 4px 14px rgba(255, 107, 44, 0.4);
-  cursor: grab;
-  transition: transform 0.15s ease, box-shadow 0.2s ease;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230A0A0A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 3h12'/%3E%3Cpath d='M6 8h12'/%3E%3Cpath d='M6 13h8.5a4.5 4.5 0 0 1 0 9H6'/%3E%3Cpath d='M6 8l8 11'/%3E%3C/svg%3E");
-  background-size: 18px 18px;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.12);
-  box-shadow: 0 0 0 7px rgba(255, 200, 87, 0.35), 0 6px 18px rgba(255, 107, 44, 0.6);
-}
-
-input[type="range"]::-moz-range-thumb {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #FFE08A, #FFC857 60%, #B8863A);
-  border: 3px solid #0A0A0A;
-  box-shadow: 0 0 0 5px rgba(255, 200, 87, 0.25), 0 4px 14px rgba(255, 107, 44, 0.4);
-  cursor: grab;
-}
-
-/* Animations */
-@keyframes pulseGlow {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(1.2);
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
-}
-
-/* Rung Scale-Bounce Micro-interactions */
-@keyframes scaleBounceStandard {
-  0% { transform: scale(1); }
-  40% { transform: scale(1.06); }
-  75% { transform: scale(0.98); }
+/* ——— Value pop (counter) ——— */
+@keyframes valuePop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.18); color: #FFD700; }
   100% { transform: scale(1); }
 }
+.animate-value-pop {
+  animation: valuePop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
 
+/* ——— Scale bounce on rung unlock ——— */
+@keyframes scaleBounceStandard {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.05); }
+  75%  { transform: scale(0.98); }
+  100% { transform: scale(1); }
+}
 .animate-scale-bounce {
-  animation: scaleBounceStandard 0.48s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation: scaleBounceStandard 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 @keyframes scaleBounceMajor {
-  0% { transform: scale(1); }
-  35% { transform: scale(1.14); }
-  65% { transform: scale(0.97); }
-  85% { transform: scale(1.03); }
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.12); }
+  65%  { transform: scale(0.97); }
+  85%  { transform: scale(1.04); }
   100% { transform: scale(1); }
 }
-
 .animate-scale-bounce-major {
   animation: scaleBounceMajor 0.85s cubic-bezier(0.22, 1.25, 0.36, 1) forwards;
 }
 
-/* Rupee Coin Particle Fall Animation */
+/* ——— Perk list expand ——— */
+@keyframes expandDown {
+  from { max-height: 0; opacity: 0; }
+  to   { max-height: 400px; opacity: 1; }
+}
+.animate-expand-down {
+  animation: expandDown 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  overflow: hidden;
+}
+
+/* ——— Pulse glow (node dot) ——— */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(1.25); }
+}
+.animate-pulse-glow {
+  animation: pulseGlow 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* ——— Spotlight for milestone modal ——— */
+@keyframes spotlightGlowPulse {
+  0%, 100% { box-shadow: 0 0 30px rgba(255, 107, 44, 0.4), 0 0 60px rgba(255, 215, 0, 0.2); }
+  50%       { box-shadow: 0 0 60px rgba(255, 107, 44, 0.8), 0 0 120px rgba(255, 215, 0, 0.5); }
+}
+.spotlight-glow {
+  animation: spotlightGlowPulse 2s infinite ease-in-out;
+}
+
+/* ——— Rupee Coin Particle ——— */
 @keyframes rupeeCoinFall {
   0% {
     opacity: 1;
     transform: translate(0, 0) scale(0.5) rotate(0deg);
-    filter: drop-shadow(0 0 10px #FFC857);
+    filter: drop-shadow(0 0 10px #DFF864);
   }
   25% {
     opacity: 1;
     transform: translate(calc(var(--dx) * 0.4), -22px) scale(var(--sc)) rotate(var(--rot));
-    filter: drop-shadow(0 0 14px #FFC857);
+    filter: drop-shadow(0 0 14px #A9D91A);
   }
   100% {
     opacity: 0;
     transform: translate(var(--dx), var(--dy)) scale(0.5) rotate(calc(var(--rot) * 2.2));
-    filter: drop-shadow(0 0 2px rgba(255, 200, 87, 0));
+    filter: drop-shadow(0 0 2px rgba(166, 217, 26, 0));
   }
 }
-
 .rupee-coin-particle {
   position: absolute;
   top: 50%;
@@ -163,32 +169,80 @@ input[type="range"]::-moz-range-thumb {
   animation: rupeeCoinFall var(--dur) cubic-bezier(0.25, 1, 0.5, 1) var(--delay) forwards;
 }
 
-/* Major Milestone Spotlight Glow */
-@keyframes spotlightGlowPulse {
-  0%, 100% {
-    box-shadow: 0 0 30px rgba(255, 200, 87, 0.4), 0 0 60px rgba(255, 107, 44, 0.25);
-  }
-  50% {
-    box-shadow: 0 0 60px rgba(255, 200, 87, 0.8), 0 0 120px rgba(255, 107, 44, 0.6);
-  }
+/* ——— Social proof ticker ——— */
+@keyframes socialScroll {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.animate-social-scroll {
+  display: inline-block;
+  animation: socialScroll 30s linear infinite;
 }
 
-.spotlight-glow {
-  animation: spotlightGlowPulse 2s infinite ease-in-out;
-}
-
-/* Custom Scrollbar for dark theme */
-::-webkit-scrollbar {
-  width: 6px;
+/* ——— Custom Range Slider — Orange Theme ——— */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
   height: 6px;
+  border-radius: 9999px;
+  background: #242424;
+  outline: none;
+  cursor: grab;
 }
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
+input[type="range"]:active { cursor: grabbing; }
+input[type="range"]:focus-visible {
+  outline: 2px solid #FF6B2C;
+  outline-offset: 4px;
 }
-::-webkit-scrollbar-thumb {
-  background: #232323;
-  border-radius: 3px;
+
+/* Slider track fill — uses a background trick */
+input[type="range"]::-webkit-slider-container {
+  background: linear-gradient(to right, #FF6B2C var(--range-pct, 0%), #242424 var(--range-pct, 0%));
+  border-radius: 9999px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #FF6B2C;
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #FFA06A, #FF6B2C 55%, #CC4510);
+  border: 3px solid #0A0A0A;
+  box-shadow: 0 0 0 4px rgba(255, 107, 44, 0.3), 0 4px 16px rgba(255, 107, 44, 0.5);
+  cursor: grab;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 3h12'/%3E%3Cpath d='M6 8h12'/%3E%3Cpath d='M6 13h8.5a4.5 4.5 0 0 1 0 9H6'/%3E%3Cpath d='M6 8l8 11'/%3E%3C/svg%3E");
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 7px rgba(255, 107, 44, 0.35), 0 6px 20px rgba(255, 107, 44, 0.7);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #FFA06A, #FF6B2C 55%, #CC4510);
+  border: 3px solid #0A0A0A;
+  box-shadow: 0 0 0 4px rgba(255, 107, 44, 0.3);
+  cursor: grab;
+}
+
+/* ——— Scrollbar ——— */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #FF6B2C; }
+
+/* ——— Reduced Motion ——— */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

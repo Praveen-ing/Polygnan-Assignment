@@ -15,9 +15,9 @@ export const BadgeIcon: React.FC<BadgeIconProps> = ({
   isUnlocked = true,
   size = 48,
 }) => {
-  const primaryColor = isUnlocked ? '#FFC857' : '#726C64';
+  const primaryColor = isUnlocked ? '#C4F62E' : '#726C64';
   const accentColor = isUnlocked ? '#FF6B2C' : '#4A4640';
-  const glowColor = isUnlocked ? 'rgba(255, 200, 87, 0.35)' : 'transparent';
+  const glowColor = isUnlocked ? 'rgba(196, 246, 46, 0.35)' : 'transparent';
 
   return (
     <svg

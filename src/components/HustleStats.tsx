@@ -24,10 +24,10 @@ export const HustleStats: React.FC<HustleStatsProps> = ({ regs }) => {
 
       <div className="bg-[#141414] border border-[#232323] rounded-xl p-3.5 space-y-1">
         <div className="flex items-center gap-1.5 text-[11px] font-mono-stats uppercase text-[#A39E93]">
-          <Trophy className="w-3.5 h-3.5 text-[#FFC857]" />
+          <Trophy className="w-3.5 h-3.5 text-[#C4F62E]" />
           <span>Unlocked Value</span>
         </div>
-        <div className="font-mono-stats font-bold text-base text-[#FFC857]">
+        <div className="font-mono-stats font-bold text-base text-[#C4F62E]">
           {highestRung.estimatedValue}
         </div>
       </div>

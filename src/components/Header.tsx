@@ -1,6 +1,6 @@
 import React from 'react';
 import { CAMPUSES } from '../data/ladderData';
-import { Sparkles, MapPin, Zap } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 
 interface HeaderProps {
   selectedCampus: string;
@@ -14,38 +14,14 @@ export const Header: React.FC<HeaderProps> = ({ selectedCampus, onSelectCampus }
     <header className="space-y-4 text-left">
       {/* Eyebrow badge */}
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#141414] border border-[#232323] text-xs font-mono-stats uppercase tracking-widest text-[#726C64]">
-          <span className="w-2 h-2 rounded-full bg-[#FF6B2C] animate-pulse-glow shadow-[0_0_8px_#FF6B2C]" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#141414] border border-[#232323] text-xs font-mono-stats uppercase tracking-widest text-[#A39E93]">
+          <span className="w-2 h-2 rounded-full bg-[#C4F62E] animate-pulse-glow shadow-[0_0_8px_#C4F62E]" />
           <span>WAVE 01 · CAMPUS AMBASSADOR LADDER</span>
         </div>
 
-        {/* EYFI Brand Logo / Tag */}
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#FF6B2C]/10 border border-[#FF6B2C]/30 text-[#FF6B2C] text-xs font-bold font-heading">
-          <Zap className="w-3.5 h-3.5 fill-[#FF6B2C]" />
-          <span>EYFI // Earn Your First Income</span>
-        </div>
-      </div>
-
-      {/* Main Title & Subtitle */}
-      <div className="space-y-2">
-        <h1 className="font-heading font-extrabold text-3xl sm:text-4xl text-[#F5F3EF] leading-[1.15] tracking-tight">
-          Every registration <br className="hidden sm:inline" />
-          moves you <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B2C] via-[#FF8542] to-[#FFC857]">up the ladder.</span>
-        </h1>
-        <p className="text-sm text-[#A39E93] leading-relaxed max-w-xl">
-          Drag the counter slider and watch what you unlock. Nothing here is handed to you — you climb it with real registrations.
-        </p>
-      </div>
-
-      {/* Scarcity chip + Campus Selector */}
-      <div className="flex flex-wrap items-center gap-3 pt-1">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF6B2C]/10 border border-[#FF6B2C]/30 text-[#FF6B2C] text-xs font-semibold shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-[#FF6B2C]" />
-          <span>🔥 Only {currentCampus.remainingSpots} Ambassador spots left at {currentCampus.name}</span>
-        </div>
-
-        <div className="relative inline-flex items-center gap-1.5 bg-[#141414] border border-[#232323] hover:border-[#333] rounded-full px-3 py-1.5 text-xs text-[#F5F3EF] transition-all focus-within:ring-2 focus-within:ring-[#FFC857] focus-within:ring-offset-2 focus-within:ring-offset-[#0A0A0A]">
-          <MapPin className="w-3.5 h-3.5 text-[#FFC857]" />
+        {/* Campus Selector */}
+        <div className="relative inline-flex items-center gap-1.5 bg-[#141414] border border-[#232323] hover:border-[#3A3A3A] rounded-full px-3 py-1 text-xs text-[#F5F3EF] transition-all focus-within:ring-2 focus-within:ring-[#C4F62E] focus-within:ring-offset-2 focus-within:ring-offset-[#0A0A0A]">
+          <MapPin className="w-3.5 h-3.5 text-[#C4F62E]" />
           <select
             value={selectedCampus}
             onChange={(e) => onSelectCampus(e.target.value)}
@@ -58,6 +34,17 @@ export const Header: React.FC<HeaderProps> = ({ selectedCampus, onSelectCampus }
             ))}
           </select>
         </div>
+      </div>
+
+      {/* Main Title & Subtitle */}
+      <div className="space-y-2">
+        <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-[#F5F3EF] leading-[1.2] tracking-tight">
+          Every registration <br className="hidden sm:inline" />
+          moves you <span className="text-[#C4F62E]">up the ladder.</span>
+        </h1>
+        <p className="text-sm text-[#A39E93] leading-relaxed max-w-xl">
+          Drag the counter slider and watch what you unlock. Nothing here is handed to you — you climb it with real registrations.
+        </p>
       </div>
     </header>
   );

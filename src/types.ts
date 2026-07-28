@@ -1,5 +1,10 @@
 import { MilestoneBadgeType } from './components/BadgeIcon';
 
+export interface PerkDetail {
+  emoji: string;
+  text: string;
+}
+
 export interface LadderRung {
   id: number;
   threshold: number;
@@ -9,7 +14,11 @@ export interface LadderRung {
   icon: string;
   badgeType: MilestoneBadgeType;
   perks: string[];
-  estimatedValue: string; // e.g., "₹2,500 value"
+  perksDetailed: PerkDetail[];
+  estimatedValue: string;
+  color: string;        // tier accent color
+  xpValue: number;     // numeric rupee value for counter
+  timeToEarn: string;  // e.g. "~1 week of hustle"
 }
 
 export interface CampusLeaderboardItem {

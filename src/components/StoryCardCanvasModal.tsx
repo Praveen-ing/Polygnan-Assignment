@@ -51,16 +51,16 @@ export const StoryCardCanvasModal: React.FC<StoryCardCanvasModalProps> = ({
       ctx.fillStyle = '#0A0A0A';
       ctx.fillRect(0, 0, width, height);
 
-      // Radial Gold Aura in the upper-center
+      // Radial Lime Aura in the upper-center
       const aura = ctx.createRadialGradient(width / 2, 680, 80, width / 2, 680, 700);
-      aura.addColorStop(0, 'rgba(255, 107, 44, 0.35)');
-      aura.addColorStop(0.4, 'rgba(255, 200, 87, 0.18)');
+      aura.addColorStop(0, 'rgba(196, 246, 46, 0.35)');
+      aura.addColorStop(0.4, 'rgba(232, 185, 35, 0.18)');
       aura.addColorStop(1, 'rgba(10, 10, 10, 0)');
       ctx.fillStyle = aura;
       ctx.fillRect(0, 0, width, height);
 
       // Subtle Decorative Diagonal Lines in Background
-      ctx.strokeStyle = 'rgba(255, 200, 87, 0.05)';
+      ctx.strokeStyle = 'rgba(196, 246, 46, 0.05)';
       ctx.lineWidth = 2;
       for (let i = -width; i < width + height; i += 60) {
         ctx.beginPath();
@@ -70,11 +70,11 @@ export const StoryCardCanvasModal: React.FC<StoryCardCanvasModalProps> = ({
       }
 
       // Outer Frame Border
-      ctx.strokeStyle = '#FFC857';
+      ctx.strokeStyle = '#C4F62E';
       ctx.lineWidth = 8;
       ctx.strokeRect(36, 36, width - 72, height - 72);
 
-      ctx.strokeStyle = '#FF6B2C';
+      ctx.strokeStyle = '#E8B923';
       ctx.lineWidth = 3;
       ctx.strokeRect(48, 48, width - 96, height - 96);
 
@@ -83,12 +83,12 @@ export const StoryCardCanvasModal: React.FC<StoryCardCanvasModalProps> = ({
       ctx.textAlign = 'left';
       
       // "EYFI"
-      ctx.fillStyle = '#FF6B2C';
+      ctx.fillStyle = '#C4F62E';
       ctx.font = '900 68px "Space Grotesk", sans-serif';
       ctx.fillText('EYFI', 90, 150);
 
       // "// EARN YOUR FIRST INCOME"
-      ctx.fillStyle = '#FFC857';
+      ctx.fillStyle = '#E8B923';
       ctx.font = '700 24px "Space Mono", monospace';
       ctx.fillText('// EARN YOUR FIRST INCOME', 260, 142);
 
@@ -107,7 +107,7 @@ export const StoryCardCanvasModal: React.FC<StoryCardCanvasModalProps> = ({
       ctx.beginPath();
       ctx.roundRect(pillX, pillY, pillW, pillH, 25);
       ctx.fill();
-      ctx.strokeStyle = '#FF6B2C';
+      ctx.strokeStyle = '#C4F62E';
       ctx.lineWidth = 2;
       ctx.stroke();
 
@@ -116,7 +116,7 @@ export const StoryCardCanvasModal: React.FC<StoryCardCanvasModalProps> = ({
       ctx.restore();
 
       // Divider Line below header
-      ctx.strokeStyle = 'rgba(255, 200, 87, 0.2)';
+      ctx.strokeStyle = 'rgba(196, 246, 46, 0.2)';
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.moveTo(90, 195);
@@ -130,10 +130,10 @@ export const StoryCardCanvasModal: React.FC<StoryCardCanvasModalProps> = ({
 
       // Outer Glowing Ring
       ctx.save();
-      ctx.shadowColor = 'rgba(255, 200, 87, 0.5)';
+      ctx.shadowColor = 'rgba(196, 246, 46, 0.5)';
       ctx.shadowBlur = 40;
       ctx.fillStyle = '#141414';
-      ctx.strokeStyle = '#FFC857';
+      ctx.strokeStyle = '#C4F62E';
       ctx.lineWidth = 6;
       ctx.beginPath();
       ctx.arc(centerX, centerY, badgeRadius, 0, Math.PI * 2);
@@ -142,7 +142,7 @@ export const StoryCardCanvasModal: React.FC<StoryCardCanvasModalProps> = ({
 
       // Inner Dashed Accent Ring
       ctx.setLineDash([8, 8]);
-      ctx.strokeStyle = '#FF6B2C';
+      ctx.strokeStyle = '#E8B923';
       ctx.lineWidth = 3;
       ctx.beginPath();
       ctx.arc(centerX, centerY, badgeRadius - 16, 0, Math.PI * 2);
@@ -158,14 +158,14 @@ export const StoryCardCanvasModal: React.FC<StoryCardCanvasModalProps> = ({
       ctx.textAlign = 'center';
 
       // "I JUST BECAME"
-      ctx.fillStyle = '#FFC857';
+      ctx.fillStyle = '#C4F62E';
       ctx.font = '700 34px "Space Mono", monospace';
       ctx.fillText('I JUST BECAME', centerX, 730);
 
       // Big Bold Milestone Title
       ctx.fillStyle = '#F5F3EF';
       ctx.font = '800 76px "Space Grotesk", sans-serif';
-      ctx.shadowColor = 'rgba(255, 200, 87, 0.4)';
+      ctx.shadowColor = 'rgba(196, 246, 46, 0.4)';
       ctx.shadowBlur = 20;
       ctx.fillText(`${rung.title} ${rung.icon}`, centerX, 825);
       ctx.shadowBlur = 0;
@@ -185,52 +185,52 @@ export const StoryCardCanvasModal: React.FC<StoryCardCanvasModalProps> = ({
       ctx.save();
       // Card Background
       const cardGrad = ctx.createLinearGradient(cardX, cardY, cardX, cardY + cardH);
-      cardGrad.addColorStop(0, '#1A1612');
+      cardGrad.addColorStop(0, '#18200C');
       cardGrad.addColorStop(1, '#101010');
       ctx.fillStyle = cardGrad;
       ctx.beginPath();
       ctx.roundRect(cardX, cardY, cardW, cardH, 36);
       ctx.fill();
 
-      ctx.strokeStyle = '#FFC857';
+      ctx.strokeStyle = '#C4F62E';
       ctx.lineWidth = 4;
       ctx.stroke();
 
       ctx.textAlign = 'center';
 
       // Stat Header Label
-      ctx.fillStyle = '#FF6B2C';
+      ctx.fillStyle = '#C4F62E';
       ctx.font = '700 28px "Space Mono", monospace';
       ctx.fillText('CAMPUS REGISTRATIONS DRIVEN', centerX, cardY + 75);
 
-      // Giant Space Mono Gold Number Style
-      ctx.fillStyle = '#FFC857';
+      // Giant Space Mono Lime Number Style
+      ctx.fillStyle = '#C4F62E';
       ctx.font = '800 145px "Space Mono", monospace';
-      ctx.shadowColor = 'rgba(255, 200, 87, 0.6)';
+      ctx.shadowColor = 'rgba(196, 246, 46, 0.6)';
       ctx.shadowBlur = 30;
       ctx.fillText(`${Math.round(regs)}`, centerX, cardY + 235);
       ctx.shadowBlur = 0;
 
       // Value Badge Pill
-      ctx.fillStyle = '#2A2016';
+      ctx.fillStyle = '#1F2A0E';
       ctx.beginPath();
       ctx.roundRect(centerX - 220, cardY + 285, 440, 60, 30);
       ctx.fill();
-      ctx.strokeStyle = 'rgba(255, 200, 87, 0.4)';
+      ctx.strokeStyle = 'rgba(196, 246, 46, 0.4)';
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      ctx.fillStyle = '#FFE8A3';
+      ctx.fillStyle = '#C4F62E';
       ctx.font = '700 24px "Space Mono", monospace';
       ctx.fillText(`ESTIMATED VALUE: ${rung.estimatedValue}`, centerX, cardY + 324);
 
       // Perks summary
-      ctx.fillStyle = '#726C64';
+      ctx.fillStyle = '#8C8A82';
       ctx.font = '600 22px "Space Grotesk", sans-serif';
       ctx.fillText(`UNLOCKED: ${rung.perks.join(' • ')}`, centerX, cardY + 415);
       ctx.restore();
 
-      // 6. Bottom Tag — "Wave 01 · Campus Ambassador" (as requested)
+      // 6. Bottom Tag — "Wave 01 · Campus Ambassador"
       const tagY = 1620;
       ctx.save();
       ctx.textAlign = 'center';
@@ -244,19 +244,19 @@ export const StoryCardCanvasModal: React.FC<StoryCardCanvasModalProps> = ({
       const tagPillH = 76;
       const tagPillX = centerX - tagPillW / 2;
 
-      // Gold Glow behind bottom tag
-      ctx.shadowColor = 'rgba(255, 200, 87, 0.4)';
+      // Lime Glow behind bottom tag
+      ctx.shadowColor = 'rgba(196, 246, 46, 0.4)';
       ctx.shadowBlur = 20;
-      ctx.fillStyle = '#1C1712';
+      ctx.fillStyle = '#1A230B';
       ctx.beginPath();
       ctx.roundRect(tagPillX, tagY, tagPillW, tagPillH, 38);
       ctx.fill();
-      ctx.strokeStyle = '#FFC857';
+      ctx.strokeStyle = '#C4F62E';
       ctx.lineWidth = 3;
       ctx.stroke();
       ctx.shadowBlur = 0;
 
-      ctx.fillStyle = '#FFC857';
+      ctx.fillStyle = '#C4F62E';
       ctx.fillText(tagText, centerX, tagY + 49);
 
       // Footer Slogan
@@ -314,8 +314,8 @@ export const StoryCardCanvasModal: React.FC<StoryCardCanvasModalProps> = ({
         </button>
 
         <div className="space-y-1 text-left pr-8">
-          <div className="flex items-center gap-1.5 text-xs font-mono-stats uppercase text-[#FF6B2C] font-bold">
-            <InstagramIcon className="w-4 h-4 text-[#FF6B2C]" />
+          <div className="flex items-center gap-1.5 text-xs font-mono-stats uppercase text-[#C4F62E] font-bold">
+            <InstagramIcon className="w-4 h-4 text-[#C4F62E]" />
             <span>Instagram Story Progress Card</span>
           </div>
           <h2 className="font-heading font-extrabold text-xl sm:text-2xl text-[#F5F3EF]">
@@ -324,7 +324,7 @@ export const StoryCardCanvasModal: React.FC<StoryCardCanvasModalProps> = ({
         </div>
 
         {/* Scaled Preview of the 1080x1920 Story Canvas */}
-        <div className="relative mx-auto bg-[#0A0A0A] border-2 border-[#FFC857]/40 rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(255,200,87,0.15)] group max-w-[280px] sm:max-w-[310px] aspect-[9/16]">
+        <div className="relative mx-auto bg-[#0A0A0A] border-2 border-[#C4F62E]/40 rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(196,246,46,0.15)] group max-w-[280px] sm:max-w-[310px] aspect-[9/16]">
           {/* Canvas Element (Rendered at full 1080x1920, scaled down via CSS for sharp crisp export) */}
           <canvas
             ref={canvasRef}
@@ -333,7 +333,7 @@ export const StoryCardCanvasModal: React.FC<StoryCardCanvasModalProps> = ({
             className="w-full h-full object-contain block"
           />
 
-          <div className="absolute top-2.5 right-2.5 bg-black/70 backdrop-blur-md text-[#FFC857] text-[10px] font-mono-stats px-2 py-0.5 rounded-md border border-[#FFC857]/30">
+          <div className="absolute top-2.5 right-2.5 bg-black/70 backdrop-blur-md text-[#C4F62E] text-[10px] font-mono-stats px-2 py-0.5 rounded-md border border-[#C4F62E]/30">
             1080 × 1920 PNG
           </div>
         </div>
@@ -343,7 +343,7 @@ export const StoryCardCanvasModal: React.FC<StoryCardCanvasModalProps> = ({
           <button
             onClick={handleDownload}
             disabled={downloading}
-            className="w-full bg-gradient-to-r from-[#FF6B2C] via-[#FF8542] to-[#FFC857] hover:brightness-110 text-[#0A0A0A] font-heading font-extrabold text-sm py-3.5 px-5 rounded-2xl transition-all shadow-[0_4px_20px_rgba(255,107,44,0.35)] flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full bg-[#C4F62E] hover:bg-[#b0eb18] text-[#0A0A0A] font-heading font-extrabold text-sm py-3.5 px-5 rounded-2xl transition-all shadow-[0_4px_20px_rgba(196,246,46,0.35)] flex items-center justify-center gap-2 cursor-pointer"
           >
             {downloadSuccess ? (
               <>
@@ -360,11 +360,11 @@ export const StoryCardCanvasModal: React.FC<StoryCardCanvasModalProps> = ({
 
           <button
             onClick={handleCopyCaption}
-            className="w-full bg-[#1B1B1B] hover:bg-[#232323] border border-[#262626] text-[#F5F3EF] font-mono-stats text-xs py-2.5 px-4 rounded-xl transition-colors flex items-center justify-center gap-2"
+            className="w-full bg-[#1B1B1B] hover:bg-[#232323] border border-[#262626] text-[#F5F3EF] font-mono-stats text-xs py-2.5 px-4 rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer"
           >
             {copiedText ? (
               <>
-                <Check className="w-4 h-4 text-[#FFC857]" />
+                <Check className="w-4 h-4 text-[#C4F62E]" />
                 <span>Caption Copied!</span>
               </>
             ) : (
@@ -378,7 +378,7 @@ export const StoryCardCanvasModal: React.FC<StoryCardCanvasModalProps> = ({
 
         {/* Wave 01 Tag Note */}
         <div className="bg-[#111] border border-[#222] rounded-xl p-3 text-center text-[11px] font-mono-stats text-[#726C64]">
-          <span className="text-[#FFC857] font-bold">Tag @eyfi.in</span> on Instagram Stories to get featured on the official campus ambassador leaderboard!
+          <span className="text-[#C4F62E] font-bold">Tag @eyfi.in</span> on Instagram Stories to get featured on the official campus ambassador leaderboard!
         </div>
       </div>
     </div>
@@ -398,8 +398,8 @@ function drawCanvasBadge(
   const s = scale / 64; // Base vector design was on 64x64 grid
   ctx.scale(s, s);
 
-  const primary = '#FFC857';
-  const accent = '#FF6B2C';
+  const primary = '#C4F62E';
+  const accent = '#E8B923';
 
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';

@@ -17,23 +17,22 @@ export const RegistrationCounter: React.FC<RegistrationCounterProps> = ({
   onToggleAutoplay,
   onReset,
 }) => {
-  // Find current and next stage
+  // Current tier
   let currentIdx = 0;
   for (let i = 0; i < LADDER_RUNGS.length; i++) {
-    if (regs >= LADDER_RUNGS[i].threshold) {
-      currentIdx = i;
-    }
+    if (regs >= LADDER_RUNGS[i].threshold) currentIdx = i;
   }
 
   const currentRung = LADDER_RUNGS[currentIdx];
-  const nextRung = LADDER_RUNGS[currentIdx + 1];
+  const nextRung    = LADDER_RUNGS[currentIdx + 1];
 
+  // Status text
   let statusText = '';
   if (currentIdx === LADDER_RUNGS.length - 1) {
-    statusText = "🏆 You've reached Founding Team consideration. Top of the ladder!";
+    statusText = "👑 Founding Team — you've reached the top!";
   } else if (nextRung) {
-    const diff = nextRung.threshold - regs;
-    statusText = `${diff} more registration${diff === 1 ? '' : 's'} to unlock "${nextRung.title}"`;
+    const diff = nextRung.threshold - Math.floor(regs);
+    statusText = `${diff} more reg${diff === 1 ? '' : 's'} to unlock "${nextRung.title}"`;
   }
 
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,47 +40,45 @@ export const RegistrationCounter: React.FC<RegistrationCounterProps> = ({
   };
 
   const handlePresetClick = (amount: number) => {
-    const target = Math.min(200, regs + amount);
-    onRegsChange(target);
+    onRegsChange(Math.min(200, regs + amount));
   };
 
+  // Slider fill %
+  const sliderPct = (regs / 200) * 100;
+
   return (
-    <div className="bg-[#141414] border border-[#232323] rounded-2xl p-5 sm:p-6 space-y-5 shadow-xl relative overflow-hidden">
-      {/* Background glow accent */}
+    <div className="bg-[#111111] border border-[#242424] rounded-2xl p-5 sm:p-6 space-y-5 shadow-xl relative overflow-hidden">
+      {/* Background glow */}
       <div className="absolute top-0 right-0 w-48 h-48 bg-[#FF6B2C]/5 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Header row & Auto-play controls */}
+      {/* Header row */}
       <div className="flex items-center justify-between">
-        <div className="text-xs font-mono-stats uppercase tracking-widest text-[#726C64]">
+        <div className="text-xs font-mono-stats uppercase tracking-widest text-[#8A8A85]">
           Your Registrations
         </div>
 
-        <div className="flex items-center gap-1.5 bg-[#1B1B1B] border border-[#262626] rounded-lg p-1">
+        <div className="flex items-center gap-1.5 bg-[#1A1A1A] border border-[#262626] rounded-lg p-1">
           <button
             onClick={onToggleAutoplay}
-            className={`flex items-center gap-1 text-[11px] font-mono-stats font-semibold px-2.5 py-1 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857] focus-visible:ring-offset-2 focus-visible:ring-offset-[#141414] ${
+            id="autoplay-toggle-btn"
+            className={`flex items-center gap-1 text-[11px] font-mono-stats font-semibold px-2.5 py-1 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B2C] cursor-pointer ${
               isAutoplay
-                ? 'bg-[#FF6B2C] text-[#0A0A0A]'
+                ? 'bg-[#FF6B2C] text-white'
                 : 'text-[#F5F3EF] hover:bg-[#232323]'
             }`}
-            title={isAutoplay ? 'Pause auto-climb' : 'Auto-play climb (0 → 200)'}
+            title={isAutoplay ? 'Pause auto-climb' : 'Auto-play 0→200'}
           >
             {isAutoplay ? (
-              <>
-                <Pause className="w-3 h-3 fill-current" />
-                <span>Climbing...</span>
-              </>
+              <><Pause className="w-3 h-3 fill-current" /><span>Climbing…</span></>
             ) : (
-              <>
-                <Play className="w-3 h-3 fill-current" />
-                <span>Auto Climb</span>
-              </>
+              <><Play className="w-3 h-3 fill-current" /><span>Auto Climb</span></>
             )}
           </button>
 
           <button
             onClick={onReset}
-            className="p-1 text-[#A39E93] hover:text-[#F5F3EF] transition-colors rounded hover:bg-[#232323] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857] focus-visible:ring-offset-2 focus-visible:ring-offset-[#141414]"
+            id="reset-btn"
+            className="p-1 text-[#8A8A85] hover:text-[#F5F3EF] transition-colors rounded hover:bg-[#232323] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B2C] cursor-pointer"
             title="Reset to 0"
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -89,12 +86,26 @@ export const RegistrationCounter: React.FC<RegistrationCounterProps> = ({
         </div>
       </div>
 
-      {/* Counter number and status */}
-      <div className="text-center space-y-1">
-        <div className="font-mono-stats text-5xl sm:text-6xl font-extrabold text-[#FFC857] tracking-tight drop-shadow-[0_0_24px_rgba(255,200,87,0.3)]">
+      {/* Big count + current tier label */}
+      <div className="text-center space-y-1.5">
+        <div className="font-mono-stats text-5xl sm:text-6xl font-extrabold text-[#FF6B2C] tracking-tight drop-shadow-[0_0_24px_rgba(255,107,44,0.4)]">
           {Math.round(regs)}
         </div>
-        <div className="text-xs sm:text-sm text-[#F5F3EF] font-medium min-h-[22px]">
+
+        {/* Current tier badge */}
+        <div
+          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono-stats font-bold"
+          style={{
+            color: currentRung.color,
+            backgroundColor: `${currentRung.color}15`,
+            border: `1px solid ${currentRung.color}30`,
+          }}
+        >
+          <span>{currentRung.icon}</span>
+          <span>{currentRung.title}</span>
+        </div>
+
+        <div className="text-xs sm:text-sm text-[#8A8A85] font-sans min-h-[20px]">
           {statusText}
         </div>
       </div>
@@ -103,19 +114,20 @@ export const RegistrationCounter: React.FC<RegistrationCounterProps> = ({
       <div className="space-y-2 pt-1">
         <input
           type="range"
+          id="regs-slider"
           min="0"
           max="200"
           value={regs}
           onChange={handleSliderChange}
-          onPointerDown={() => {
-            if (isAutoplay) onToggleAutoplay();
+          onPointerDown={() => { if (isAutoplay) onToggleAutoplay(); }}
+          style={{
+            background: `linear-gradient(to right, #FF6B2C ${sliderPct}%, #242424 ${sliderPct}%)`,
           }}
-          className="w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857] focus-visible:ring-offset-2 focus-visible:ring-offset-[#141414]"
-          aria-label="Campus registrations count slider"
+          aria-label="Registrations count slider"
         />
 
-        {/* Slider ticks */}
-        <div className="flex justify-between font-mono-stats text-[10px] text-[#A39E93] px-1 font-semibold">
+        {/* Tick marks */}
+        <div className="flex justify-between font-mono-stats text-[9px] text-[#4A4640] px-1 font-semibold">
           <span>0</span>
           <span>25</span>
           <span>50</span>
@@ -125,23 +137,25 @@ export const RegistrationCounter: React.FC<RegistrationCounterProps> = ({
         </div>
       </div>
 
-      {/* Quick Add Preset Chips */}
-      <div className="pt-1 flex flex-wrap items-center justify-between gap-2 border-t border-[#232323]">
-        <span className="text-[11px] font-mono-stats text-[#A39E93]">Quick Add:</span>
+      {/* Quick Add Chips */}
+      <div className="pt-1 flex flex-wrap items-center justify-between gap-2 border-t border-[#1E1E1E]">
+        <span className="text-[10px] font-mono-stats text-[#4A4640] uppercase tracking-wider">Quick Add:</span>
         <div className="flex items-center gap-1.5 flex-wrap">
           {[5, 10, 25, 50].map((amt) => (
             <button
               key={amt}
+              id={`quick-add-${amt}`}
               onClick={() => handlePresetClick(amt)}
-              className="inline-flex items-center gap-0.5 text-[11px] font-mono-stats font-semibold bg-[#1B1B1B] hover:bg-[#FF6B2C]/20 hover:text-[#FF6B2C] border border-[#262626] hover:border-[#FF6B2C]/40 px-2.5 py-1 rounded-md transition-all text-[#F5F3EF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857] focus-visible:ring-offset-2 focus-visible:ring-offset-[#141414]"
+              className="inline-flex items-center gap-0.5 text-[10px] font-mono-stats font-semibold bg-[#1A1A1A] hover:bg-[#FF6B2C]/15 hover:text-[#FF6B2C] border border-[#262626] hover:border-[#FF6B2C]/40 px-2.5 py-1 rounded-md transition-all text-[#F5F3EF] cursor-pointer"
             >
               <Plus className="w-2.5 h-2.5" />
               <span>{amt}</span>
             </button>
           ))}
           <button
+            id="max-regs-btn"
             onClick={() => onRegsChange(200)}
-            className="text-[11px] font-mono-stats font-semibold bg-[#FFC857]/10 hover:bg-[#FFC857]/20 text-[#FFC857] border border-[#FFC857]/30 px-2.5 py-1 rounded-md transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857] focus-visible:ring-offset-2 focus-visible:ring-offset-[#141414]"
+            className="text-[10px] font-mono-stats font-semibold bg-[#FF6B2C]/10 hover:bg-[#FF6B2C]/20 text-[#FF6B2C] border border-[#FF6B2C]/30 px-2.5 py-1 rounded-md transition-all cursor-pointer"
           >
             Max (200)
           </button>
