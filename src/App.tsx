@@ -7,7 +7,6 @@ import { RegistrationCounter } from './components/RegistrationCounter';
 import { RiverLadder } from './components/RiverLadder';
 import { TierProgressBar } from './components/TierProgressBar';
 import { ScoutBadgeGenerator } from './components/ScoutBadgeGenerator';
-import { CampusLeaderboard } from './components/CampusLeaderboard';
 import { PerksShowcase } from './components/PerksShowcase';
 import { FaqAccordion } from './components/FaqAccordion';
 import { ShareCardModal } from './components/ShareCardModal';
@@ -184,22 +183,17 @@ export function App() {
           <ScoutBadgeGenerator currentRegs={regs} />
         </section>
 
-        {/* 10. Campus Leaderboard */}
-        <section id="leaderboard" className="max-w-6xl mx-auto px-4 sm:px-6">
-          <CampusLeaderboard />
-        </section>
-
-        {/* 11. Perks & Privileges Showcase Grid */}
+        {/* 10. Perks & Privileges Showcase Grid */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6">
           <PerksShowcase />
         </section>
 
-        {/* 12. FAQ Accordion */}
+        {/* 11. FAQ Accordion */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6">
           <FaqAccordion />
         </section>
 
-        {/* 13. Final Apply CTA Section */}
+        {/* 12. Final Apply CTA Section */}
         <section
           id="apply-section"
           className="py-20 px-4 sm:px-6 bg-gradient-to-b from-[#0C0C0C] to-[#050505] border-t border-[#1A1A1A] relative overflow-hidden"
@@ -247,15 +241,15 @@ export function App() {
         </section>
       </main>
 
-      {/* 14. Footer */}
+      {/* 13. Footer */}
       <footer className="border-t border-[#1A1A1A] py-10 px-6 text-center bg-[#070707]">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 rounded-lg bg-[#C4F62E] text-[#0A0A0A] flex items-center justify-center font-extrabold text-xs">
               EY
             </div>
-            <span className="font-display font-black text-white text-lg">
-              EYFI<span className="text-[#C4F62E]">.</span>
+            <span className="font-display font-black text-[#C4F62E] text-lg">
+              EYFI<span className="text-white">.</span>
             </span>
           </div>
 
