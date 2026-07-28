@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { LADDER_RUNGS } from '../data/ladderData';
-import { CheckCircle2, Lock, Zap, Check, ArrowDown } from 'lucide-react';
+import { CheckCircle2, Lock, Zap, Check } from 'lucide-react';
 import { RupeeCoinBurst } from './RupeeCoinBurst';
 import { SpotlightCard } from './SpotlightCard';
 import { BadgeCoinSVG } from './BadgeCoinSVG';
@@ -19,6 +19,7 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
   const [bouncingRungId, setBouncingRungId] = useState<number | null>(null);
   const [burstRungId, setBurstRungId]     = useState<number | null>(null);
   const [scrollProgress, setScrollProgress] = useState<number>(0);
+  const [riverTheme, setRiverTheme]       = useState<'gradient' | 'cyan' | 'lime' | 'orange'>('gradient');
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Sync river fill with vertical window scrolling
@@ -60,6 +61,12 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
     document.getElementById(`level-station-${levelId}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
+  // Determine stroke color
+  let strokeColor = 'url(#riverMultiGradient)';
+  if (riverTheme === 'cyan') strokeColor = '#00F0FF';
+  if (riverTheme === 'lime') strokeColor = '#C4F62E';
+  if (riverTheme === 'orange') strokeColor = '#FF6B2C';
+
   return (
     <div ref={containerRef} className="space-y-12 relative">
 
@@ -91,6 +98,33 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
             </button>
           );
         })}
+
+        {/* River Color Selector */}
+        <div className="pt-2 mt-1 border-t border-[#222] space-y-1 text-center">
+          <span className="text-[9px] font-mono-stats text-[#6A6A65] uppercase block">River Color</span>
+          <div className="flex items-center justify-center gap-1">
+            <button
+              onClick={() => setRiverTheme('gradient')}
+              title="Liquid Gradient Flow"
+              className={`w-4 h-4 rounded-full bg-gradient-to-b from-[#FF6B2C] via-[#C4F62E] to-[#00F0FF] border cursor-pointer ${riverTheme === 'gradient' ? 'border-white scale-110' : 'border-transparent opacity-70'}`}
+            />
+            <button
+              onClick={() => setRiverTheme('cyan')}
+              title="Electric Luminous Cyan"
+              className={`w-4 h-4 rounded-full bg-[#00F0FF] border cursor-pointer ${riverTheme === 'cyan' ? 'border-white scale-110' : 'border-transparent opacity-70'}`}
+            />
+            <button
+              onClick={() => setRiverTheme('lime')}
+              title="EYFI Lime Green"
+              className={`w-4 h-4 rounded-full bg-[#C4F62E] border cursor-pointer ${riverTheme === 'lime' ? 'border-white scale-110' : 'border-transparent opacity-70'}`}
+            />
+            <button
+              onClick={() => setRiverTheme('orange')}
+              title="Flame Orange"
+              className={`w-4 h-4 rounded-full bg-[#FF6B2C] border cursor-pointer ${riverTheme === 'orange' ? 'border-white scale-110' : 'border-transparent opacity-70'}`}
+            />
+          </div>
+        </div>
       </aside>
 
       {/* ── Massive Flowing River Container (Full Screen Scroll per Level) ── */}
@@ -103,6 +137,16 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
           >
+            {/* SVG Gradient Definition */}
+            <defs>
+              <linearGradient id="riverMultiGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#FF6B2C" />
+                <stop offset="25%" stopColor="#E8B923" />
+                <stop offset="60%" stopColor="#C4F62E" />
+                <stop offset="100%" stopColor="#00F0FF" />
+              </linearGradient>
+            </defs>
+
             {/* Base river bed */}
             <path
               d="M 50 2 C 85 8, 85 16, 50 20 C 15 24, 15 32, 50 36 C 85 40, 85 48, 50 52 C 15 56, 15 64, 50 68 C 85 72, 85 80, 50 84 C 15 88, 15 96, 50 99"
@@ -112,12 +156,12 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
               strokeLinecap="round"
             />
 
-            {/* Unlocked green fill river stroke synced with scrolling */}
+            {/* Unlocked river stroke with custom gradient/color */}
             <path
               d="M 50 2 C 85 8, 85 16, 50 20 C 15 24, 15 32, 50 36 C 85 40, 85 48, 50 52 C 15 56, 15 64, 50 68 C 85 72, 85 80, 50 84 C 15 88, 15 96, 50 99"
               fill="none"
-              stroke="#C4F62E"
-              strokeWidth="3.5"
+              stroke={strokeColor}
+              strokeWidth="4"
               strokeLinecap="round"
               strokeDasharray="600"
               strokeDashoffset={600 - (flowPct / 100) * 600}
@@ -132,7 +176,7 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeDasharray="8 24"
-              className="opacity-40 animate-marquee"
+              className="opacity-50 animate-marquee"
             />
           </svg>
         </div>
@@ -142,7 +186,6 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
           {LADDER_RUNGS.map((rung, idx) => {
             const isUnlocked = flowPct >= (rung.threshold / 200) * 100;
             const isBouncing = bouncingRungId === rung.id;
-            const regsToGo   = rung.threshold - Math.floor(currentRegs);
             const isEven     = idx % 2 === 0;
 
             return (
@@ -181,7 +224,7 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
                     </span>
                   </div>
 
-                  {/* Station Card Content (Transparent Floating) */}
+                  {/* Station Card Content */}
                   <div className="flex-1 w-full relative z-20">
                     <SpotlightCard
                       spotlightColor={isUnlocked ? 'rgba(196, 246, 46, 0.25)' : 'rgba(255, 255, 255, 0.05)'}
