@@ -29,7 +29,7 @@ export const RegistrationCounter: React.FC<RegistrationCounterProps> = ({
   // Status text
   let statusText = '';
   if (currentIdx === LADDER_RUNGS.length - 1) {
-    statusText = "👑 Founding Team — you've reached the top!";
+    statusText = "Founding Team — you've reached the top level!";
   } else if (nextRung) {
     const diff = nextRung.threshold - Math.floor(regs);
     statusText = `${diff} more reg${diff === 1 ? '' : 's'} to unlock "${nextRung.title}"`;
@@ -101,7 +101,6 @@ export const RegistrationCounter: React.FC<RegistrationCounterProps> = ({
             border: `1px solid ${currentRung.color}30`,
           }}
         >
-          <span>{currentRung.icon}</span>
           <span>{currentRung.title}</span>
         </div>
 

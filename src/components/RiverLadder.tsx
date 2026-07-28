@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LADDER_RUNGS } from '../data/ladderData';
-import { CheckCircle, Lock, Zap, ShieldCheck, ArrowDown, ChevronRight, Award } from 'lucide-react';
+import { CheckCircle2, Lock, Zap, ArrowDown, Flag, Award, Flame, Lightbulb, Briefcase, Crown, Check } from 'lucide-react';
 import { RupeeCoinBurst } from './RupeeCoinBurst';
 
 interface RiverLadderProps {
@@ -8,6 +8,16 @@ interface RiverLadderProps {
   unlockedSet: Set<number>;
   onUnlockNewRung?: (rungId: number) => void;
 }
+
+// Clean Lucide SVG icons for each level station
+const LEVEL_ICONS = [
+  <Flag className="w-6 h-6 sm:w-7 sm:h-7" />,
+  <Award className="w-6 h-6 sm:w-7 sm:h-7" />,
+  <Flame className="w-6 h-6 sm:w-7 sm:h-7" />,
+  <Lightbulb className="w-6 h-6 sm:w-7 sm:h-7" />,
+  <Briefcase className="w-6 h-6 sm:w-7 sm:h-7" />,
+  <Crown className="w-6 h-6 sm:w-7 sm:h-7" />,
+];
 
 export const RiverLadder: React.FC<RiverLadderProps> = ({
   currentRegs,
@@ -45,7 +55,7 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
         <div className="max-w-6xl mx-auto px-4 flex items-center justify-between gap-2 overflow-x-auto scrollbar-none">
           <span className="text-xs font-mono-stats text-[#8A8A85] flex-shrink-0 flex items-center gap-1">
             <Zap className="w-3.5 h-3.5 text-[#C4F62E]" />
-            Jump to Level:
+            Jump to Milestone:
           </span>
           <div className="flex items-center gap-1.5 flex-nowrap">
             {LADDER_RUNGS.map((rung, idx) => {
@@ -60,7 +70,7 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
                       : 'bg-[#141414] border-[#222] text-[#4A4640] hover:text-[#8A8A85]'
                   }`}
                 >
-                  L{idx + 1}: {rung.title}
+                  L{idx + 1}: {rung.milestoneText}
                 </button>
               );
             })}
@@ -117,7 +127,7 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
                   isEven ? 'md:flex-row' : 'md:flex-row-reverse'
                 }`}
               >
-                {/* Coin Burst Effect */}
+                {/* Starburst Effect */}
                 {burstRungId === rung.id && (
                   <div className="absolute inset-0 pointer-events-none z-40">
                     <RupeeCoinBurst triggerKey={rung.id} />
@@ -127,7 +137,7 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
                 {/* Level Station Node Badge on the River Center */}
                 <div className="flex-shrink-0 relative z-20 flex flex-col items-center">
                   <div
-                    className={`w-16 h-16 sm:w-20 sm:h-20 rounded-3xl flex items-center justify-center text-3xl sm:text-4xl border-2 transition-all duration-500 shadow-2xl ${
+                    className={`w-16 h-16 sm:w-20 sm:h-20 rounded-3xl flex items-center justify-center border-2 transition-all duration-500 shadow-2xl ${
                       isBouncing ? 'animate-bounce' : ''
                     } ${
                       isUnlocked
@@ -135,12 +145,12 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
                         : 'bg-[#111111] border-[#2A2A2A] text-[#4A4640] opacity-70'
                     }`}
                   >
-                    {rung.icon}
+                    {LEVEL_ICONS[idx]}
                   </div>
 
                   {/* Level Tag under node */}
                   <div className="mt-2 bg-[#0A0A0A] border border-[#242424] px-3 py-1 rounded-full text-[10px] font-mono-stats font-bold text-[#C4F62E]">
-                    Level {idx + 1} · {rung.reqText}
+                    {rung.milestoneText}
                   </div>
                 </div>
 
@@ -156,16 +166,16 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
                   <div className="flex items-center justify-between flex-wrap gap-2">
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-mono-stats font-extrabold text-[#C4F62E] uppercase tracking-wider bg-[#C4F62E]/10 border border-[#C4F62E]/30 px-3 py-1 rounded-full">
-                        Level {idx + 1} Station
+                        Level {idx + 1}
                       </span>
                       <span className="text-xs font-mono-stats text-[#8A8A85]">
-                        {rung.reqText}
+                        {rung.milestoneText}
                       </span>
                     </div>
 
                     {isUnlocked ? (
                       <span className="inline-flex items-center gap-1.5 text-xs font-mono-stats font-bold text-[#C4F62E] bg-[#C4F62E]/10 border border-[#C4F62E]/30 px-3 py-1 rounded-full">
-                        <CheckCircle className="w-3.5 h-3.5" />
+                        <CheckCircle2 className="w-3.5 h-3.5" />
                         UNLOCKED
                       </span>
                     ) : (
@@ -176,33 +186,25 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
                     )}
                   </div>
 
-                  {/* Title & Description */}
+                  {/* Title */}
                   <div>
                     <h3 className="font-display font-black text-2xl sm:text-3xl text-white">
                       {rung.title}
                     </h3>
-                    <p className="text-sm text-[#8A8A85] mt-1 font-sans leading-relaxed">
-                      {rung.description}
-                    </p>
-                    <p className="text-xs text-[#C4F62E] font-mono-stats mt-2 flex items-center gap-1">
-                      <Zap className="w-3 h-3 fill-[#C4F62E]" />
-                      Target time: {rung.timeToEarn}
-                    </p>
                   </div>
 
-                  {/* Perks Unlocked */}
+                  {/* Unlocked Rewards List for this Level — Exact matching prompt table */}
                   <div className="bg-[#0A0A0A] border border-[#222222] rounded-2xl p-4 sm:p-5 space-y-3">
-                    <div className="text-xs font-mono-stats uppercase tracking-widest text-[#C4F62E] font-bold flex items-center gap-2">
-                      <ShieldCheck className="w-4 h-4 text-[#C4F62E]" />
-                      Rewards Unlocked at Level {idx + 1}:
+                    <div className="text-xs font-mono-stats uppercase tracking-widest text-[#C4F62E] font-bold">
+                      WHAT YOU UNLOCK:
                     </div>
 
                     <div className="space-y-2.5">
-                      {rung.perksDetailed.map((perk, pIdx) => (
-                        <div key={pIdx} className="flex items-start gap-3 bg-[#121212] border border-[#1E1E1E] p-3 rounded-xl">
-                          <span className="text-lg flex-shrink-0">{perk.emoji}</span>
-                          <p className="text-xs sm:text-sm text-[#F5F3EF] font-sans leading-relaxed">
-                            {perk.text}
+                      {rung.unlocks.map((unlockText, uIdx) => (
+                        <div key={uIdx} className="flex items-start gap-3 bg-[#121212] border border-[#1E1E1E] p-3.5 rounded-xl">
+                          <Check className="w-4 h-4 text-[#C4F62E] flex-shrink-0 mt-0.5" />
+                          <p className="text-xs sm:text-sm text-[#F5F3EF] font-sans font-medium leading-relaxed">
+                            {unlockText}
                           </p>
                         </div>
                       ))}
@@ -214,9 +216,9 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
                     <div className="pt-2 flex justify-end text-xs font-mono-stats text-[#6A6A65]">
                       <button
                         onClick={() => scrollToLevel(rung.id + 1)}
-                        className="inline-flex items-center gap-1 hover:text-[#C4F62E] transition-colors cursor-pointer"
+                        className="inline-flex items-center gap-1.5 hover:text-[#C4F62E] transition-colors cursor-pointer"
                       >
-                        <span>Flow to Level {idx + 2}: {LADDER_RUNGS[idx + 1].title}</span>
+                        <span>Flow to {LADDER_RUNGS[idx + 1].milestoneText}</span>
                         <ArrowDown className="w-3.5 h-3.5 animate-bounce text-[#C4F62E]" />
                       </button>
                     </div>

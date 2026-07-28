@@ -35,7 +35,7 @@ export const ShareCardModal: React.FC<ShareCardModalProps> = ({
   const currentRung   = unlockedRungs[unlockedRungs.length - 1] || LADDER_RUNGS[0];
   const tierColor     = currentRung.color;
 
-  const shareText = `Just unlocked "${currentRung.title}" 🎖️ on the EYFI Campus Ambassador Ladder with ${Math.round(regs)} registrations!\n\nWave 01 is open — only 1-2 spots per college.\n#EarnYourFirstIncome #EYFI #CampusAmbassador`;
+  const shareText = `Just unlocked "${currentRung.title}" on the EYFI Campus Ambassador Ladder with ${Math.round(regs)} registrations!\n\nWave 01 is open — limited spots per college.\n#EarnYourFirstIncome #EYFI #CampusAmbassador`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(shareText);
@@ -79,7 +79,7 @@ export const ShareCardModal: React.FC<ShareCardModalProps> = ({
           />
 
           <div className="relative space-y-2">
-            <div className="text-4xl">{currentRung.icon}</div>
+            <Award className="w-8 h-8 text-[#C4F62E] mx-auto" />
             <div className="font-mono-stats text-3xl font-black text-[#C4F62E]">
               {Math.round(regs)}{' '}
               <span className="text-sm font-normal text-[#6A6A65]">regs</span>
@@ -103,7 +103,7 @@ export const ShareCardModal: React.FC<ShareCardModalProps> = ({
                     border: `1px solid ${regs >= r.threshold ? r.color + '40' : '#2A2A2A'}`,
                   }}
                 >
-                  {r.reqText === 'Selected' ? '🚩 Scout' : `${r.threshold} regs`}
+                  {r.milestoneText}
                 </span>
               ))}
             </div>

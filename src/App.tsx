@@ -172,7 +172,7 @@ export function App() {
           className="py-16 sm:py-20 px-4 sm:px-6 bg-[#0A0A0A] border-t border-[#1A1A1A]"
         >
           <div className="max-w-2xl mx-auto text-center space-y-6">
-            <div className="inline-block text-4xl">🚀</div>
+            <Zap className="w-8 h-8 text-[#C4F62E] mx-auto" />
             <h2 className="font-display font-extrabold text-2xl sm:text-4xl text-white tracking-tight">
               Ready to start your level journey?
             </h2>
@@ -204,7 +204,7 @@ export function App() {
 
             {/* Urgency */}
             <p className="text-xs font-mono-stats text-[#4A4640]">
-              ⚡ Wave 01 closing soon · Limited spots per college
+              Wave 01 closing soon · Limited spots per college
             </p>
           </div>
         </section>

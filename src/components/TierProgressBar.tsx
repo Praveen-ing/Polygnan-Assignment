@@ -43,11 +43,11 @@ export const TierProgressBar: React.FC<TierProgressBarProps> = ({ currentRegs })
           </span>
         )}
         {isMaxed && (
-          <span className="text-[#E8B923] font-semibold">👑 MAX TIER</span>
+          <span className="text-[#E8B923] font-semibold uppercase tracking-wider">MAX LEVEL REACHED</span>
         )}
       </div>
 
-      {/* XP bar */}
+      {/* Progress bar */}
       <div className="relative h-3 bg-[#1A1A1A] rounded-full overflow-hidden">
         <div
           className="h-full rounded-full transition-all duration-700 ease-out relative"
@@ -62,8 +62,8 @@ export const TierProgressBar: React.FC<TierProgressBarProps> = ({ currentRegs })
       </div>
 
       {/* Status text */}
-      <div className="flex items-center justify-between text-xs">
-        <span className="font-mono-stats text-[#FF6B2C] font-bold">{pct}% to next tier</span>
+      <div className="flex items-center justify-between text-xs font-mono-stats">
+        <span className="text-[#C4F62E] font-bold">{pct}% to next level</span>
         {!isMaxed && (
           <span className="text-[#8A8A85]">
             <span className="text-[#F5F3EF] font-semibold">{regsNeeded}</span> more regs →{' '}
@@ -71,7 +71,7 @@ export const TierProgressBar: React.FC<TierProgressBarProps> = ({ currentRegs })
           </span>
         )}
         {isMaxed && (
-          <span className="text-[#FFD700] text-xs">Founding Team unlocked 🎉</span>
+          <span className="text-[#E8B923] text-xs">Founding Team Unlocked</span>
         )}
       </div>
     </div>

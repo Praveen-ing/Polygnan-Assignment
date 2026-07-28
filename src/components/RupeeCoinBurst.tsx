@@ -1,38 +1,31 @@
 import React, { useMemo } from 'react';
 
-interface RupeeCoinBurstProps {
-  triggerKey: number | string;
-}
-
 interface Particle {
   id: number;
   dx: string;
   dy: string;
   sc: string;
-  rot: string;
   dur: string;
   delay: string;
 }
 
-export const RupeeCoinBurst: React.FC<RupeeCoinBurstProps> = ({ triggerKey }) => {
-  // Generate 9 falling gold Rupee glyph particles with random trajectory angles & forces
+export const RupeeCoinBurst: React.FC<{ triggerKey: number | string }> = ({ triggerKey }) => {
   const particles = useMemo<Particle[]>(() => {
     const list: Particle[] = [];
-    const count = 9; // 8-10 particles
+    const count = 8;
     for (let i = 0; i < count; i++) {
       const angle = (i / count) * 360 + (Math.random() * 20 - 10);
       const rad = (angle * Math.PI) / 180;
-      const distance = 40 + Math.random() * 70; // 40px to 110px outward spread
+      const distance = 30 + Math.random() * 50;
       const dx = Math.cos(rad) * distance;
-      const dy = Math.sin(rad) * distance + 35; // Downward bias for falling effect
+      const dy = Math.sin(rad) * distance + 20;
 
       list.push({
         id: i,
         dx: `${Math.round(dx)}px`,
         dy: `${Math.round(dy)}px`,
-        sc: (0.9 + Math.random() * 0.5).toFixed(2),
-        rot: `${Math.round((Math.random() - 0.5) * 180)}deg`,
-        dur: `${(0.85 + Math.random() * 0.45).toFixed(2)}s`,
+        sc: (0.6 + Math.random() * 0.4).toFixed(2),
+        dur: `${(0.7 + Math.random() * 0.3).toFixed(2)}s`,
         delay: `${(i * 0.02).toFixed(2)}s`,
       });
     }
@@ -44,19 +37,18 @@ export const RupeeCoinBurst: React.FC<RupeeCoinBurstProps> = ({ triggerKey }) =>
       {particles.map((p) => (
         <span
           key={`${triggerKey}-${p.id}`}
-          className="rupee-coin-particle font-mono-stats font-extrabold text-[#DFF864] text-sm sm:text-base select-none"
+          className="rupee-coin-particle font-mono-stats font-extrabold text-[#C4F62E] text-xs select-none"
           style={
             {
               '--dx': p.dx,
               '--dy': p.dy,
               '--sc': p.sc,
-              '--rot': p.rot,
               '--dur': p.dur,
               '--delay': p.delay,
             } as React.CSSProperties
           }
         >
-          ₹
+          ✦
         </span>
       ))}
     </div>

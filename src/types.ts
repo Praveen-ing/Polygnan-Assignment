@@ -1,20 +1,10 @@
-export interface PerkDetail {
-  emoji: string;
-  text: string;
-}
-
 export interface LadderRung {
   id: number;
   threshold: number;
+  milestoneText: string;  // e.g. "Selected as Scout", "25 registrations", etc.
   title: string;
-  reqText: string;
-  description: string;
-  icon: string;
-  badgeType: string;
-  perks: string[];
-  perksDetailed: PerkDetail[];
-  color: string;        // accent color
-  timeToEarn: string;  // e.g. "~1 week of hustle"
+  unlocks: string[];       // clean text items matching the prompt table
+  color: string;           // accent color
 }
 
 export interface CampusLeaderboardItem {

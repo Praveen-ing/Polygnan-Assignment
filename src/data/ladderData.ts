@@ -4,104 +4,68 @@ export const LADDER_RUNGS: LadderRung[] = [
   {
     id: 0,
     threshold: 0,
+    milestoneText: 'Selected as Scout',
     title: 'Scout',
-    reqText: 'Selected',
-    description: 'Private community access + starter kit',
-    icon: '🚩',
-    badgeType: 'scout',
-    color: '#C4F62E',   // EYFI lime green
-    timeToEarn: 'Instant on selection',
-    perks: ['Discord VIP Role', 'Ambassador Handbook', 'Welcome Asset Pack'],
-    perksDetailed: [
-      { emoji: '💬', text: 'Exclusive Scout Discord channel — direct line to the founding team' },
-      { emoji: '📘', text: 'Ambassador Playbook — growth strategies & outreach scripts' },
-      { emoji: '🎁', text: 'Welcome Asset Pack — high-res social media assets & EYFI brand kit' },
+    unlocks: [
+      'Private community access',
+      'Starter kit'
     ],
+    color: '#C4F62E',
   },
   {
     id: 1,
     threshold: 25,
+    milestoneText: '25 registrations',
     title: 'Campus Ambassador',
-    reqText: '25 regs',
-    description: 'Official title, swag drop, prize-linked challenge',
-    icon: '🎖️',
-    badgeType: 'ambassador',
-    color: '#C4F62E',
-    timeToEarn: '~1–2 weeks of active outreach',
-    perks: ['Official Certificate', 'EYFI Oversized Hoodie', 'Weekly Prize Draw'],
-    perksDetailed: [
-      { emoji: '📜', text: 'Official Campus Ambassador Certificate — verifiable & LinkedIn ready' },
-      { emoji: '👕', text: 'EYFI Limited-Edition Oversized Hoodie (delivered to campus)' },
-      { emoji: '🏆', text: 'Entry into Weekly Ambassador Challenges & Prize Pool' },
+    unlocks: [
+      'Official Campus Ambassador title',
+      'First swag drop',
+      'Prize-linked challenge'
     ],
+    color: '#C4F62E',
   },
   {
     id: 2,
     threshold: 50,
+    milestoneText: '50+ registrations',
     title: 'Level Up',
-    reqText: '50 regs',
-    description: 'Campus event grant + exclusive merch',
-    icon: '🔥',
-    badgeType: 'levelup',
-    color: '#C4F62E',
-    timeToEarn: '~3 weeks of consistent outreach',
-    perks: ['Campus Event Grant', 'Customized Name Tag', 'Direct Team Access'],
-    perksDetailed: [
-      { emoji: '💸', text: 'Campus Event Grant — host your official EYFI campus meetup fully funded' },
-      { emoji: '🏷️', text: 'Custom EYFI Ambassador Lanyard + Official ID Badge' },
-      { emoji: '🤝', text: 'Direct access to EYFI core team Slack — pitch ideas & get instant support' },
+    unlocks: [
+      'Event grants for your campus',
+      'Exclusive merch'
     ],
+    color: '#C4F62E',
   },
   {
     id: 3,
     threshold: 75,
+    milestoneText: '75+ registrations',
     title: 'Go Further',
-    reqText: '75 regs',
-    description: 'Mentorship access + flagship campus budget',
-    icon: '💡',
-    badgeType: 'gofurther',
-    color: '#C4F62E',
-    timeToEarn: '~4 weeks of hustle',
-    perks: ['1-on-1 Founder Mentorship', 'Priority Roadmap Input', 'Flagship Event Budget'],
-    perksDetailed: [
-      { emoji: '🧠', text: '1-on-1 Monthly Mentorship session with EYFI co-founders' },
-      { emoji: '⚡', text: 'Priority product feature requests — shape the EYFI platform roadmap' },
-      { emoji: '🎪', text: 'Flagship Campus Event Budget for mega EYFI workshops at your college' },
+    unlocks: [
+      'Mentorship access',
+      'Campus event grants'
     ],
+    color: '#C4F62E',
   },
   {
     id: 4,
     threshold: 100,
+    milestoneText: '100+ registrations',
     title: 'Paid Internship',
-    reqText: '100 regs',
-    description: 'Monthly stipend + Goa retreat + Letter of Recommendation',
-    icon: '💼',
-    badgeType: 'internship',
-    color: '#C4F62E',
-    timeToEarn: '~6 weeks — elite tier',
-    perks: ['Monthly Internship Stipend', 'Quarterly Goa Retreat', 'Letter of Recommendation'],
-    perksDetailed: [
-      { emoji: '💰', text: 'Monthly Paid Internship position — work directly with core EYFI leaders' },
-      { emoji: '🏖️', text: 'Fully sponsored invite to the Quarterly Ambassador Retreat in Goa' },
-      { emoji: '✍️', text: 'Glowing Letter of Recommendation signed by Polygnan founders' },
+    unlocks: [
+      'Paid internship opportunities',
+      'Invite to ambassador events'
     ],
+    color: '#C4F62E',
   },
   {
     id: 5,
     threshold: 200,
+    milestoneText: '200+ registrations',
     title: 'Founding Team',
-    reqText: '200 regs',
-    description: 'Founding team consideration + equity pool',
-    icon: '👑',
-    badgeType: 'founding',
-    color: '#E8B923',   // EYFI gold
-    timeToEarn: 'Top 1% — Pinnacle level',
-    perks: ['Equity Pool Consideration', 'Co-Founder Dinner', 'Lead Campus Director'],
-    perksDetailed: [
-      { emoji: '📊', text: 'Founding Team Equity Pool consideration — real ownership in EYFI' },
-      { emoji: '🍽️', text: 'Exclusive Co-Founder Dinner in Bangalore with core leadership' },
-      { emoji: '🗺️', text: 'Lead Campus Director role — lead ambassador expansion across India' },
+    unlocks: [
+      'Founding Team consideration'
     ],
+    color: '#E8B923',
   },
 ];
 
