@@ -196,17 +196,7 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
                     <BadgeCoinSVG badgeIndex={idx} size={120} isUnlocked={isUnlocked} />
                   </div>
 
-                  <div
-                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono-stats font-bold uppercase tracking-wider border shadow-md"
-                    style={{
-                      color: isUnlocked ? meta.themeColor : '#6A6A65',
-                      borderColor: isUnlocked ? `${meta.themeColor}50` : '#262626',
-                      backgroundColor: isUnlocked ? `${meta.themeColor}10` : 'transparent',
-                    }}
-                  >
-                    <Sparkles className="w-3.5 h-3.5" />
-                    Level {idx + 1} of 6 Milestone · {meta.badgeLabel}
-                  </div>
+
                 </div>
 
                 {/* Single Unobstructed Reward Card */}

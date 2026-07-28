@@ -132,10 +132,7 @@ export function App() {
           <div className="max-w-6xl mx-auto space-y-12">
             {/* Section Header */}
             <div className="text-center space-y-4">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/30 text-xs font-mono-stats text-[#C4F62E] uppercase tracking-wider font-bold">
-                <Zap className="w-4 h-4 fill-[#C4F62E]" />
-                6-Level Flowing River Pathway
-              </div>
+
               <h2 className="font-display font-extrabold text-3xl sm:text-6xl text-white tracking-tight">
                 Flow Through The <span className="text-[#C4F62E]">6 Reward Levels</span>
               </h2>
