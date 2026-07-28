@@ -10,41 +10,58 @@ export const OfficialHeader: React.FC<OfficialHeaderProps> = ({
   onTabClick,
 }) => {
   return (
-    <header className="sticky top-0 z-40 backdrop-blur-md bg-[#0A0A0A]/85 border-b border-[#1E1E1E]">
+    <header className="sticky top-0 z-40 backdrop-blur-md bg-[#0A0A0A]/70 border-b border-[#242424]/40">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
-        {/* EYFI Logo */}
-        <a href="#top" className="flex items-center gap-2 focus:outline-none group">
-          <div className="font-display font-black text-2xl sm:text-3xl text-[#FF6B2C] tracking-tight">
-            EYFI<span className="text-white">.</span>
-            <span className="text-sm font-semibold ml-1.5 text-[#8A8A85] font-sans">
-              Ambassadors
-            </span>
-          </div>
+        {/* Official EYFI Logo Image */}
+        <a href="#top" className="flex items-center active">
+          <img
+            src="/eyfi_orange_nobg_fv1.png"
+            alt="EYFI — Earn Your First Income"
+            className="h-14 sm:h-16 w-auto"
+          />
         </a>
 
         {/* Nav */}
-        <nav className="flex items-center gap-3 sm:gap-6 font-sans text-xs sm:text-sm font-semibold">
+        <nav className="flex items-center gap-3 sm:gap-7 font-open-sans text-sm sm:text-base font-semibold">
           <button
             onClick={() => onTabClick?.('ladder')}
-            className="text-[#F5F3EF]/70 hover:text-[#FF6B2C] transition cursor-pointer hidden sm:inline"
+            className="text-[#F5F3EF]/80 hover:text-[#FF6B2C] transition hidden sm:inline cursor-pointer"
           >
             Reward Ladder
           </button>
 
           <a
+            href="https://ambassador.eyfichallenge.com/how-it-works"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#F5F3EF]/80 hover:text-[#FF6B2C] transition hidden sm:inline"
+          >
+            How it works
+          </a>
+
+          <a
+            href="https://ambassador.eyfichallenge.com/faq"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#F5F3EF]/80 hover:text-[#FF6B2C] transition hidden sm:inline"
+          >
+            FAQs
+          </a>
+
+          <a
             href="https://eyfichallenge.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#F5F3EF]/70 hover:text-[#FF6B2C] transition hidden sm:inline"
+            className="text-[#F5F3EF]/80 hover:text-[#FF6B2C] transition hidden sm:inline"
           >
-            EYFI Challenge ↗
+            EYFI Challenge
           </a>
 
           <button
             id="header-apply-btn"
             onClick={onApplyClick}
             type="button"
-            className="rounded-full bg-[#FF6B2C] text-white px-4 py-1.5 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-display font-extrabold hover:bg-[#e85a1a] transition cursor-pointer shadow-[0_2px_16px_rgba(255,107,44,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B2C]"
+            className="rounded-full bg-[#FF6B2C] text-white px-3.5 py-1.5 sm:px-5 sm:py-2.5 text-sm sm:text-base font-bold hover:opacity-90 transition cursor-pointer"
           >
             Apply Now
           </button>

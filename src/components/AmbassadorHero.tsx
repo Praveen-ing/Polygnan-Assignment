@@ -73,7 +73,7 @@ export const AmbassadorHero: React.FC<AmbassadorHeroProps> = ({
       </h1>
 
       {/* Gold italic tagline */}
-      <p className="font-serif italic text-2xl sm:text-3xl text-[#FFD700] my-8 sm:my-10 leading-tight">
+      <p className="font-serif-italic text-2xl sm:text-4xl text-[#E8B923] my-6 sm:my-8 leading-tight">
         Why shouldn't it be you?
       </p>
 

@@ -43,7 +43,7 @@ export const TierProgressBar: React.FC<TierProgressBarProps> = ({ currentRegs })
           </span>
         )}
         {isMaxed && (
-          <span className="text-[#FFD700] font-semibold">👑 MAX TIER</span>
+          <span className="text-[#E8B923] font-semibold">👑 MAX TIER</span>
         )}
       </div>
 

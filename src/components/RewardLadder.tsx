@@ -73,7 +73,7 @@ export const RewardLadder: React.FC<RewardLadderProps> = ({
 
           {/* Orange fill line */}
           <div
-            className="absolute top-3 w-0.5 bg-gradient-to-b from-[#FF6B2C] to-[#FFD700] left-1/2 -translate-x-1/2 rounded-full transition-all duration-500 ease-out"
+            className="absolute top-3 w-0.5 bg-gradient-to-b from-[#FF6B2C] to-[#E8B923] left-1/2 -translate-x-1/2 rounded-full transition-all duration-500 ease-out"
             style={{ height: `calc(${overallPct}% - 24px)` }}
           />
 

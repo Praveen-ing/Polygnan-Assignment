@@ -56,7 +56,7 @@ export const UnlockValueCounter: React.FC<UnlockValueCounterProps> = ({ currentR
   return (
     <div className="bg-[#111111] border border-[#242424] rounded-2xl p-5 text-center relative overflow-hidden">
       {/* Background glow */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#FF6B2C]/5 via-transparent to-[#FFD700]/5 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#FF6B2C]/5 via-transparent to-[#E8B923]/5 pointer-events-none" />
 
       <p className="text-[10px] font-mono-stats uppercase tracking-widest text-[#8A8A85] mb-2">
         💰 Total Value Unlocked
@@ -78,7 +78,7 @@ export const UnlockValueCounter: React.FC<UnlockValueCounterProps> = ({ currentR
           className="h-full rounded-full transition-all duration-700 ease-out"
           style={{
             width: `${Math.min(100, (unlockedCount / LADDER_RUNGS.length) * 100)}%`,
-            background: 'linear-gradient(90deg, #FF6B2C, #FFD700)',
+            background: 'linear-gradient(90deg, #FF6B2C, #E8B923)',
           }}
         />
       </div>
