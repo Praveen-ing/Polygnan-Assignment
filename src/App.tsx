@@ -11,12 +11,9 @@ import { CampusLeaderboard } from './components/CampusLeaderboard';
 import { PerksShowcase } from './components/PerksShowcase';
 import { FaqAccordion } from './components/FaqAccordion';
 import { ShareCardModal } from './components/ShareCardModal';
-import { ScoutFunnelChart } from './components/ScoutFunnelChart';
-import { CampusRankBumpChart } from './components/CampusRankBumpChart';
-import { RadialRankChart } from './components/RadialRankChart';
 import { PolygnanEthosBanner } from './components/PolygnanEthosBanner';
 import { AIEvaluatorSimulator } from './components/AIEvaluatorSimulator';
-import { Zap, ArrowRight, ExternalLink, BarChart3 } from 'lucide-react';
+import { Zap, ArrowRight, ExternalLink } from 'lucide-react';
 
 export function App() {
   const [regs, setRegs]               = useState<number>(0);
@@ -182,53 +179,27 @@ export function App() {
           </div>
         </section>
 
-        {/* 9. CF-Lens Visual Analytics Section */}
-        <section id="analytics" className="max-w-6xl mx-auto px-4 sm:px-6 space-y-12">
-          {/* Section Banner */}
-          <div className="text-center space-y-3">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/20 text-xs font-mono-stats text-[#C4F62E] font-bold uppercase tracking-wider">
-              <BarChart3 className="w-4 h-4 text-[#C4F62E]" />
-              CF-Lens Dynamic Visualization Suite
-            </div>
-            <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight">
-              Advanced <span className="text-[#C4F62E]">Visual Analytics</span>
-            </h2>
-            <p className="text-xs sm:text-base text-[#8A8A85] max-w-xl mx-auto font-sans">
-              Inspired by CF-Lens visual analytics engine — featuring interactive funnels, radial gauges, and bump rank trajectories.
-            </p>
-          </div>
-
-          {/* 9a. Radial Gauge */}
-          <RadialRankChart currentRegs={regs} />
-
-          {/* 9b. Scout Level Funnel */}
-          <ScoutFunnelChart />
-
-          {/* 9c. Campus Rank Trajectory Bump Chart */}
-          <CampusRankBumpChart />
-        </section>
-
-        {/* 10. Pass Studio Generator */}
+        {/* 9. Pass Studio Generator */}
         <section id="pass-studio" className="max-w-6xl mx-auto px-4 sm:px-6">
           <ScoutBadgeGenerator currentRegs={regs} />
         </section>
 
-        {/* 11. Campus Leaderboard */}
+        {/* 10. Campus Leaderboard */}
         <section id="leaderboard" className="max-w-6xl mx-auto px-4 sm:px-6">
           <CampusLeaderboard />
         </section>
 
-        {/* 12. Perks & Privileges Showcase Grid */}
+        {/* 11. Perks & Privileges Showcase Grid */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6">
           <PerksShowcase />
         </section>
 
-        {/* 13. FAQ Accordion */}
+        {/* 12. FAQ Accordion */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6">
           <FaqAccordion />
         </section>
 
-        {/* 14. Final Apply CTA Section */}
+        {/* 13. Final Apply CTA Section */}
         <section
           id="apply-section"
           className="py-20 px-4 sm:px-6 bg-gradient-to-b from-[#0C0C0C] to-[#050505] border-t border-[#1A1A1A] relative overflow-hidden"
@@ -276,7 +247,7 @@ export function App() {
         </section>
       </main>
 
-      {/* 15. Footer */}
+      {/* 14. Footer */}
       <footer className="border-t border-[#1A1A1A] py-10 px-6 text-center bg-[#070707]">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
