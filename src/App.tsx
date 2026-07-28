@@ -14,6 +14,7 @@ import { ShareCardModal } from './components/ShareCardModal';
 import { PolygnanEthosBanner } from './components/PolygnanEthosBanner';
 import { FlyingBird } from './components/FlyingBird';
 import { PolyAgent } from './components/PolyAgent';
+import { DinoMiniGame } from './components/DinoMiniGame';
 import { Zap, ArrowRight, ExternalLink } from 'lucide-react';
 
 export function App() {
@@ -280,6 +281,7 @@ export function App() {
       />
 
       <PolyAgent />
+      <DinoMiniGame />
     </div>
   );
 }
