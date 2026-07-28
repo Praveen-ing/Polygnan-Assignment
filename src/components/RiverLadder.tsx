@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { LADDER_RUNGS } from '../data/ladderData';
-import { CheckCircle2, Lock, Zap, Check } from 'lucide-react';
+import { CheckCircle2, Lock, Zap, Check, ArrowDown, Sparkles } from 'lucide-react';
 import { RupeeCoinBurst } from './RupeeCoinBurst';
 import { SpotlightCard } from './SpotlightCard';
 import { BadgeCoinSVG } from './BadgeCoinSVG';
@@ -19,10 +19,9 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
   const [bouncingRungId, setBouncingRungId] = useState<number | null>(null);
   const [burstRungId, setBurstRungId]     = useState<number | null>(null);
   const [scrollProgress, setScrollProgress] = useState<number>(0);
-  const [riverTheme, setRiverTheme]       = useState<'ice' | 'pastelLime' | 'pastelCyan' | 'gradient'>('ice');
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Sync river fill with vertical window scrolling
+  // Sync scroll progress as user scrolls down the section
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
@@ -39,11 +38,11 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Calculate overall river flow percentage combining slider registrations and scroll progress
+  // Combine manual slider registrations with scroll progress
   const regPct = Math.min(100, (currentRegs / 200) * 100);
   const flowPct = Math.max(regPct, scrollProgress);
 
-  // Auto unlock check based on current progress
+  // Auto unlock check
   useEffect(() => {
     LADDER_RUNGS.forEach((rung) => {
       const effectiveRegs = Math.max(currentRegs, (scrollProgress / 100) * 200);
@@ -61,29 +60,22 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
     document.getElementById(`level-station-${levelId}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
-  // Determine stroke color (Default: Very Light Luminous Ice White)
-  let strokeColor = '#FFFFFF';
-  let filterGlow = 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.8))';
-
-  if (riverTheme === 'pastelLime') {
-    strokeColor = '#E2FF80';
-    filterGlow = 'drop-shadow(0 0 10px rgba(196, 246, 46, 0.6))';
-  } else if (riverTheme === 'pastelCyan') {
-    strokeColor = '#E0F2FE';
-    filterGlow = 'drop-shadow(0 0 10px rgba(56, 189, 248, 0.6))';
-  } else if (riverTheme === 'gradient') {
-    strokeColor = 'url(#riverMultiGradient)';
-    filterGlow = 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.5))';
-  }
-
   return (
     <div ref={containerRef} className="space-y-12 relative">
 
-      {/* ── Fixed Vertical Right Dock Navigation Bar ── */}
+      {/* ── Sleek Left Vertical Liquid River Progress Bar (Unobstructed Margin) ── */}
+      <div className="fixed left-4 lg:left-12 top-1/4 bottom-1/4 w-1.5 rounded-full bg-[#1C1C1C] z-40 hidden sm:block pointer-events-none">
+        <div
+          className="w-full bg-[#C4F62E] rounded-full transition-all duration-300 shadow-[0_0_16px_rgba(196,246,46,0.8)]"
+          style={{ height: `${flowPct}%` }}
+        />
+      </div>
+
+      {/* ── Fixed Vertical Right Dock Milestone Navigation Bar ── */}
       <aside className="fixed right-3 sm:right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2 p-2 sm:p-3 border border-[#262626] rounded-2xl shadow-2xl max-h-[85vh] overflow-y-auto">
         <div className="text-[10px] font-mono-stats text-[#8A8A85] uppercase tracking-wider px-2 py-1 flex items-center gap-1 font-bold">
           <Zap className="w-3 h-3 text-[#C4F62E]" />
-          <span className="hidden md:inline">Milestones</span>
+          <span className="hidden md:inline">Level Jump</span>
         </div>
 
         {LADDER_RUNGS.map((rung, idx) => {
@@ -107,195 +99,127 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
             </button>
           );
         })}
-
-        {/* Light River Color Options */}
-        <div className="pt-2 mt-1 border-t border-[#222] space-y-1 text-center">
-          <span className="text-[9px] font-mono-stats text-[#6A6A65] uppercase block">Light Water</span>
-          <div className="flex items-center justify-center gap-1.5">
-            <button
-              onClick={() => setRiverTheme('ice')}
-              title="Luminous Ice White"
-              className={`w-4 h-4 rounded-full bg-[#FFFFFF] border cursor-pointer ${riverTheme === 'ice' ? 'border-[#C4F62E] scale-125' : 'border-transparent opacity-60'}`}
-            />
-            <button
-              onClick={() => setRiverTheme('pastelCyan')}
-              title="Pastel Ice Cyan"
-              className={`w-4 h-4 rounded-full bg-[#E0F2FE] border cursor-pointer ${riverTheme === 'pastelCyan' ? 'border-[#C4F62E] scale-125' : 'border-transparent opacity-60'}`}
-            />
-            <button
-              onClick={() => setRiverTheme('pastelLime')}
-              title="Soft Glow Lime"
-              className={`w-4 h-4 rounded-full bg-[#E2FF80] border cursor-pointer ${riverTheme === 'pastelLime' ? 'border-[#C4F62E] scale-125' : 'border-transparent opacity-60'}`}
-            />
-          </div>
-        </div>
       </aside>
 
-      {/* ── Massive Flowing River Container (Full Screen Scroll per Level) ── */}
-      <div className="relative py-12 px-2 sm:px-6">
+      {/* ── 6 Full-Screen Height Level Reward Sections (One Card Per Viewport Page) ── */}
+      <div className="relative space-y-16 sm:space-y-24">
+        {LADDER_RUNGS.map((rung, idx) => {
+          const isUnlocked = flowPct >= (rung.threshold / 200) * 100;
+          const isBouncing = bouncingRungId === rung.id;
+          const regsToGo   = rung.threshold - Math.floor(currentRegs);
 
-        {/* ── Background SVG Winding River Path ── */}
-        <div className="absolute inset-x-0 top-0 bottom-0 pointer-events-none overflow-hidden">
-          <svg
-            className="w-full h-full"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-          >
-            {/* SVG Gradient Definition */}
-            <defs>
-              <linearGradient id="riverMultiGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#FFFFFF" />
-                <stop offset="35%" stopColor="#E0F2FE" />
-                <stop offset="70%" stopColor="#E2FF80" />
-                <stop offset="100%" stopColor="#C4F62E" />
-              </linearGradient>
-            </defs>
+          return (
+            <section
+              key={rung.id}
+              id={`level-station-${rung.id}`}
+              className="min-h-screen flex flex-col justify-center items-center py-12 px-4 relative snap-start"
+            >
+              {/* Starburst Effect */}
+              {burstRungId === rung.id && (
+                <div className="absolute inset-0 pointer-events-none z-40">
+                  <RupeeCoinBurst triggerKey={rung.id} />
+                </div>
+              )}
 
-            {/* Base river bed path */}
-            <path
-              d="M 50 2 C 85 8, 85 16, 50 20 C 15 24, 15 32, 50 36 C 85 40, 85 48, 50 52 C 15 56, 15 64, 50 68 C 85 72, 85 80, 50 84 C 15 88, 15 96, 50 99"
-              fill="none"
-              stroke="#1C1C1C"
-              strokeWidth="4"
-              strokeLinecap="round"
-            />
-
-            {/* Unlocked light river stroke synced with scrolling */}
-            <path
-              d="M 50 2 C 85 8, 85 16, 50 20 C 15 24, 15 32, 50 36 C 85 40, 85 48, 50 52 C 15 56, 15 64, 50 68 C 85 72, 85 80, 50 84 C 15 88, 15 96, 50 99"
-              fill="none"
-              stroke={strokeColor}
-              strokeWidth="3.5"
-              strokeLinecap="round"
-              strokeDasharray="600"
-              strokeDashoffset={600 - (flowPct / 100) * 600}
-              style={{ filter: filterGlow }}
-              className="transition-all duration-300 ease-out"
-            />
-
-            {/* Flowing animated light water pulses along path */}
-            <path
-              d="M 50 2 C 85 8, 85 16, 50 20 C 15 24, 15 32, 50 36 C 85 40, 85 48, 50 52 C 15 56, 15 64, 50 68 C 85 72, 85 80, 50 84 C 15 88, 15 96, 50 99"
-              fill="none"
-              stroke="#0A0A0A"
-              strokeWidth="1.2"
-              strokeLinecap="round"
-              strokeDasharray="6 20"
-              className="opacity-40 animate-marquee"
-            />
-          </svg>
-        </div>
-
-        {/* ── 6 Full-Screen Height Level Sections ── */}
-        <div className="relative space-y-12">
-          {LADDER_RUNGS.map((rung, idx) => {
-            const isUnlocked = flowPct >= (rung.threshold / 200) * 100;
-            const isBouncing = bouncingRungId === rung.id;
-            const isEven     = idx % 2 === 0;
-
-            return (
-              <div
-                key={rung.id}
-                id={`level-station-${rung.id}`}
-                className="min-h-screen flex flex-col justify-center items-center py-16 relative transition-all duration-500"
-              >
-                <div
-                  className={`w-full max-w-4xl flex flex-col md:flex-row items-center gap-8 sm:gap-12 ${
-                    isEven ? 'md:flex-row' : 'md:flex-row-reverse'
-                  }`}
-                >
-                  {/* Starburst Effect */}
-                  {burstRungId === rung.id && (
-                    <div className="absolute inset-0 pointer-events-none z-40">
-                      <RupeeCoinBurst triggerKey={rung.id} />
-                    </div>
-                  )}
-
-                  {/* 3D Gold Coin Badge Node */}
-                  <div className="flex-shrink-0 relative z-20 flex flex-col items-center">
-                    <div className={`transition-transform duration-300 ${isBouncing ? 'animate-value-pop scale-125' : ''}`}>
-                      <BadgeCoinSVG badgeIndex={idx} size={96} isUnlocked={isUnlocked} />
-                    </div>
-
-                    {/* Level Tag under coin */}
-                    <span
-                      className={`mt-3 font-mono-stats font-extrabold text-xs sm:text-sm px-4 py-1.5 rounded-full border shadow-lg ${
-                        isUnlocked
-                          ? 'bg-[#C4F62E] text-[#0A0A0A] border-[#C4F62E]'
-                          : 'text-[#6A6A65] border-[#222222]'
-                      }`}
-                    >
-                      Level {idx + 1} of 6
-                    </span>
+              <div className="w-full max-w-2xl mx-auto space-y-8 relative z-20">
+                {/* 3D Gold Coin Badge Header */}
+                <div className="flex flex-col items-center text-center space-y-3">
+                  <div className={`relative transition-transform duration-300 ${isBouncing ? 'animate-value-pop scale-125' : ''}`}>
+                    <div className="absolute inset-0 rounded-full bg-[#FAD02C]/20 blur-2xl animate-pulse" />
+                    <BadgeCoinSVG badgeIndex={idx} size={110} isUnlocked={isUnlocked} />
                   </div>
 
-                  {/* Station Card Content */}
-                  <div className="flex-1 w-full relative z-20">
-                    <SpotlightCard
-                      spotlightColor={isUnlocked ? 'rgba(196, 246, 46, 0.25)' : 'rgba(255, 255, 255, 0.05)'}
-                      className={`p-6 sm:p-10 rounded-3xl border transition-all duration-300 ${
-                        isUnlocked
-                          ? 'border-[#C4F62E]/50 shadow-[0_12px_48px_rgba(196,246,46,0.15)]'
-                          : 'border-[#202020] opacity-85'
-                      }`}
-                    >
-                      <div className="space-y-5">
-                        {/* Header */}
-                        <div className="flex items-center justify-between border-b border-[#242424] pb-4">
-                          <div className="space-y-1">
-                            <div className="flex items-center gap-2">
-                              <span className="text-xs font-mono-stats text-[#8A8A85] uppercase tracking-wider font-bold">
-                                Milestone Station {idx + 1}
-                              </span>
-                              <span className="text-xs font-mono-stats text-[#C4F62E] font-bold">
-                                ({rung.threshold} Regs Required)
-                              </span>
-                            </div>
-                            <h3 className="font-display font-black text-2xl sm:text-3xl text-white">
-                              {rung.title}
-                            </h3>
-                          </div>
-
-                          {/* Status Icon */}
-                          {isUnlocked ? (
-                            <div className="w-10 h-10 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/40 flex items-center justify-center text-[#C4F62E]">
-                              <Check className="w-5 h-5 stroke-[3]" />
-                            </div>
-                          ) : (
-                            <div className="w-10 h-10 rounded-full border border-[#262626] flex items-center justify-center text-[#6A6A65]">
-                              <Lock className="w-5 h-5" />
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Milestone Requirement */}
-                        <div className="text-xs sm:text-sm font-mono-stats text-[#C4F62E] font-bold uppercase tracking-wider">
-                          Requirement: {rung.milestoneText}
-                        </div>
-
-                        {/* Unlocked Privileges */}
-                        <div className="border border-[#1E1E1E] rounded-2xl p-5 space-y-3">
-                          <div className="text-xs font-mono-stats uppercase tracking-widest text-[#C4F62E] font-bold flex items-center gap-1.5">
-                            <Zap className="w-4 h-4 text-[#C4F62E]" />
-                            ACTIVE LEVEL UNLOCKS & REWARDS:
-                          </div>
-                          <ul className="space-y-2">
-                            {rung.unlocks.map((benefit, bIdx) => (
-                              <li key={bIdx} className="text-xs sm:text-sm text-[#F5F3EF] flex items-start gap-2.5 font-sans font-medium">
-                                <CheckCircle2 className="w-4.5 h-4.5 text-[#C4F62E] flex-shrink-0 mt-0.5" />
-                                <span>{benefit}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </SpotlightCard>
+                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono-stats font-bold uppercase tracking-wider border"
+                    style={{
+                      color: isUnlocked ? '#C4F62E' : '#6A6A65',
+                      borderColor: isUnlocked ? 'rgba(196, 246, 46, 0.4)' : '#262626',
+                    }}
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    Level {idx + 1} of 6 Milestone
                   </div>
                 </div>
+
+                {/* Single Unobstructed Reward Card */}
+                <SpotlightCard
+                  spotlightColor={isUnlocked ? 'rgba(196, 246, 46, 0.25)' : 'rgba(255, 255, 255, 0.05)'}
+                  className={`p-6 sm:p-10 rounded-3xl border transition-all duration-500 shadow-2xl ${
+                    isUnlocked
+                      ? 'border-[#C4F62E]/60 shadow-[0_16px_56px_rgba(196,246,46,0.2)]'
+                      : 'border-[#262626] opacity-85'
+                  }`}
+                >
+                  <div className="space-y-6">
+                    {/* Header */}
+                    <div className="flex items-center justify-between border-b border-[#242424] pb-4 flex-wrap gap-3">
+                      <div>
+                        <span className="text-xs font-mono-stats text-[#8A8A85] uppercase tracking-wider font-bold block">
+                          Level {idx + 1} Title
+                        </span>
+                        <h3 className="font-display font-black text-2xl sm:text-4xl text-white">
+                          {rung.title}
+                        </h3>
+                      </div>
+
+                      {/* Lock Status */}
+                      {isUnlocked ? (
+                        <div className="flex items-center gap-1.5 bg-[#C4F62E]/10 border border-[#C4F62E]/40 px-4 py-1.5 rounded-full text-xs font-mono-stats font-bold text-[#C4F62E]">
+                          <Check className="w-4 h-4 stroke-[3]" />
+                          UNLOCKED
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-1.5 border border-[#262626] px-4 py-1.5 rounded-full text-xs font-mono-stats text-[#6A6A65]">
+                          <Lock className="w-4 h-4" />
+                          Requires {rung.threshold} Regs
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Milestone Requirement */}
+                    <div className="space-y-1">
+                      <span className="text-xs font-mono-stats text-[#C4F62E] font-bold uppercase tracking-wider">
+                        Milestone Requirement:
+                      </span>
+                      <p className="text-sm sm:text-base font-display font-extrabold text-white">
+                        {rung.milestoneText}
+                      </p>
+                    </div>
+
+                    {/* Active Privileges */}
+                    <div className="border border-[#222222] rounded-2xl p-5 space-y-3">
+                      <div className="text-xs font-mono-stats uppercase tracking-widest text-[#C4F62E] font-bold flex items-center gap-2">
+                        <Zap className="w-4 h-4 text-[#C4F62E]" />
+                        LEVEL UNLOCKS & REWARDS:
+                      </div>
+
+                      <ul className="space-y-2.5">
+                        {rung.unlocks.map((benefit, bIdx) => (
+                          <li key={bIdx} className="text-xs sm:text-sm text-[#F5F3EF] flex items-start gap-3 font-sans font-medium">
+                            <CheckCircle2 className="w-4.5 h-4.5 text-[#C4F62E] flex-shrink-0 mt-0.5" />
+                            <span>{benefit}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Flow Prompt to Next Level */}
+                    {idx < LADDER_RUNGS.length - 1 && (
+                      <div className="pt-2 flex justify-center">
+                        <button
+                          onClick={() => scrollToLevel(rung.id + 1)}
+                          className="inline-flex items-center gap-2 text-xs font-mono-stats font-bold text-[#8A8A85] hover:text-[#C4F62E] transition-colors cursor-pointer py-1 px-4 rounded-full border border-[#262626] hover:border-[#C4F62E]/40"
+                        >
+                          <span>Scroll to Level {idx + 2}: {LADDER_RUNGS[idx + 1].title}</span>
+                          <ArrowDown className="w-3.5 h-3.5 animate-bounce text-[#C4F62E]" />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </SpotlightCard>
               </div>
-            );
-          })}
-        </div>
+            </section>
+          );
+        })}
       </div>
     </div>
   );
