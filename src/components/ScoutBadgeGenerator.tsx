@@ -23,7 +23,7 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
   };
 
   return (
-    <div className="bg-[#0D0D0D] border border-[#1F1F1F] rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden noise-overlay">
+    <div className="relative overflow-hidden py-6">
       {/* Background ambient glow */}
       <div className="pointer-events-none absolute -top-24 -right-24 w-96 h-96 bg-[#C4F62E]/10 rounded-full blur-[120px]" />
       <div className="pointer-events-none absolute -bottom-24 -left-24 w-96 h-96 bg-[#E8B923]/10 rounded-full blur-[120px]" />
@@ -45,7 +45,7 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Controls Form */}
-          <div className="lg:col-span-6 space-y-5 bg-[#121212] border border-[#222222] rounded-3xl p-6 sm:p-8 shadow-xl">
+          <div className="lg:col-span-6 space-y-5 bg-[#121212]/80 border border-[#222222] rounded-3xl p-6 sm:p-8 backdrop-blur-sm">
             <div className="space-y-2">
               <label className="block text-xs font-mono-stats uppercase tracking-widest text-[#8A8A85] font-bold">
                 Your Full Name
@@ -57,7 +57,7 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Enter your name"
-                  className="w-full bg-[#0A0A0A] border border-[#2A2A2A] rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder-[#4A4640] focus:border-[#C4F62E] focus:outline-none transition-all font-sans"
+                  className="w-full bg-[#0A0A0A]/90 border border-[#2A2A2A] rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder-[#4A4640] focus:border-[#C4F62E] focus:outline-none transition-all font-sans"
                 />
               </div>
             </div>
@@ -73,7 +73,7 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
                   value={college}
                   onChange={(e) => setCollege(e.target.value)}
                   placeholder="Enter college name"
-                  className="w-full bg-[#0A0A0A] border border-[#2A2A2A] rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder-[#4A4640] focus:border-[#C4F62E] focus:outline-none transition-all font-sans"
+                  className="w-full bg-[#0A0A0A]/90 border border-[#2A2A2A] rounded-xl py-3 pl-10 pr-4 text-sm text-white placeholder-[#4A4640] focus:border-[#C4F62E] focus:outline-none transition-all font-sans"
                 />
               </div>
             </div>
@@ -92,7 +92,7 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
                       className={`py-2.5 px-3 rounded-xl text-xs font-mono-stats font-bold transition-all text-left border cursor-pointer flex flex-col justify-between ${
                         isSelected
                           ? 'bg-[#C4F62E] text-[#0A0A0A] border-[#C4F62E] shadow-[0_4px_16px_rgba(196,246,46,0.35)] scale-[1.02]'
-                          : 'bg-[#0A0A0A] text-[#8A8A85] border-[#222222] hover:border-[#444444] hover:text-white'
+                          : 'bg-[#0A0A0A]/90 text-[#8A8A85] border-[#222222] hover:border-[#444444] hover:text-white'
                       }`}
                     >
                       <span className="text-[10px] opacity-75">L{idx + 1}</span>
@@ -118,11 +118,11 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
             </div>
           </div>
 
-          {/* Ultra-Premium Glassmorphic 3D Holographic Pass Card Preview */}
+          {/* Pass Card Preview */}
           <div className="lg:col-span-6 flex justify-center">
             <SpotlightCard
               spotlightColor="rgba(196, 246, 46, 0.25)"
-              className="w-full max-w-sm bg-gradient-to-b from-[#1C1C1C] via-[#121212] to-[#080808] border-2 border-[#C4F62E]/50 rounded-3xl p-6 space-y-6 shadow-[0_20px_60px_rgba(0,0,0,0.9)] relative group"
+              className="w-full max-w-sm bg-gradient-to-b from-[#1C1C1C]/90 via-[#121212]/90 to-[#080808]/90 border-2 border-[#C4F62E]/50 rounded-3xl p-6 space-y-6 shadow-[0_20px_60px_rgba(0,0,0,0.9)] relative group backdrop-blur-md"
             >
               {/* Simulated Lanyard Slot */}
               <div className="w-12 h-1.5 rounded-full bg-[#050505] border border-[#2A2A2A] mx-auto -mt-2 opacity-80" />
@@ -148,7 +148,7 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
               {/* Card Body */}
               <div className="space-y-5">
                 <div className="flex items-center gap-4">
-                  {/* 3D Gold Badge Coin with Glowing Halo */}
+                  {/* 3D Gold Badge Coin */}
                   <div className="relative flex-shrink-0">
                     <div className="absolute inset-0 rounded-full bg-[#FAD02C]/20 blur-xl animate-pulse" />
                     <BadgeCoinSVG badgeIndex={selectedRole} size={72} isUnlocked={true} />
@@ -169,7 +169,7 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
                 </div>
 
                 {/* Level Perks Unlocked */}
-                <div className="bg-[#070707] border border-[#1E1E1E] rounded-2xl p-4 space-y-2.5">
+                <div className="bg-[#070707]/90 border border-[#1E1E1E] rounded-2xl p-4 space-y-2.5">
                   <p className="text-[10px] font-mono-stats uppercase tracking-widest text-[#C4F62E] font-bold">
                     ACTIVE LEVEL PRIVILEGES:
                   </p>
@@ -184,7 +184,7 @@ export const ScoutBadgeGenerator: React.FC<ScoutBadgeGeneratorProps> = ({ curren
                 </div>
               </div>
 
-              {/* Bottom Code & QR Verification Aesthetic */}
+              {/* Bottom Code & QR */}
               <div className="pt-3 border-t border-[#202020] flex items-center justify-between text-[10px] font-mono-stats">
                 <div>
                   <p className="text-[#6A6A65]">ID: EYFI-SCOUT-2026</p>
