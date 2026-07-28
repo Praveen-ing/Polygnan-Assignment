@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MarqueeTicker } from './components/MarqueeTicker';
-import { OfficialHeader } from './components/OfficialHeader';
 import { AmbassadorHero } from './components/AmbassadorHero';
 import { SocialProofBanner } from './components/SocialProofBanner';
 import { HowItWorksSteps } from './components/HowItWorksSteps';
@@ -98,9 +97,6 @@ export function App() {
 
       {/* 1. Announcement Ticker (Orange background) */}
       <MarqueeTicker />
-
-      {/* 2. Official Header Navigation */}
-      <OfficialHeader onNavClick={scrollToSection} />
 
       <main className="flex-1 space-y-16 sm:space-y-24">
         {/* 3. Ambassador Hero Section */}
