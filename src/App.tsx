@@ -4,9 +4,8 @@ import { OfficialHeader } from './components/OfficialHeader';
 import { AmbassadorHero } from './components/AmbassadorHero';
 import { SocialProofBanner } from './components/SocialProofBanner';
 import { RegistrationCounter } from './components/RegistrationCounter';
-import { RewardLadder } from './components/RewardLadder';
+import { RiverLadder } from './components/RiverLadder';
 import { TierProgressBar } from './components/TierProgressBar';
-import { UnlockValueCounter } from './components/UnlockValueCounter';
 import { ShareCardModal } from './components/ShareCardModal';
 import { Zap, ArrowRight, ExternalLink } from 'lucide-react';
 
@@ -110,40 +109,30 @@ export function App() {
         {/* 4. Social Proof Banner */}
         <SocialProofBanner />
 
-        {/* 5. Reward Ladder — the star of the show */}
+        {/* 5. 6-Level River Journey Section */}
         <section
           id="ladder"
           className="py-16 sm:py-24 px-4 sm:px-6 bg-[#0C0C0C] border-t border-[#1A1A1A]"
         >
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-6xl mx-auto space-y-8">
             {/* Section header */}
-            <div className="text-center mb-12 sm:mb-16">
+            <div className="text-center">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/20 text-xs font-mono-stats text-[#C4F62E] uppercase tracking-wider mb-4 font-bold">
-                <Zap className="w-3 h-3 fill-[#C4F62E]" />
-                Reward Ladder · 6 Tiers
+                <Zap className="w-3.5 h-3.5 fill-[#C4F62E]" />
+                Level River Journey · 6 Levels
               </div>
-              <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-white mb-4 tracking-tight">
-                Earned,{' '}
-                <span className="text-[#C4F62E]">not handed.</span>
+              <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-white mb-3 tracking-tight">
+                Flow Through The <span className="text-[#C4F62E]">6 Levels</span>
               </h2>
-              <p className="text-sm sm:text-base text-[#8A8A85] max-w-lg mx-auto font-sans">
-                Drag the slider to see what you unlock at each milestone.
-                Every tier earned = real rewards, real value.
+              <p className="text-sm sm:text-base text-[#8A8A85] max-w-xl mx-auto font-sans">
+                Follow the curved river pathway as your campus registrations grow.
+                Each level unlocks exclusive perks, grants, titles, and team opportunities.
               </p>
             </div>
 
-            {/* Main 2-col layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
-
-              {/* Left: Controls (sticky on desktop) */}
-              <div className="lg:col-span-5 space-y-4 lg:sticky lg:top-24 lg:self-start">
-                {/* Value counter */}
-                <UnlockValueCounter currentRegs={regs} />
-
-                {/* Tier XP progress bar */}
-                <TierProgressBar currentRegs={regs} />
-
-                {/* Registration slider */}
+            {/* Registration Controls + Level Progress Bar */}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-[#111111] border border-[#242424] rounded-3xl p-5 shadow-xl">
+              <div className="md:col-span-7">
                 <RegistrationCounter
                   regs={regs}
                   onRegsChange={handleManualRegsChange}
@@ -151,51 +140,29 @@ export function App() {
                   onToggleAutoplay={handleToggleAutoplay}
                   onReset={handleReset}
                 />
-
-                {/* Share rank card CTA */}
-                <div className="bg-gradient-to-r from-[#C4F62E]/10 via-[#C4F62E]/5 to-transparent border border-[#C4F62E]/20 rounded-2xl p-4 flex items-center justify-between gap-3">
-                  <div>
-                    <p className="font-display font-bold text-sm text-[#F5F3EF]">
-                      Show your campus who's climbing.
-                    </p>
-                    <p className="text-xs text-[#6A6A65] mt-0.5">
-                      Share your custom ambassador rank card
-                    </p>
-                  </div>
-                  <button
-                    id="share-rank-btn"
-                    onClick={() => setIsShareOpen(true)}
-                    className="flex-shrink-0 bg-[#C4F62E] hover:bg-[#b0eb18] text-[#0A0A0A] font-display font-extrabold text-xs px-4 py-2.5 rounded-full flex items-center gap-1.5 transition-all shadow-[0_2px_12px_rgba(196,246,46,0.35)] cursor-pointer"
-                  >
-                    Share Rank
-                    <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
-                  </button>
-                </div>
               </div>
 
-              {/* Right: Vertical Ladder */}
-              <div className="lg:col-span-7">
-                {/* Live scouts indicator */}
-                <div className="flex items-center justify-between mb-4 px-1">
-                  <div className="inline-flex items-center gap-1.5 text-xs font-mono-stats text-[#6A6A65]">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C4F62E] opacity-75" />
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C4F62E]" />
-                    </span>
-                    <span>847 scouts climbing right now</span>
-                  </div>
-                  <div className="text-xs font-mono-stats text-[#3A3A3A] uppercase tracking-wider">
-                    6 reward tiers
-                  </div>
-                </div>
+              <div className="md:col-span-5 space-y-3">
+                <TierProgressBar currentRegs={regs} />
 
-                <RewardLadder
-                  currentRegs={regs}
-                  unlockedSet={unlockedSet}
-                  onUnlockNewRung={handleUnlockNewRung}
-                />
+                {/* Share rank CTA button */}
+                <button
+                  id="share-rank-btn"
+                  onClick={() => setIsShareOpen(true)}
+                  className="w-full bg-[#C4F62E] hover:bg-[#b0eb18] text-[#0A0A0A] font-display font-extrabold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-[0_2px_12px_rgba(196,246,46,0.35)] cursor-pointer"
+                >
+                  Share Ambassador Level
+                  <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                </button>
               </div>
             </div>
+
+            {/* The 6-Level River & Step Page Showcase Component */}
+            <RiverLadder
+              currentRegs={regs}
+              unlockedSet={unlockedSet}
+              onUnlockNewRung={handleUnlockNewRung}
+            />
           </div>
         </section>
 
@@ -207,7 +174,7 @@ export function App() {
           <div className="max-w-2xl mx-auto text-center space-y-6">
             <div className="inline-block text-4xl">🚀</div>
             <h2 className="font-display font-extrabold text-2xl sm:text-4xl text-white tracking-tight">
-              Ready to start climbing?
+              Ready to start your level journey?
             </h2>
             <p className="text-[#8A8A85] font-sans text-sm sm:text-base leading-relaxed">
               Applications are open for Wave 01 scouts. Only 1–2 spots per college.

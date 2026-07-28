@@ -13,9 +13,7 @@ export interface LadderRung {
   badgeType: string;
   perks: string[];
   perksDetailed: PerkDetail[];
-  estimatedValue: string;
-  color: string;        // tier accent color
-  xpValue: number;     // numeric rupee value for counter
+  color: string;        // accent color
   timeToEarn: string;  // e.g. "~1 week of hustle"
 }
 
