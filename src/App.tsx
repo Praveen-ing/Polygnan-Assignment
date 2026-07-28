@@ -13,6 +13,7 @@ import { FaqAccordion } from './components/FaqAccordion';
 import { ShareCardModal } from './components/ShareCardModal';
 import { PolygnanEthosBanner } from './components/PolygnanEthosBanner';
 import { FlyingBird } from './components/FlyingBird';
+import { PolyAgent } from './components/PolyAgent';
 import { Zap, ArrowRight, ExternalLink } from 'lucide-react';
 
 export function App() {
@@ -270,13 +271,15 @@ export function App() {
         </div>
       </footer>
 
-      {/* Modals */}
+      {/* Modals & Poly AI Agent Assistant */}
       <ShareCardModal
         isOpen={isShareOpen}
         onClose={() => setIsShareOpen(false)}
         regs={Math.round(regs)}
         campusName="Your Campus"
       />
+
+      <PolyAgent />
     </div>
   );
 }
