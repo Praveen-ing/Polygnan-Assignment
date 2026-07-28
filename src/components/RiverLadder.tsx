@@ -201,51 +201,89 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
           </div>
         </div>
 
-        {/* 7 Horizontal Step Chips */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5">
-          {QUEST_STEPS.map((step, idx) => {
-            const isUnlocked = currentRegs >= step.threshold;
-            const isSelected = activeStepIndex === idx;
-
-            return (
-              <button
-                key={step.stepId}
-                onClick={() => setActiveStepIndex(idx)}
-                className={`p-3 rounded-2xl border transition-all flex flex-col items-center text-center space-y-1.5 cursor-pointer relative ${
-                  isSelected
-                    ? `scale-105 z-10 shadow-lg`
-                    : 'opacity-70 hover:opacity-100 hover:scale-100 border-[#222222]'
-                }`}
-                style={{
-                  borderColor: isSelected ? step.themeColor : isUnlocked ? `${step.themeColor}50` : '#222222',
-                  backgroundColor: isSelected ? `${step.themeColor}12` : '#0D0D0D',
+        {/* Alternating Horizontal Stepper Timeline */}
+        <div className="relative w-full py-12 overflow-x-auto no-scrollbar">
+          <div className="min-w-[800px] relative h-32 flex items-center justify-between px-12">
+            {/* Main Horizontal Progress Line */}
+            <div className="absolute top-1/2 left-12 right-12 h-[2px] bg-[#222] -translate-y-1/2 z-0">
+              <div 
+                className="h-full transition-all duration-700 ease-out"
+                style={{ 
+                  width: `${(activeStepIndex / (QUEST_STEPS.length - 1)) * 100}%`,
+                  background: 'linear-gradient(90deg, #10B981, #C4F62E, #38BDF8)'
                 }}
-              >
-                {/* Lock or Icon badge */}
-                <div
-                  className="w-8 h-8 rounded-xl flex items-center justify-center border transition-transform"
-                  style={{
-                    backgroundColor: isUnlocked ? `${step.themeColor}15` : '#141414',
-                    borderColor: isUnlocked ? `${step.themeColor}40` : '#262626',
-                  }}
-                >
-                  {isUnlocked ? step.icon : <Lock className="w-3.5 h-3.5 text-[#6A6A65]" />}
-                </div>
+              />
+            </div>
+            
+            {QUEST_STEPS.map((step, idx) => {
+              const isUnlocked = currentRegs >= step.threshold;
+              const isSelected = activeStepIndex === idx;
+              const isUp = idx % 2 === 0;
 
-                <div className="space-y-0.5">
-                  <span
-                    className="text-[9px] font-mono-stats uppercase font-bold block"
-                    style={{ color: isUnlocked ? step.themeColor : '#6A6A65' }}
+              return (
+                <div key={step.stepId} className="relative z-10 flex flex-col items-center justify-center">
+                  
+                  {/* Node Dot on the main line */}
+                  <div 
+                    className={`w-5 h-5 rounded-full border-[3px] bg-[#0D0D0D] z-10 transition-colors cursor-pointer hover:scale-125 ${isSelected ? 'scale-125' : ''}`}
+                    onClick={() => setActiveStepIndex(idx)}
+                    style={{
+                      borderColor: isSelected ? step.themeColor : isUnlocked ? step.themeColor : '#333',
+                      boxShadow: isUnlocked ? `0 0 15px ${step.themeColor}60` : 'none'
+                    }}
+                  />
+
+                  {/* Vertical Connector Line */}
+                  <div 
+                    className={`absolute w-[2px] bg-[#333] transition-colors ${
+                      isUp ? 'bottom-3 h-8' : 'top-3 h-8'
+                    }`} 
+                    style={{ backgroundColor: isUnlocked ? `${step.themeColor}50` : '#333' }}
+                  />
+
+                  {/* The interactive Node Card */}
+                  <button
+                    onClick={() => setActiveStepIndex(idx)}
+                    className={`absolute w-28 p-2.5 rounded-2xl border transition-all flex flex-col items-center text-center space-y-1 cursor-pointer ${
+                      isUp ? 'bottom-11' : 'top-11'
+                    } ${
+                      isSelected
+                        ? `scale-110 z-20 shadow-2xl`
+                        : 'opacity-70 hover:opacity-100 hover:scale-105 border-[#222222]'
+                    }`}
+                    style={{
+                      borderColor: isSelected ? step.themeColor : isUnlocked ? `${step.themeColor}50` : '#222222',
+                      backgroundColor: isSelected ? `${step.themeColor}12` : '#0D0D0D',
+                    }}
                   >
-                    {step.levelNumber}
-                  </span>
-                  <span className="font-display font-extrabold text-[11px] text-white truncate max-w-[95px] block">
-                    {step.title}
-                  </span>
+                    {/* Lock or Icon badge */}
+                    <div
+                      className="w-7 h-7 rounded-lg flex items-center justify-center border transition-transform"
+                      style={{
+                        backgroundColor: isUnlocked ? `${step.themeColor}15` : '#141414',
+                        borderColor: isUnlocked ? `${step.themeColor}40` : '#262626',
+                      }}
+                    >
+                      {isUnlocked ? React.cloneElement(step.icon as React.ReactElement<any>, { className: 'w-3.5 h-3.5' }) : <Lock className="w-3 h-3 text-[#6A6A65]" />}
+                    </div>
+
+                    <div className="w-full space-y-0.5">
+                      <span
+                        className="text-[8px] font-mono-stats uppercase font-bold block"
+                        style={{ color: isUnlocked ? step.themeColor : '#6A6A65' }}
+                      >
+                        {step.levelNumber}
+                      </span>
+                      <span className="font-display font-extrabold text-[9px] text-white truncate block w-full">
+                        {step.title}
+                      </span>
+                    </div>
+                  </button>
+                  
                 </div>
-              </button>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
 
