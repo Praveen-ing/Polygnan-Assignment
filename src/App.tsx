@@ -14,7 +14,6 @@ import { ShareCardModal } from './components/ShareCardModal';
 import { PolygnanEthosBanner } from './components/PolygnanEthosBanner';
 import { FlyingBird } from './components/FlyingBird';
 import { PolyAgent } from './components/PolyAgent';
-import { DinoMiniGame } from './components/DinoMiniGame';
 import { Zap, ArrowRight, ExternalLink } from 'lucide-react';
 
 export function App() {
@@ -128,12 +127,12 @@ export function App() {
         {/* 8. Flowing River Level Journey Section (Long Scrollable) */}
         <section
           id="ladder"
-          className="py-16 sm:py-24 px-4 sm:px-6 bg-[#0C0C0C] border-y border-[#1A1A1A] relative"
+          className="py-16 sm:py-24 px-4 sm:px-6 relative"
         >
           <div className="max-w-6xl mx-auto space-y-12">
             {/* Section Header */}
             <div className="text-center space-y-4">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/20 text-xs font-mono-stats text-[#C4F62E] uppercase tracking-wider font-bold">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C4F62E]/10 border border-[#C4F62E]/30 text-xs font-mono-stats text-[#C4F62E] uppercase tracking-wider font-bold">
                 <Zap className="w-4 h-4 fill-[#C4F62E]" />
                 6-Level Flowing River Pathway
               </div>
@@ -146,8 +145,8 @@ export function App() {
               </p>
             </div>
 
-            {/* Live Registration Controls + Tier Progress Bar */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-[#111111] border border-[#242424] rounded-3xl p-5 sm:p-6 shadow-2xl">
+            {/* Live Registration Controls + Tier Progress Bar (Transparent Floating) */}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center border border-[#262626] rounded-3xl p-5 sm:p-8 shadow-2xl relative">
               <div className="md:col-span-7">
                 <RegistrationCounter
                   regs={regs}
@@ -281,7 +280,6 @@ export function App() {
       />
 
       <PolyAgent />
-      <DinoMiniGame />
     </div>
   );
 }

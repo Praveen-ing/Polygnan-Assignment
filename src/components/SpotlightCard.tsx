@@ -5,6 +5,7 @@ interface SpotlightCardProps {
   className?: string;
   spotlightColor?: string;
   tiltEnabled?: boolean;
+  style?: React.CSSProperties;
 }
 
 export const SpotlightCard: React.FC<SpotlightCardProps> = ({
@@ -12,6 +13,7 @@ export const SpotlightCard: React.FC<SpotlightCardProps> = ({
   className = '',
   spotlightColor = 'rgba(196, 246, 46, 0.15)',
   tiltEnabled = true,
+  style = {},
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -45,7 +47,7 @@ export const SpotlightCard: React.FC<SpotlightCardProps> = ({
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ transform, transition: 'transform 0.15s ease-out' }}
+      style={{ transform, transition: 'transform 0.15s ease-out', ...style }}
       className={`relative overflow-hidden ${className}`}
     >
       {/* Spotlight highlight layer */}
