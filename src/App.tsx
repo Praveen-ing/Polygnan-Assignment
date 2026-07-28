@@ -8,6 +8,7 @@ import { RiverLadder } from './components/RiverLadder';
 import { TierProgressBar } from './components/TierProgressBar';
 import { ScoutBadgeGenerator } from './components/ScoutBadgeGenerator';
 import { PerksShowcase } from './components/PerksShowcase';
+import { CollegeGlobe3D } from './components/CollegeGlobe3D';
 import { FaqAccordion } from './components/FaqAccordion';
 import { ShareCardModal } from './components/ShareCardModal';
 import { PolygnanEthosBanner } from './components/PolygnanEthosBanner';
@@ -105,6 +106,9 @@ export function App() {
 
         {/* 4. Social Proof Banner (300+ colleges ticker) */}
         <SocialProofBanner />
+
+        {/* 3D College Cards Globe (Real scouts, real campuses.) */}
+        <CollegeGlobe3D />
 
         {/* 5. Polygnan Ethos & Rancho Mindset Banner */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6">
