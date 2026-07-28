@@ -12,7 +12,6 @@ import { CollegeGlobe3D } from './components/CollegeGlobe3D';
 import { FaqAccordion } from './components/FaqAccordion';
 import { ShareCardModal } from './components/ShareCardModal';
 import { PolygnanEthosBanner } from './components/PolygnanEthosBanner';
-import { FlyingBird } from './components/FlyingBird';
 import { PolyAgent } from './components/PolyAgent';
 import { Zap, ArrowRight, ExternalLink } from 'lucide-react';
 
@@ -115,9 +114,6 @@ export function App() {
         <section className="max-w-6xl mx-auto px-4 sm:px-6">
           <PolygnanEthosBanner />
         </section>
-
-        {/* Animated Flying Bird Silhouette */}
-        <FlyingBird />
 
         {/* 7. How It Works Section */}
         <section id="how-it-works" className="max-w-6xl mx-auto px-4 sm:px-6">

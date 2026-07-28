@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   UserCheck,
   Compass,
@@ -160,6 +160,28 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
 }) => {
   const [activeStepIndex, setActiveStepIndex] = useState<number>(0);
   const [burstKey, setBurstKey] = useState<number | null>(null);
+  const [birdPos, setBirdPos] = useState({ t: 0, direction: 1 });
+
+  useEffect(() => {
+    let animFrame: number;
+    let t = 0;
+    let direction = 1;
+    const NUM_NODES = QUEST_STEPS.length;
+
+    const flightLoop = () => {
+      t += 0.005 * direction;
+      if (t >= NUM_NODES - 1) {
+        direction = -1;
+      } else if (t <= 0) {
+        direction = 1;
+      }
+      setBirdPos({ t, direction });
+      animFrame = requestAnimationFrame(flightLoop);
+    };
+
+    animFrame = requestAnimationFrame(flightLoop);
+    return () => cancelAnimationFrame(animFrame);
+  }, []);
 
   const activeStep = QUEST_STEPS[activeStepIndex];
 
@@ -188,18 +210,6 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
 
       {/* ── Top Level Progress Track Navigator ── */}
       <div className="border border-[#262626] rounded-3xl p-5 sm:p-6 shadow-2xl relative overflow-hidden backdrop-blur-md">
-        <div className="flex items-center justify-between border-b border-[#222] pb-4 mb-4 flex-wrap gap-2">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#C4F62E] animate-pulse" />
-            <span className="font-display font-extrabold text-xs sm:text-sm text-white uppercase tracking-wider">
-              Scout Milestone Progression Track
-            </span>
-          </div>
-
-          <div className="text-xs font-mono-stats text-[#8A8A85]">
-            Active Selection: <strong style={{ color: activeStep.themeColor }}>{activeStep.levelNumber} — {activeStep.title}</strong>
-          </div>
-        </div>
 
         {/* Alternating Horizontal Stepper Timeline */}
         <div className="relative w-full py-12 overflow-x-auto no-scrollbar">
@@ -213,6 +223,35 @@ export const RiverLadder: React.FC<RiverLadderProps> = ({
                   background: 'linear-gradient(90deg, #10B981, #C4F62E, #38BDF8)'
                 }}
               />
+
+              {/* The Traveling Bird */}
+              <div
+                className="absolute z-50 pointer-events-none"
+                style={{
+                  left: `${(birdPos.t / (QUEST_STEPS.length - 1)) * 100}%`,
+                  top: `${Math.cos(birdPos.t * Math.PI) * -60}px`,
+                  transform: `translate(-50%, -50%) scaleX(${birdPos.direction})`,
+                }}
+              >
+                <div className="relative flex items-center justify-center">
+                  <svg
+                    width="50"
+                    height="35"
+                    viewBox="0 0 100 75"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="drop-shadow-[0_0_12px_rgba(196,246,46,0.8)]"
+                  >
+                    <path d="M 50 40 C 60 38, 75 35, 85 32 C 90 31, 95 29, 98 32 C 95 36, 88 42, 80 44 C 65 48, 45 46, 30 42 C 20 40, 10 32, 5 28 C 12 32, 22 36, 32 38 Z" fill="#C4F62E" />
+                    <path d="M 45 40 C 40 20, 25 5, 10 0 C 18 14, 32 28, 42 38 Z" fill="#C4F62E" className="animate-bird-wing" />
+                    <path d="M 52 40 C 58 20, 72 4, 90 0 C 80 14, 64 27, 54 38 Z" fill="#A9E015" className="animate-bird-wing" />
+                    <path d="M 5 28 L 0 20 L 8 26 L 2 15 L 12 30 Z" fill="#C4F62E" />
+                  </svg>
+                  <span className="text-[12px] text-[#C4F62E] font-bold animate-ping absolute -left-2 top-0">
+                    ✨
+                  </span>
+                </div>
+              </div>
             </div>
             
             {QUEST_STEPS.map((step, idx) => {
